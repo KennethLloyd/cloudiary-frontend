@@ -8,7 +8,8 @@ export const logIn = formValues => async dispatch => {
 
   dispatch({
     type: LOG_IN,
-    payload: response.data,
+    payload: response.data
   });
-  history.push('/');
+
+  history.push('/home');
 };

@@ -1,68 +1,107 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { logIn } from '../../actions';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  Button,
+  Form,
+  FormText,
+  FormFeedback,
+  FormGroup,
+  Input,
+  Container,
+  Col,
+  Row
+} from 'reactstrap';
+
+import { logIn } from '../../actions';
+import '../../index.css';
+import projectLogo from '../../images/project-logo.svg';
+import projectLabel from '../../images/project-label.svg';
 
 class UserLogIn extends React.Component {
-  renderError({ error, touched }) {
-    if (touched && error) {
-      return (
-        <div>
-          <div>{error}</div>
-        </div>
-      );
-    }
-  }
+  renderInput = formProps => {
+    const { input, type, id, placeholder } = formProps;
 
-  renderInput = (formProps) => {
-    const { input, label, meta } = formProps;
-    //const className = `field ${meta.error && meta.touched ? 'error' : ''}`;
     return (
       <div>
-        <label>{label}</label>
-        <input {...input} autoComplete="off" />
-        <div>{this.renderError(meta)}</div>
+        <Input
+          {...input}
+          type={type}
+          id={id}
+          placeholder={placeholder}
+          required
+        />
       </div>
     );
   };
 
-  onSubmit = (formValues) => {
+  onSubmit = formValues => {
     this.props.logIn(formValues);
   };
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-        <Field
-          name="email"
-          component={this.renderInput}
-          label="Email Address: "
-        />
-        <Field
-          name="password"
-          component={this.renderInput}
-          label="Password: "
-        />
-        <button>Log In</button>
-      </form>
+      <Container>
+        <Row className="align-items-center" style={{ height: '100vh' }}>
+          <Col md={{ size: 4, offset: 4 }}>
+            <img
+              className="img-fluid mx-auto d-block"
+              src={projectLogo}
+              style={{ width: '70%' }}
+            />
+            <img
+              className="img-fluid mx-auto d-block"
+              src={projectLabel}
+              style={{ width: '60%' }}
+            />
+            <Form
+              onSubmit={this.props.handleSubmit(this.onSubmit)}
+              className="mt-5"
+            >
+              <FormGroup>
+                <Field
+                  type="email"
+                  name="email"
+                  id="userEmail"
+                  placeholder="Email Address"
+                  component={this.renderInput}
+                />
+              </FormGroup>
+              <FormGroup>
+                <Field
+                  type="password"
+                  name="password"
+                  id="userPassword"
+                  placeholder="Password"
+                  component={this.renderInput}
+                />
+              </FormGroup>
+              <FormText color="secondary" className="text-right">
+                <Link to="/forgot-password" className="text-secondary">
+                  Forgot password?
+                </Link>
+              </FormText>
+              <div className="text-center mt-2">
+                <Button color="primary">Log In</Button>
+              </div>
+              <FormText color="secondary" className="text-center">
+                Don't have an account?{' '}
+                <Link to="/sign-up" className="text-secondary">
+                  Sign Up
+                </Link>
+              </FormText>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
 
-const validate = (formValues) => {
-  const errors = {};
-  if (!formValues.email) {
-    errors.title = 'You must enter an email';
-  }
-  if (!formValues.password) {
-    errors.password = 'You must enter a password';
-  }
-  return errors;
-};
-
 const formWrapped = reduxForm({
-  form: 'userLogin',
-  validate,
+  form: 'UserLogin'
 })(UserLogIn);
 
 export default connect(null, { logIn })(formWrapped);
