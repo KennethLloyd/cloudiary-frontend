@@ -7,7 +7,6 @@ import {
   Button,
   Form,
   FormText,
-  FormFeedback,
   FormGroup,
   Input,
   Container,
@@ -84,7 +83,9 @@ class UserLogIn extends React.Component {
                 </Link>
               </FormText>
               <div className="text-center mt-2">
-                <Button color="primary">Log In</Button>
+                <Button color="primary" size="sm">
+                  Log In
+                </Button>
               </div>
               <FormText color="secondary" className="text-center">
                 Don't have an account?{' '}
@@ -101,7 +102,7 @@ class UserLogIn extends React.Component {
 }
 
 const formWrapped = reduxForm({
-  form: 'UserLogin'
+  form: 'UserLogIn'
 })(UserLogIn);
 
 export default connect(null, { logIn })(formWrapped);
