@@ -3,6 +3,7 @@ import { Router, Route, Switch } from 'react-router-dom';
 import UserSignUp from './users/UserSignUp';
 import UserLogIn from './users/UserLogIn';
 import history from '../history';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
           </Switch>
         </div>
       </Router>
+      <ToastContainer />
     </div>
   );
 };

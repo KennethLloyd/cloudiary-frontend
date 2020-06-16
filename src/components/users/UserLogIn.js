@@ -14,7 +14,10 @@ import {
   Row
 } from 'reactstrap';
 
-import { logIn } from '../../actions';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { logIn, hideError } from '../../actions';
 import '../../index.css';
 import projectLogo from '../../images/project-logo.svg';
 import projectLabel from '../../images/project-label.svg';
@@ -40,9 +43,30 @@ class UserLogIn extends React.Component {
     this.props.logIn(formValues);
   };
 
+  toastError = () => {
+    const toastId = 'logInErrorToast';
+
+    if (this.props.errors.error !== null) {
+      toast(this.props.errors.error, {
+        toastId,
+        position: 'top-right',
+        type: 'error',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      });
+    }
+
+    this.props.hideError();
+  };
+
   render() {
     return (
       <Container>
+        <div>{this.toastError()}</div>
         <Row className="align-items-center" style={{ height: '100vh' }}>
           <Col md={{ size: 4, offset: 4 }}>
             <img
@@ -101,8 +125,12 @@ class UserLogIn extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return { errors: state.errors };
+};
+
 const formWrapped = reduxForm({
   form: 'UserLogIn'
 })(UserLogIn);
 
-export default connect(null, { logIn })(formWrapped);
+export default connect(mapStateToProps, { logIn, hideError })(formWrapped);

@@ -11,27 +11,3 @@ body {
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
 }
-
-/* @media only screen and (min-width: 1200px) {
-  body {
-    background: red;
-  }
-}
-
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  body {
-    background: green;
-  }
-}
-
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  body {
-    background: blue;
-  }
-}
-
-@media only screen and (max-width: 767px) {
-  body {
-    background: yellow;
-  }
-} */
