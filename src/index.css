@@ -11,3 +11,8 @@ body {
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
 }
+
+.eye-icon {
+  right: 20px;
+  pointer-events: auto;
+}

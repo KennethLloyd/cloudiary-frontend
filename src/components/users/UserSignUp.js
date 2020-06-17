@@ -18,21 +18,62 @@ import { signUp } from '../../actions';
 import '../../index.css';
 import projectLogo from '../../images/project-logo.svg';
 import projectLabel from '../../images/project-label.svg';
+import passwordShown from '../../images/password-shown.svg';
+import passwordHidden from '../../images/password-hidden.svg';
 
 class UserSignUp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      passwordType: 'password',
+      eyeIcon: passwordHidden
+    };
+  }
+
+  togglePasswordVisibility = () => {
+    if (this.state.passwordType === 'password') {
+      this.setState({
+        passwordType: 'text',
+        eyeIcon: passwordShown
+      });
+    } else {
+      this.setState({
+        passwordType: 'password',
+        eyeIcon: passwordHidden
+      });
+    }
+  };
+
   renderInput = formProps => {
-    const { input, type, id, placeholder } = formProps;
+    const { input, type, id, placeholder, meta } = formProps;
+    const hasError = meta.touched && meta.error;
+    const className = `${hasError ? 'border border-danger' : ''}`;
 
     return (
       <div>
-        <Input
-          className="mt-2"
-          {...input}
-          type={type}
-          id={id}
-          placeholder={placeholder}
-          required
-        />
+        <span className="position-relative d-flex flex-column justify-content-center">
+          {id === 'userPassword' ? (
+            <img
+              onClick={() => this.togglePasswordVisibility()}
+              src={this.state.eyeIcon}
+              className="position-absolute eye-icon align-self-end"
+              alt="Password visibility icon"
+              width="25"
+              height="20"
+            />
+          ) : (
+            ''
+          )}
+          <Input
+            className={className}
+            {...input}
+            type={type}
+            id={id}
+            placeholder={placeholder}
+            required
+          />
+        </span>
+        <FormText color="danger">{hasError ? meta.error : ''}</FormText>
       </div>
     );
   };
@@ -62,11 +103,20 @@ class UserSignUp extends React.Component {
               <FormGroup className="d-xl-flex justify-content-xl-around">
                 <Field
                   type="text"
-                  name="name"
-                  id="userName"
-                  placeholder="Name"
+                  name="firstName"
+                  id="userFirstName"
+                  placeholder="First Name"
                   component={this.renderInput}
                 />
+                <Field
+                  type="text"
+                  name="lastName"
+                  id="userLastName"
+                  placeholder="Last Name"
+                  component={this.renderInput}
+                />
+              </FormGroup>
+              <FormGroup className="d-xl-flex justify-content-xl-around">
                 <Field
                   type="email"
                   name="email"
@@ -74,20 +124,11 @@ class UserSignUp extends React.Component {
                   placeholder="Email Address"
                   component={this.renderInput}
                 />
-              </FormGroup>
-              <FormGroup className="d-xl-flex justify-content-xl-around">
                 <Field
-                  type="password"
+                  type={this.state.passwordType}
                   name="password"
                   id="userPassword"
                   placeholder="Password"
-                  component={this.renderInput}
-                />
-                <Field
-                  type="password"
-                  name="confirmPassword"
-                  id="userConfirmPassword"
-                  placeholder="Confirm Password"
                   component={this.renderInput}
                 />
               </FormGroup>
@@ -98,7 +139,7 @@ class UserSignUp extends React.Component {
               </div>
               <FormText color="secondary" className="text-center">
                 Already have an account?{' '}
-                <Link to="/" className="text-secondary">
+                <Link to="/" className="text-primary">
                   Log In
                 </Link>
               </FormText>
@@ -110,8 +151,20 @@ class UserSignUp extends React.Component {
   }
 }
 
+const validate = values => {
+  const errors = {};
+  if (values.password && values.password.length < 8) {
+    errors.password = 'Password is too short';
+  }
+  if (values.confirmPassword !== values.password) {
+    errors.confirmPassword = 'Passwords did not match';
+  }
+  return errors;
+};
+
 const formWrapped = reduxForm({
-  form: 'UserSignUp'
+  form: 'UserSignUp',
+  validate
 })(UserSignUp);
 
 export default connect(null, { signUp })(formWrapped);

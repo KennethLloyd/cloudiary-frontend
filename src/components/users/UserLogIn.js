@@ -18,13 +18,49 @@ import { logIn } from '../../actions';
 import '../../index.css';
 import projectLogo from '../../images/project-logo.svg';
 import projectLabel from '../../images/project-label.svg';
+import passwordShown from '../../images/password-shown.svg';
+import passwordHidden from '../../images/password-hidden.svg';
 
 class UserLogIn extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      passwordType: 'password',
+      eyeIcon: passwordHidden
+    };
+  }
+
+  togglePasswordVisibility = () => {
+    if (this.state.passwordType === 'password') {
+      this.setState({
+        passwordType: 'text',
+        eyeIcon: passwordShown
+      });
+    } else {
+      this.setState({
+        passwordType: 'password',
+        eyeIcon: passwordHidden
+      });
+    }
+  };
+
   renderInput = formProps => {
     const { input, type, id, placeholder } = formProps;
 
     return (
-      <div>
+      <div className="position-relative d-flex flex-column justify-content-center">
+        {id === 'userPassword' ? (
+          <img
+            onClick={() => this.togglePasswordVisibility()}
+            src={this.state.eyeIcon}
+            className="position-absolute eye-icon align-self-end"
+            alt="Password visibility icon"
+            width="25"
+            height="20"
+          />
+        ) : (
+          ''
+        )}
         <Input
           {...input}
           type={type}
@@ -70,15 +106,15 @@ class UserLogIn extends React.Component {
               </FormGroup>
               <FormGroup>
                 <Field
-                  type="password"
+                  type={this.state.passwordType}
                   name="password"
                   id="userPassword"
                   placeholder="Password"
                   component={this.renderInput}
                 />
               </FormGroup>
-              <FormText color="secondary" className="text-right">
-                <Link to="/forgot-password" className="text-secondary">
+              <FormText className="text-right">
+                <Link to="/forgot-password" className="text-primary">
                   Forgot password?
                 </Link>
               </FormText>
@@ -89,7 +125,7 @@ class UserLogIn extends React.Component {
               </div>
               <FormText color="secondary" className="text-center">
                 Don't have an account?{' '}
-                <Link to="/sign-up" className="text-secondary">
+                <Link to="/sign-up" className="text-primary">
                   Sign Up
                 </Link>
               </FormText>
