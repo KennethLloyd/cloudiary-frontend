@@ -1,4 +1,4 @@
-import { HIDE_ERROR } from '../actions/types';
+import { SET_ERROR, HIDE_ERROR } from '../actions/types';
 
 const INITIAL_STATE = {
   error: null,
@@ -6,19 +6,18 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  const { error } = action;
-
-  if (error) {
-    return {
-      error: error,
-      isOpen: true
-    };
-  } else if (action.type === HIDE_ERROR) {
-    return {
-      error: null,
-      isOpen: false
-    };
+  switch (action.type) {
+    case SET_ERROR:
+      return {
+        error: action.error,
+        isOpen: true
+      };
+    case HIDE_ERROR:
+      return {
+        error: null,
+        isOpen: false
+      };
+    default:
+      return state;
   }
-
-  return state;
 };

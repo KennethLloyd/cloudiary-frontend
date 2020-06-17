@@ -10,8 +10,11 @@ export const logIn = formValues => async dispatch => {
 
     dispatch({
       type: LOG_IN,
-      payload: response.data,
-      error: null
+      payload: response.data
+    });
+
+    dispatch({
+      type: HIDE_ERROR
     });
 
     history.push('/home');
@@ -35,8 +38,11 @@ export const signUp = formValues => async dispatch => {
 
     dispatch({
       type: SIGN_UP,
-      payload: response.data,
-      error: null
+      payload: response.data
+    });
+
+    dispatch({
+      type: HIDE_ERROR
     });
 
     history.push('/home');
@@ -54,6 +60,7 @@ export const signUp = formValues => async dispatch => {
   }
 };
 
+//manual triggers
 export const setError = error => async dispatch => {
   dispatch({
     type: SET_ERROR,
