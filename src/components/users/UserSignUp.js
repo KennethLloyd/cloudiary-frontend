@@ -38,8 +38,7 @@ class UserSignUp extends React.Component {
   };
 
   onSubmit = formValues => {
-    console.log(formValues);
-    // this.props.signUp(formValues);
+    this.props.signUp(formValues);
   };
 
   render() {

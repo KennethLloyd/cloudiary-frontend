@@ -1,9 +1,10 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import UserSignUp from './users/UserSignUp';
 import UserLogIn from './users/UserLogIn';
 import history from '../history';
-import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   return (
