@@ -7,12 +7,17 @@ body {
   height: 100%;
 }
 
-body {
+body,
+main {
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
 }
 
 .eye-icon {
   right: 20px;
-  pointer-events: auto;
+  cursor: pointer;
+}
+
+.navbar-link:hover {
+  cursor: pointer;
 }

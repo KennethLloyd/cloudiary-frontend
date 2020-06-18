@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -19,6 +18,7 @@ import projectLabel from '../../images/project-label.svg';
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isActive, setIsActive] = useState('Entries');
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -26,24 +26,33 @@ const Header = (props) => {
     <div className="shadow bg-white rounded">
       <Navbar color="light" light expand="md">
         <NavbarBrand className="mr-5">
-          <Link to="/home">
-            <img src={projectLogo} alt="Project logo" width="60" height="30" />
-            <img
-              src={projectLabel}
-              alt="Project label"
-              width="90"
-              height="30"
-            />
-          </Link>
+          <img src={projectLogo} alt="Project logo" width="60" height="30" />
+          <img src={projectLabel} alt="Project label" width="90" height="30" />
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            <NavItem active>
-              <NavLink href="/components/">Entries</NavLink>
+            <NavItem className={isActive === 'Entries' ? 'active' : ''}>
+              <NavLink
+                className="navbar-link"
+                onClick={() => {
+                  setIsActive('Entries');
+                  props.setActive('Entries');
+                }}
+              >
+                Entries
+              </NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="/components/">Calendar</NavLink>
+            <NavItem className={isActive === 'Calendar' ? 'active' : ''}>
+              <NavLink
+                className="navbar-link"
+                onClick={() => {
+                  setIsActive('Calendar');
+                  props.setActive('Calendar');
+                }}
+              >
+                Calendar
+              </NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
               <DropdownToggle nav caret>
@@ -55,7 +64,12 @@ const Header = (props) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-          <NavbarText>Log out</NavbarText>
+          <NavbarText
+            className="navbar-link"
+            onClick={() => props.showLogOut()}
+          >
+            Log out
+          </NavbarText>
         </Collapse>
       </Navbar>
     </div>
