@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UserSignUp from './users/UserSignUp';
 import UserLogIn from './users/UserLogIn';
+import HomePage from './home/HomePage';
 import history from '../history';
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={UserLogIn} />
             <Route path="/sign-up" exact component={UserSignUp} />
+            <Route path="/home" exact component={HomePage} />
           </Switch>
         </div>
       </Router>
