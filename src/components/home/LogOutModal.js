@@ -25,7 +25,7 @@ class LogOutModal extends React.Component {
   render() {
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>
+        <Button size="sm" color="danger" onClick={this.toggle}>
           {this.props.buttonLabel}
         </Button>
         <Modal
