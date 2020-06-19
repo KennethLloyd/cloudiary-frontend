@@ -11,7 +11,7 @@ import {
   Input,
   Container,
   Col,
-  Row
+  Row,
 } from 'reactstrap';
 
 import { signUp } from '../../actions';
@@ -26,7 +26,7 @@ class UserSignUp extends React.Component {
     super(props);
     this.state = {
       passwordType: 'password',
-      eyeIcon: passwordHidden
+      eyeIcon: passwordHidden,
     };
   }
 
@@ -34,17 +34,17 @@ class UserSignUp extends React.Component {
     if (this.state.passwordType === 'password') {
       this.setState({
         passwordType: 'text',
-        eyeIcon: passwordShown
+        eyeIcon: passwordShown,
       });
     } else {
       this.setState({
         passwordType: 'password',
-        eyeIcon: passwordHidden
+        eyeIcon: passwordHidden,
       });
     }
   };
 
-  renderInput = formProps => {
+  renderInput = (formProps) => {
     const { input, type, id, placeholder, meta } = formProps;
     const hasError = meta.touched && meta.error;
     const className = `${hasError ? 'border border-danger' : ''}`;
@@ -78,7 +78,7 @@ class UserSignUp extends React.Component {
     );
   };
 
-  onSubmit = formValues => {
+  onSubmit = (formValues) => {
     this.props.signUp(formValues);
   };
 
@@ -151,7 +151,7 @@ class UserSignUp extends React.Component {
   }
 }
 
-const validate = values => {
+const validate = (values) => {
   const errors = {};
   if (values.password && values.password.length < 8) {
     errors.password = 'Password is too short';
@@ -164,7 +164,7 @@ const validate = values => {
 
 const formWrapped = reduxForm({
   form: 'UserSignUp',
-  validate
+  validate,
 })(UserSignUp);
 
 export default connect(null, { signUp })(formWrapped);
