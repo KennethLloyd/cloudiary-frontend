@@ -1,6 +1,7 @@
 import React from 'react';
-import EntryNav from './EntryNav';
 import moment from 'moment';
+import EntryNav from './EntryNav';
+import SearchFilter from './SearchFilter';
 
 class Entries extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class Entries extends React.Component {
           back={this.goToLastMonth}
           next={this.goToNextMonth}
         />
+        <SearchFilter />
       </div>
     );
   }

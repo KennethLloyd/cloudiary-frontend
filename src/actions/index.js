@@ -1,6 +1,13 @@
 // Action Creators
 import api from '../apis/api';
-import { LOG_IN, SIGN_UP, LOG_OUT, SET_ERROR, HIDE_ERROR } from './types';
+import {
+  LOG_IN,
+  SIGN_UP,
+  LOG_OUT,
+  FETCH_MOODS,
+  SET_ERROR,
+  HIDE_ERROR,
+} from './types';
 import history from '../history';
 import { toast } from 'react-toastify';
 
@@ -86,6 +93,28 @@ export const logOut = (token) => async (dispatch) => {
     toast.error(errorMessage);
 
     history.push('/home');
+  }
+};
+
+export const fetchMoods = (token) => async (dispatch) => {
+  try {
+    const response = await api.get('/moods', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    dispatch({
+      type: FETCH_MOODS,
+      payload: response.data,
+    });
+  } catch (e) {
+    const errorMessage = e.response.data.error;
+
+    dispatch({
+      type: SET_ERROR,
+      error: errorMessage,
+    });
+
+    toast.error(errorMessage);
   }
 };
 
