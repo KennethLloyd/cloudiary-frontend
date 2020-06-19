@@ -15,6 +15,7 @@ import {
 } from 'reactstrap';
 import projectLogo from '../../images/project-logo.svg';
 import projectLabel from '../../images/project-label.svg';
+import LogOutModal from './LogOutModal';
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,11 +65,8 @@ const Header = (props) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-          <NavbarText
-            className="navbar-link"
-            onClick={() => props.showLogOut()}
-          >
-            Log out
+          <NavbarText>
+            <LogOutModal buttonLabel="Log Out" />
           </NavbarText>
         </Collapse>
       </Navbar>
