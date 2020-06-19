@@ -1,6 +1,6 @@
 // Action Creators
 import api from '../apis/api';
-import { LOG_IN, SIGN_UP, SET_ERROR, HIDE_ERROR } from './types';
+import { LOG_IN, SIGN_UP, LOG_OUT, SET_ERROR, HIDE_ERROR } from './types';
 import history from '../history';
 import { toast } from 'react-toastify';
 
@@ -57,6 +57,35 @@ export const signUp = (formValues) => async (dispatch) => {
     toast.error(errorMessage);
 
     history.push('/sign-up');
+  }
+};
+
+export const logOut = (token) => async (dispatch) => {
+  try {
+    await api.post('/users/logout', null, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    dispatch({
+      type: LOG_OUT,
+    });
+
+    dispatch({
+      type: HIDE_ERROR,
+    });
+
+    history.push('/');
+  } catch (e) {
+    const errorMessage = e.response.data.error;
+
+    dispatch({
+      type: SET_ERROR,
+      error: errorMessage,
+    });
+
+    toast.error(errorMessage);
+
+    history.push('/home');
   }
 };
 

@@ -1,34 +1,56 @@
 /* eslint react/no-multi-comp: 0, react/prop-types: 0 */
 
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { logOut } from '../../actions';
 
-const LogOutModal = (props) => {
-  const { buttonLabel, className } = props;
+class LogOutModal extends React.Component {
+  constructor(props) {
+    super(props);
 
-  const [modal, setModal] = useState(false);
+    this.state = {
+      modal: false,
+    };
+  }
 
-  const toggle = () => setModal(!modal);
+  toggle = (logOut = 'yes') => {
+    if (logOut === 'yes') {
+      this.props.logOut(this.props.token);
+    }
 
-  return (
-    <div>
-      <Button color="danger" onClick={toggle}>
-        {buttonLabel}
-      </Button>
-      <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>Log Out</ModalHeader>
-        <ModalBody>Are you sure you want to log out?</ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Yes
-          </Button>{' '}
-          <Button color="secondary" onClick={toggle}>
-            No
-          </Button>
-        </ModalFooter>
-      </Modal>
-    </div>
-  );
+    this.setState({ modal: !this.state.modal });
+  };
+
+  render() {
+    return (
+      <div>
+        <Button size="sm" color="danger" onClick={this.toggle}>
+          {this.props.buttonLabel}
+        </Button>
+        <Modal
+          isOpen={this.state.modal}
+          toggle={this.toggle}
+          className={this.props.className}
+        >
+          <ModalHeader toggle={this.toggle}>Log Out</ModalHeader>
+          <ModalBody>Are you sure you want to log out?</ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={() => this.toggle('yes')}>
+              Yes
+            </Button>{' '}
+            <Button color="secondary" onClick={this.toggle}>
+              No
+            </Button>
+          </ModalFooter>
+        </Modal>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return { token: state.currentUser.token };
 };
 
-export default LogOutModal;
+export default connect(mapStateToProps, { logOut })(LogOutModal);

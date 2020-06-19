@@ -24,7 +24,7 @@ const Header = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div className="shadow bg-white rounded">
+    <div className="shadow bg-white rounded mb-3">
       <Navbar color="light" light expand="md">
         <NavbarBrand className="mr-5">
           <img src={projectLogo} alt="Project logo" width="60" height="30" />

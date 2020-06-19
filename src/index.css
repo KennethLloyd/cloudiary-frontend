@@ -21,3 +21,12 @@ main {
 .navbar-link:hover {
   cursor: pointer;
 }
+
+@media (max-width: 767px) {
+  .new-view-all-btn {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 100%;
+  }
+}

@@ -11,7 +11,7 @@ import {
   Input,
   Container,
   Col,
-  Row
+  Row,
 } from 'reactstrap';
 
 import { logIn } from '../../actions';
@@ -26,7 +26,7 @@ class UserLogIn extends React.Component {
     super(props);
     this.state = {
       passwordType: 'password',
-      eyeIcon: passwordHidden
+      eyeIcon: passwordHidden,
     };
   }
 
@@ -34,17 +34,17 @@ class UserLogIn extends React.Component {
     if (this.state.passwordType === 'password') {
       this.setState({
         passwordType: 'text',
-        eyeIcon: passwordShown
+        eyeIcon: passwordShown,
       });
     } else {
       this.setState({
         passwordType: 'password',
-        eyeIcon: passwordHidden
+        eyeIcon: passwordHidden,
       });
     }
   };
 
-  renderInput = formProps => {
+  renderInput = (formProps) => {
     const { input, type, id, placeholder } = formProps;
 
     return (
@@ -72,7 +72,7 @@ class UserLogIn extends React.Component {
     );
   };
 
-  onSubmit = formValues => {
+  onSubmit = (formValues) => {
     this.props.logIn(formValues);
   };
 
@@ -138,7 +138,7 @@ class UserLogIn extends React.Component {
 }
 
 const formWrapped = reduxForm({
-  form: 'UserLogIn'
+  form: 'UserLogIn',
 })(UserLogIn);
 
 export default connect(null, { logIn })(formWrapped);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from 'reactstrap';
 import Header from './Header';
+import Entries from './Entries';
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -19,9 +20,9 @@ class HomePage extends React.Component {
     return (
       <div>
         <Header setActive={this.changeActiveView} />
-        <main>
-          <div>Date Header</div>
-        </main>
+        <Container fluid>
+          <div>{this.state.activeView === 'Entries' ? <Entries /> : ''}</div>
+        </Container>
       </div>
     );
   }
