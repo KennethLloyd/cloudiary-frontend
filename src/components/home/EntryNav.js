@@ -1,31 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap';
-import moment from 'moment';
 
 class EntryNav extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      date: moment().format('MMMM YYYY'),
-    };
-  }
-
-  goToNextMonth = () => {
-    this.setState({
-      date: moment(this.state.date, 'MMMM YYYY')
-        .add(1, 'month')
-        .format('MMMM YYYY'),
-    });
-  };
-
-  goToLastMonth = () => {
-    this.setState({
-      date: moment(this.state.date, 'MMMM YYYY')
-        .subtract(1, 'month')
-        .format('MMMM YYYY'),
-    });
-  };
-
   render() {
     return (
       <div className="d-xs-flex flex-xs-column align-items-xs-center d-md-flex justify-content-md-around align-items-md-center">
@@ -37,16 +13,16 @@ class EntryNav extends React.Component {
             size="sm"
             outline
             color="primary"
-            onClick={this.goToLastMonth}
+            onClick={() => this.props.back()}
           >
             Back
           </Button>
-          <h4 className="mr-5 ml-5 mt-2">{this.state.date}</h4>
+          <h4 className="mr-5 ml-5 mt-2">{this.props.currentDate}</h4>
           <Button
             size="sm"
             outline
             color="primary"
-            onClick={this.goToNextMonth}
+            onClick={() => this.props.next()}
           >
             Next
           </Button>
