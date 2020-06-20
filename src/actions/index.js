@@ -24,7 +24,7 @@ export const logIn = (formValues) => async (dispatch) => {
       type: HIDE_ERROR,
     });
 
-    history.push('/home');
+    history.push('/');
   } catch (e) {
     const errorMessage = e.response.data.error;
 
@@ -35,7 +35,7 @@ export const logIn = (formValues) => async (dispatch) => {
 
     toast.error(errorMessage);
 
-    history.push('/');
+    history.push('/login');
   }
 };
 
@@ -52,7 +52,7 @@ export const signUp = (formValues) => async (dispatch) => {
       type: HIDE_ERROR,
     });
 
-    history.push('/home');
+    history.push('/');
   } catch (e) {
     const errorMessage = e.response.data.error;
 
@@ -63,7 +63,7 @@ export const signUp = (formValues) => async (dispatch) => {
 
     toast.error(errorMessage);
 
-    history.push('/sign-up');
+    history.push('/signup');
   }
 };
 
@@ -81,7 +81,7 @@ export const logOut = (token) => async (dispatch) => {
       type: HIDE_ERROR,
     });
 
-    history.push('/');
+    history.push('/login');
   } catch (e) {
     const errorMessage = e.response.data.error;
 
@@ -92,7 +92,7 @@ export const logOut = (token) => async (dispatch) => {
 
     toast.error(errorMessage);
 
-    history.push('/home');
+    history.push('/');
   }
 };
 
