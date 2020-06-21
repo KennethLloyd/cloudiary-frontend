@@ -125,7 +125,7 @@ class UserLogIn extends React.Component {
               </div>
               <FormText color="secondary" className="text-center">
                 Don't have an account?{' '}
-                <Link to="/sign-up" className="text-primary">
+                <Link to="/signup" className="text-primary">
                   Sign Up
                 </Link>
               </FormText>

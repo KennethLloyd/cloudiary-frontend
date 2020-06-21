@@ -1,7 +1,9 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import AuthenticatedRoute from './AuthenticatedRoute';
+import UnauthenticatedRoute from './UnauthenticatedRoute';
 import UserSignUp from './users/UserSignUp';
 import UserLogIn from './users/UserLogIn';
 import HomePage from './home/HomePage';
@@ -13,9 +15,9 @@ const App = () => {
       <Router history={history}>
         <div>
           <Switch>
-            <Route path="/" exact component={UserLogIn} />
-            <Route path="/sign-up" exact component={UserSignUp} />
-            <Route path="/home" exact component={HomePage} />
+            <AuthenticatedRoute path="/" exact component={HomePage} />
+            <UnauthenticatedRoute path="/login" exact component={UserLogIn} />
+            <UnauthenticatedRoute path="/signup" exact component={UserSignUp} />
           </Switch>
         </div>
       </Router>

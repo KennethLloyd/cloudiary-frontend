@@ -1,16 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Container,
-  Form,
-  Button,
-  Label,
-  Input,
-} from 'reactstrap';
+import { Container, Form, Button, Label, Input } from 'reactstrap';
 
 class SearchFilter extends React.Component {
   constructor(props) {
