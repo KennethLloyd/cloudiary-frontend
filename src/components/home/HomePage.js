@@ -6,18 +6,15 @@ import Entries from './Entries';
 import { fetchMoods } from '../../actions';
 
 class HomePage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeView: 'Entries',
-    };
-  }
+  state = {
+    activeView: 'Entries'
+  };
 
   componentDidMount() {
     this.props.fetchMoods(this.props.token);
   }
 
-  changeActiveView = (activeView) => {
+  changeActiveView = activeView => {
     this.setState({ activeView });
     console.log(`Active view is now ${activeView}`);
   };
@@ -34,7 +31,7 @@ class HomePage extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return { token: state.currentUser.token };
 };
 

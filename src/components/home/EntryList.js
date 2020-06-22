@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Card, CardBody, Button, Collapse } from 'reactstrap';
 
-const EntryList = () => {
+const EntryList = props => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);

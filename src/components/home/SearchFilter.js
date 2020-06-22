@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import { Container, Form, Button, Label, Input } from 'reactstrap';
 
 class SearchFilter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mood: 'ALL',
-      dropdownOpen: false,
-    };
-  }
+  state = {
+    mood: 'ALL',
+    dropdownOpen: false
+  };
 
   toggle = () => {
     this.setState({ dropdownOpen: !this.state.dropdownOpen });
@@ -22,7 +19,7 @@ class SearchFilter extends React.Component {
         <Input bsSize="sm" type="select" name="select">
           <option onClick={() => this.setState({ mood: 'ALL' })}>ALL</option>
           {this.props.moods
-            ? this.props.moods.map((mood) => {
+            ? this.props.moods.map(mood => {
                 return (
                   <option
                     key={mood._id}
@@ -42,7 +39,7 @@ class SearchFilter extends React.Component {
     return (
       <Form
         className="inline my-2 my-lg-0 d-flex align-items-center"
-        onClick={(e) => e.preventDefault()}
+        onClick={e => e.preventDefault()}
       >
         <Input
           size="sm"
@@ -74,7 +71,7 @@ class SearchFilter extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return { moods: state.moods.moods };
 };
 

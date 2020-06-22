@@ -6,13 +6,9 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { logOut } from '../../actions';
 
 class LogOutModal extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      modal: false,
-    };
-  }
+  state = {
+    modal: false
+  };
 
   toggle = (logOut = 'yes') => {
     if (logOut === 'yes') {
@@ -49,7 +45,7 @@ class LogOutModal extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return { token: state.currentUser.token };
 };
 
