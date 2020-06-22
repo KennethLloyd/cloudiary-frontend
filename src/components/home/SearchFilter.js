@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import { Container, Form, Button, Label, Input } from 'reactstrap';
 
 class SearchFilter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mood: 'ALL',
-      dropdownOpen: false,
-    };
-  }
+  state = {
+    mood: 'ALL',
+    dropdownOpen: false,
+  };
 
   toggle = () => {
     this.setState({ dropdownOpen: !this.state.dropdownOpen });
