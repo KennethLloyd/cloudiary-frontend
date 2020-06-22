@@ -1,91 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Container, Card, CardBody, Button, Collapse } from 'reactstrap';
+import moment from 'moment';
+import { fetchEntries } from '../../actions';
 
 const EntryList = props => {
-  const [isOpen, setIsOpen] = useState(false);
+  const addIsOpen = newlyFetchedEntries => {
+    const modifiedEntries = newlyFetchedEntries.map(entry => ({
+      ...entry,
+      isOpen: false
+    }));
 
-  const toggle = () => setIsOpen(!isOpen);
+    return modifiedEntries;
+  };
+
+  const [entries, setIsOpen] = useState(addIsOpen(props.entries));
+
+  const toggle = id => {
+    const entriesCopy = [...entries];
+
+    entriesCopy.map(entry => {
+      if (entry._id === id) {
+        entry.isOpen = !entry.isOpen;
+      }
+    });
+
+    setIsOpen(entriesCopy);
+  };
+
+  useEffect(() => {
+    const thisMonth = moment(props.date).format('YYYY-MM');
+    const nextMonth = moment(props.date)
+      .add(1, 'month')
+      .format('YYYY-MM');
+
+    props.fetchEntries(props.token, `${thisMonth}-01`, `${nextMonth}-01`);
+  }, [props.date]); //upon date change, do this
+
+  useEffect(() => {
+    setIsOpen(addIsOpen(props.entries));
+  }, [props.entries]); //upon the arrival of new entries from fetch, do this
 
   return (
-    <Container>
+    <Container className="mt-3">
       <div id="accordion">
-        <Card>
-          <div className="card-header" id="headingOne">
-            <h5 className="mb-0">
-              <Button color="link" onClick={toggle}>
-                Collapsible Group Item #1
-              </Button>
-            </h5>
-          </div>
+        {entries.map(entry => (
+          <Card key={entry._id}>
+            <div className="card-header">
+              <h5 className="mb-0">
+                <Button color="link" onClick={() => toggle(entry._id)}>
+                  {entry.title}
+                </Button>
+              </h5>
+            </div>
 
-          <Collapse isOpen={isOpen}>
-            <CardBody>
-              Anim pariatur cliche reprehenderit, enim eiusmod high life
-              accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-              cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-              laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-              on it squid single-origin coffee nulla assumenda shoreditch et.
-              Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-              nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-              lomo. Leggings occaecat craft beer farm-to-table, raw denim
-              aesthetic synth nesciunt you probably haven't heard of them
-              accusamus labore sustainable VHS.
-            </CardBody>
-          </Collapse>
-        </Card>
-
-        <Card>
-          <div className="card-header" id="headingTwo">
-            <h5 className="mb-0">
-              <Button color="link" onClick={toggle}>
-                Collapsible Group Item #1
-              </Button>
-            </h5>
-          </div>
-
-          <Collapse isOpen={isOpen}>
-            <CardBody>
-              Anim pariatur cliche reprehenderit, enim eiusmod high life
-              accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-              cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-              laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-              on it squid single-origin coffee nulla assumenda shoreditch et.
-              Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-              nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-              lomo. Leggings occaecat craft beer farm-to-table, raw denim
-              aesthetic synth nesciunt you probably haven't heard of them
-              accusamus labore sustainable VHS.
-            </CardBody>
-          </Collapse>
-        </Card>
-
-        <Card>
-          <div className="card-header" id="headingThree">
-            <h5 className="mb-0">
-              <Button color="link" onClick={toggle}>
-                Collapsible Group Item #1
-              </Button>
-            </h5>
-          </div>
-
-          <Collapse isOpen={isOpen}>
-            <CardBody>
-              Anim pariatur cliche reprehenderit, enim eiusmod high life
-              accusamus terry richardson ad squid. 3 wolf moon officia aute, non
-              cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
-              laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird
-              on it squid single-origin coffee nulla assumenda shoreditch et.
-              Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred
-              nesciunt sapiente ea proident. Ad vegan excepteur butcher vice
-              lomo. Leggings occaecat craft beer farm-to-table, raw denim
-              aesthetic synth nesciunt you probably haven't heard of them
-              accusamus labore sustainable VHS.
-            </CardBody>
-          </Collapse>
-        </Card>
+            <Collapse isOpen={entry.isOpen}>
+              <CardBody>{entry.body}</CardBody>
+            </Collapse>
+          </Card>
+        ))}
       </div>
     </Container>
   );
 };
 
-export default EntryList;
+const mapStateToProps = state => {
+  return { token: state.currentUser.token, entries: state.entries.entries };
+};
+
+export default connect(mapStateToProps, { fetchEntries })(EntryList);

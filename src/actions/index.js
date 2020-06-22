@@ -119,10 +119,14 @@ export const fetchMoods = token => async dispatch => {
   }
 };
 
-export const fetchEntries = token => async dispatch => {
+export const fetchEntries = (token, from, to) => async dispatch => {
   try {
     const response = await api.get('/entries', {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
+      params: {
+        from,
+        to
+      }
     });
 
     dispatch({
