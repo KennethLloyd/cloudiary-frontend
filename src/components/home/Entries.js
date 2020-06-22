@@ -1,27 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import EntryNav from './EntryNav';
 import SearchFilter from './SearchFilter';
 import EntryList from './EntryList';
 
-class Entries extends React.Component {
-  state = {
-    date: moment().format('MMMM YYYY')
-  };
+const Entries = () => {
+  const [date, updateDate] = useState(moment().format('MMMM YYYY'));
 
-  updateDate = date => {
-    this.setState({ date });
-  };
-
-  render() {
-    return (
-      <div>
-        <EntryNav date={this.state.date} updateDate={this.updateDate} />
-        <SearchFilter />
-        <EntryList date={this.state.date} />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <EntryNav date={date} updateDate={updateDate} />
+      <SearchFilter />
+      <EntryList date={date} />
+    </div>
+  );
+};
 
 export default Entries;
