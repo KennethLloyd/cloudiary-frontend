@@ -2,7 +2,7 @@ import { SET_ERROR, HIDE_ERROR } from '../actions/types';
 
 const INITIAL_STATE = {
   error: null,
-  isOpen: false
+  isOpen: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -10,12 +10,12 @@ export default (state = INITIAL_STATE, action) => {
     case SET_ERROR:
       return {
         error: action.error,
-        isOpen: true
+        isOpen: true,
       };
     case HIDE_ERROR:
       return {
         error: null,
-        isOpen: false
+        isOpen: false,
       };
     default:
       return state;

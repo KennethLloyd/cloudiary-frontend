@@ -7,22 +7,22 @@ import {
   FETCH_MOODS,
   FETCH_ENTRIES,
   SET_ERROR,
-  HIDE_ERROR
+  HIDE_ERROR,
 } from './types';
 import history from '../history';
 import { toast } from 'react-toastify';
 
-export const logIn = formValues => async dispatch => {
+export const logIn = (formValues) => async (dispatch) => {
   try {
     const response = await api.post('/users/logIn', formValues);
 
     dispatch({
       type: LOG_IN,
-      payload: response.data
+      payload: response.data,
     });
 
     dispatch({
-      type: HIDE_ERROR
+      type: HIDE_ERROR,
     });
 
     history.push('/');
@@ -31,7 +31,7 @@ export const logIn = formValues => async dispatch => {
 
     dispatch({
       type: SET_ERROR,
-      error: errorMessage
+      error: errorMessage,
     });
 
     toast.error(errorMessage);
@@ -40,17 +40,17 @@ export const logIn = formValues => async dispatch => {
   }
 };
 
-export const signUp = formValues => async dispatch => {
+export const signUp = (formValues) => async (dispatch) => {
   try {
     const response = await api.post('/users', formValues);
 
     dispatch({
       type: SIGN_UP,
-      payload: response.data
+      payload: response.data,
     });
 
     dispatch({
-      type: HIDE_ERROR
+      type: HIDE_ERROR,
     });
 
     history.push('/');
@@ -59,7 +59,7 @@ export const signUp = formValues => async dispatch => {
 
     dispatch({
       type: SET_ERROR,
-      error: errorMessage
+      error: errorMessage,
     });
 
     toast.error(errorMessage);
@@ -68,18 +68,18 @@ export const signUp = formValues => async dispatch => {
   }
 };
 
-export const logOut = token => async dispatch => {
+export const logOut = (token) => async (dispatch) => {
   try {
     await api.post('/users/logout', null, {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     dispatch({
-      type: LOG_OUT
+      type: LOG_OUT,
     });
 
     dispatch({
-      type: HIDE_ERROR
+      type: HIDE_ERROR,
     });
 
     history.push('/login');
@@ -88,7 +88,7 @@ export const logOut = token => async dispatch => {
 
     dispatch({
       type: SET_ERROR,
-      error: errorMessage
+      error: errorMessage,
     });
 
     toast.error(errorMessage);
@@ -97,48 +97,48 @@ export const logOut = token => async dispatch => {
   }
 };
 
-export const fetchMoods = token => async dispatch => {
+export const fetchMoods = (token) => async (dispatch) => {
   try {
     const response = await api.get('/moods', {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     });
 
     dispatch({
       type: FETCH_MOODS,
-      payload: response.data
+      payload: response.data,
     });
   } catch (e) {
     const errorMessage = e.response.data.error;
 
     dispatch({
       type: SET_ERROR,
-      error: errorMessage
+      error: errorMessage,
     });
 
     toast.error(errorMessage);
   }
 };
 
-export const fetchEntries = (token, from, to) => async dispatch => {
+export const fetchEntries = (token, from, to) => async (dispatch) => {
   try {
     const response = await api.get('/entries', {
       headers: { Authorization: `Bearer ${token}` },
       params: {
         from,
-        to
-      }
+        to,
+      },
     });
 
     dispatch({
       type: FETCH_ENTRIES,
-      payload: response.data
+      payload: response.data,
     });
   } catch (e) {
     const errorMessage = e.response.data.error;
 
     dispatch({
       type: SET_ERROR,
-      error: errorMessage
+      error: errorMessage,
     });
 
     toast.error(errorMessage);
@@ -146,15 +146,15 @@ export const fetchEntries = (token, from, to) => async dispatch => {
 };
 
 //manual triggers
-export const setError = error => async dispatch => {
+export const setError = (error) => async (dispatch) => {
   dispatch({
     type: SET_ERROR,
-    error
+    error,
   });
 };
 
-export const hideError = () => async dispatch => {
+export const hideError = () => async (dispatch) => {
   dispatch({
-    type: HIDE_ERROR
+    type: HIDE_ERROR,
   });
 };

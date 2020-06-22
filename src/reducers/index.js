@@ -10,5 +10,5 @@ export default combineReducers({
   currentUser: userReducer,
   moods: moodReducer,
   entries: entryReducer,
-  errors: errorReducer
+  errors: errorReducer,
 });

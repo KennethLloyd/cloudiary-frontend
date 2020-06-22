@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import moment from 'moment';
 
-const EntryNav = props => {
+const EntryNav = (props) => {
   return (
     <div className="d-xs-flex flex-xs-column align-items-xs-center d-md-flex justify-content-md-around align-items-md-center">
       <Button size="sm" outline color="primary" className="new-view-all-btn">
@@ -17,7 +17,7 @@ const EntryNav = props => {
             props.updateDate(
               moment(props.date, 'MMMM YYYY')
                 .subtract(1, 'month')
-                .format('MMMM YYYY')
+                .format('MMMM YYYY'),
             )
           }
         >
@@ -32,7 +32,7 @@ const EntryNav = props => {
             props.updateDate(
               moment(props.date, 'MMMM YYYY')
                 .add(1, 'month')
-                .format('MMMM YYYY')
+                .format('MMMM YYYY'),
             )
           }
         >

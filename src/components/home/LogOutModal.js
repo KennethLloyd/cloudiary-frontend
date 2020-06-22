@@ -7,7 +7,7 @@ import { logOut } from '../../actions';
 
 class LogOutModal extends React.Component {
   state = {
-    modal: false
+    modal: false,
   };
 
   toggle = (logOut = 'yes') => {
@@ -45,7 +45,7 @@ class LogOutModal extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { token: state.currentUser.token };
 };
 

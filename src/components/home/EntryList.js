@@ -4,11 +4,11 @@ import { Container, Card, CardBody, Button, Collapse } from 'reactstrap';
 import moment from 'moment';
 import { fetchEntries } from '../../actions';
 
-const EntryList = props => {
-  const addIsOpen = newlyFetchedEntries => {
-    const modifiedEntries = newlyFetchedEntries.map(entry => ({
+const EntryList = (props) => {
+  const addIsOpen = (newlyFetchedEntries) => {
+    const modifiedEntries = newlyFetchedEntries.map((entry) => ({
       ...entry,
-      isOpen: false
+      isOpen: false,
     }));
 
     return modifiedEntries;
@@ -16,10 +16,10 @@ const EntryList = props => {
 
   const [entries, setIsOpen] = useState(addIsOpen(props.entries));
 
-  const toggle = id => {
+  const toggle = (id) => {
     const entriesCopy = [...entries];
 
-    entriesCopy.map(entry => {
+    entriesCopy.map((entry) => {
       if (entry._id === id) {
         entry.isOpen = !entry.isOpen;
       }
@@ -44,7 +44,7 @@ const EntryList = props => {
   return (
     <Container className="mt-3">
       <div id="accordion">
-        {entries.map(entry => (
+        {entries.map((entry) => (
           <Card key={entry._id}>
             <div className="card-header">
               <h5 className="mb-0">
@@ -64,7 +64,7 @@ const EntryList = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { token: state.currentUser.token, entries: state.entries.entries };
 };
 

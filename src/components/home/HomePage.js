@@ -5,7 +5,7 @@ import Header from './Header';
 import Entries from './Entries';
 import { fetchMoods } from '../../actions';
 
-const HomePage = props => {
+const HomePage = (props) => {
   const [activeView, changeActiveView] = useState('Entries');
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const HomePage = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return { token: state.currentUser.token };
 };
 
