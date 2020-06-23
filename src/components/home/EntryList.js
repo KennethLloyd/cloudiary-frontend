@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Container, Card, CardBody, Button, Collapse } from 'reactstrap';
 import moment from 'moment';
 import { fetchEntries } from '../../actions';
+import upArrowIcon from '../../images/up-arrow.svg';
+import downArrowIcon from '../../images/down-arrow.svg';
 
 const EntryList = (props) => {
   const addIsOpen = (newlyFetchedEntries) => {
@@ -45,7 +47,7 @@ const EntryList = (props) => {
     <Container className="mt-3">
       <div id="accordion">
         {entries.map((entry) => (
-          <Card key={entry._id}>
+          <Card key={entry._id} onClick={() => toggle(entry._id)}>
             <div className="card-header d-flex justify-content-between">
               <div className="entry-date d-flex flex-column align-items-center justify-content-center">
                 <p className="mb-0">
@@ -69,12 +71,13 @@ const EntryList = (props) => {
                 <p className="mb-0">{moment(entry.entryDate).format('LT')}</p>
               </div>
               <div className="entry-expander align-self-center d-flex justify-content-center">
-                <Button
-                  size="sm"
-                  color="link"
-                  onClick={() => toggle(entry._id)}
-                >
-                  Show More
+                <Button size="sm" color="link">
+                  <img
+                    src={entry.isOpen ? upArrowIcon : downArrowIcon}
+                    alt="Arrow icon"
+                    width="15"
+                    height="15"
+                  />
                 </Button>
               </div>
             </div>
