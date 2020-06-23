@@ -46,12 +46,37 @@ const EntryList = (props) => {
       <div id="accordion">
         {entries.map((entry) => (
           <Card key={entry._id}>
-            <div className="card-header">
-              <h5 className="mb-0">
-                <Button color="link" onClick={() => toggle(entry._id)}>
-                  {entry.title}
-                </Button>
+            <div className="card-header d-flex justify-content-between">
+              <div className="entry-date d-flex flex-column align-items-center justify-content-center">
+                <p className="mb-0">
+                  {moment(entry.entryDate)
+                    .format('MMM DD')
+                    .toUpperCase()}
+                </p>
+                <p className="entry-day mb-0 mt-2">
+                  {moment(entry.entryDate)
+                    .format('dddd')
+                    .toUpperCase()}
+                </p>
+              </div>
+              <div className="entry-mood align-self-center d-flex justify-content-center">
+                <p className="mb-0">{entry.mood.name}</p>
+              </div>
+              <h5 className="mb-0 font-weight-bold entry-title align-self-center d-flex justify-content-center">
+                {entry.title}
               </h5>
+              <div className="entry-time align-self-center d-flex justify-content-center">
+                <p className="mb-0">{moment(entry.entryDate).format('LT')}</p>
+              </div>
+              <div className="entry-expander align-self-center d-flex justify-content-center">
+                <Button
+                  size="sm"
+                  color="link"
+                  onClick={() => toggle(entry._id)}
+                >
+                  Show More
+                </Button>
+              </div>
             </div>
 
             <Collapse isOpen={entry.isOpen}>

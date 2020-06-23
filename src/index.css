@@ -30,3 +30,30 @@ main {
     width: 100%;
   }
 }
+
+.entry-date {
+  width: 15%;
+}
+
+.entry-day {
+  font-size: 0.75em;
+}
+
+.entry-mood {
+  width: 15%;
+  font-size: 0.75em;
+}
+
+.entry-title {
+  width: 40%;
+  font-size: 1em;
+}
+
+.entry-time {
+  width: 15%;
+  font-size: 0.75em;
+}
+
+.entry-expander {
+  width: 15%;
+}
