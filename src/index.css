@@ -22,11 +22,106 @@ main {
   cursor: pointer;
 }
 
+.entries-container {
+  height: 75vh;
+  overflow: auto;
+}
+
+.mood-and-date-section {
+  width: 30%;
+}
+
+.entry-date {
+  width: 50%;
+}
+
+.entry-day {
+  font-size: 0.75em;
+}
+
+.entry-mood {
+  width: 50%;
+  font-size: 0.75em;
+}
+
+.entry-title {
+  width: 40%;
+  font-size: 0.9em;
+}
+
+.time-and-more-section {
+  width: 30%;
+}
+
+.entry-time {
+  width: 50%;
+  font-size: 0.75em;
+}
+
+.entry-expander {
+  width: 50%;
+}
+
+.entry-activities-label {
+  font-size: 0.9em;
+}
+
+.entry-body {
+  font-size: 0.85em;
+}
+
 @media (max-width: 767px) {
   .new-view-all-btn {
-    display: block;
+    display: flex;
     margin-right: auto;
     margin-left: auto;
     width: 100%;
+  }
+
+  .mood-and-date-section {
+    display: flex;
+    margin-right: 0px;
+    width: 100%;
+  }
+
+  .entry-date {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: auto;
+  }
+
+  .entry-day {
+    margin: 0 5px;
+    align-self: center;
+  }
+
+  .entry-mood {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-left: auto;
+  }
+
+  .entry-title {
+    width: 100%;
+  }
+
+  .time-and-more-section {
+    display: flex;
+    width: 100%;
+  }
+
+  .entry-time {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+  }
+
+  .entry-expander {
+    display: flex;
+    justify-content: center;
+    width: 20%;
   }
 }

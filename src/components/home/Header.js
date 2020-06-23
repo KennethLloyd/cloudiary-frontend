@@ -21,8 +21,6 @@ const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState('Entries');
 
-  const toggle = () => setIsOpen(!isOpen);
-
   return (
     <div className="shadow bg-white rounded mb-3">
       <Navbar color="light" light expand="md">
@@ -30,7 +28,7 @@ const Header = (props) => {
           <img src={projectLogo} alt="Project logo" width="60" height="30" />
           <img src={projectLabel} alt="Project label" width="90" height="30" />
         </NavbarBrand>
-        <NavbarToggler onClick={toggle} />
+        <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem className={isActive === 'Entries' ? 'active' : ''}>
