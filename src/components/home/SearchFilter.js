@@ -1,41 +1,33 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Container, Form, Button, Label, Input } from 'reactstrap';
 
-class SearchFilter extends React.Component {
-  state = {
-    mood: 'ALL',
-    dropdownOpen: false,
-  };
+const SearchFilter = (props) => {
+  const moods = useSelector((state) => state.moods.moods);
 
-  toggle = () => {
-    this.setState({ dropdownOpen: !this.state.dropdownOpen });
-  };
-
-  renderDropDown() {
+  const renderDropDown = () => {
     return (
       <div className="d-flex align-items-center">
         <Label className="mt-auto mb-auto mr-2">Mood: </Label>
-        <Input bsSize="sm" type="select" name="select">
-          <option onClick={() => this.setState({ mood: 'ALL' })}>ALL</option>
-          {this.props.moods
-            ? this.props.moods.map((mood) => {
-                return (
-                  <option
-                    key={mood._id}
-                    onClick={() => this.setState({ mood: mood.name })}
-                  >
-                    {mood.name}
-                  </option>
-                );
+        <Input
+          bsSize="sm"
+          type="select"
+          onChange={(e) => {
+            props.updateMood(e.target.value);
+          }}
+        >
+          <option>{props.mood}</option>
+          {moods
+            ? moods.map((mood) => {
+                return <option key={mood._id}>{mood.name}</option>;
               })
             : ''}
         </Input>
       </div>
     );
-  }
+  };
 
-  renderSearch() {
+  const renderSearch = () => {
     return (
       <Form
         className="inline my-2 my-lg-0 d-flex align-items-center"
@@ -59,20 +51,14 @@ class SearchFilter extends React.Component {
         </Button>
       </Form>
     );
-  }
+  };
 
-  render() {
-    return (
-      <Container className="d-xs-flex d-md-flex justify-content-md-between mt-3">
-        {this.renderDropDown()}
-        {this.renderSearch()}
-      </Container>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return { moods: state.moods.moods };
+  return (
+    <Container className="d-xs-flex d-md-flex justify-content-md-between mt-3">
+      {renderDropDown()}
+      {renderSearch()}
+    </Container>
+  );
 };
 
-export default connect(mapStateToProps, null)(SearchFilter);
+export default SearchFilter;

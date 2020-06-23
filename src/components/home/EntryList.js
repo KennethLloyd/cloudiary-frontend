@@ -43,6 +43,10 @@ const EntryList = (props) => {
     setIsOpen(addIsOpen(props.entries));
   }, [props.entries]); //upon the arrival of new entries from fetch, do this
 
+  // useEffect(() => {
+  //   console.log(props.mood);
+  // }, [props.mood]);
+
   return (
     <Container className="mt-3">
       <div id="accordion">
