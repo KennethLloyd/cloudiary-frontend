@@ -46,7 +46,7 @@ main {
 
 .entry-title {
   width: 40%;
-  font-size: 1em;
+  font-size: 0.9em;
 }
 
 .entry-time {
@@ -56,4 +56,12 @@ main {
 
 .entry-expander {
   width: 15%;
+}
+
+.entry-activities-label {
+  font-size: 0.9em;
+}
+
+.entry-body {
+  font-size: 0.85em;
 }

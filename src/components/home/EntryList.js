@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Container, Card, CardBody, Button, Collapse } from 'reactstrap';
+import { Container, Card, CardBody, Button, Collapse, Badge } from 'reactstrap';
 import moment from 'moment';
 import { fetchEntries } from '../../actions';
 import upArrowIcon from '../../images/up-arrow.svg';
@@ -49,8 +49,11 @@ const EntryList = (props) => {
         {entries.map((entry) => {
           if (props.mood === entry.mood.name || props.mood === 'ALL') {
             return (
-              <Card key={entry._id} onClick={() => toggle(entry._id)}>
-                <div className="card-header d-flex justify-content-between">
+              <Card key={entry._id}>
+                <div
+                  className="card-header d-flex justify-content-between"
+                  onClick={() => toggle(entry._id)}
+                >
                   <div className="entry-date d-flex flex-column align-items-center justify-content-center">
                     <p className="mb-0">
                       {moment(entry.entryDate)
@@ -87,7 +90,21 @@ const EntryList = (props) => {
                 </div>
 
                 <Collapse isOpen={entry.isOpen}>
-                  <CardBody>{entry.body}</CardBody>
+                  <CardBody>
+                    <div className="entry-activities-section d-flex align-items-center mb-4">
+                      <p className="mb-0 entry-activities-label">Activities:</p>
+                      <div className="entry-activities d-flex mb-0 ml-2">
+                        {entry.activities.map((activity) => {
+                          return (
+                            <Badge color="success" className="mr-1 ml-1">
+                              {activity.name}
+                            </Badge>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className="entry-body">{entry.body}</div>
+                  </CardBody>
                 </Collapse>
               </Card>
             );
