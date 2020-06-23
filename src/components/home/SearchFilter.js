@@ -16,7 +16,7 @@ const SearchFilter = (props) => {
             props.updateMood(e.target.value);
           }}
         >
-          <option>{props.mood}</option>
+          <option>ALL</option>
           {moods
             ? moods.map((mood) => {
                 return <option key={mood._id}>{mood.name}</option>;

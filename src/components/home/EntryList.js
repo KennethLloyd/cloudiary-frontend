@@ -43,54 +43,56 @@ const EntryList = (props) => {
     setIsOpen(addIsOpen(props.entries));
   }, [props.entries]); //upon the arrival of new entries from fetch, do this
 
-  // useEffect(() => {
-  //   console.log(props.mood);
-  // }, [props.mood]);
-
   return (
     <Container className="mt-3">
       <div id="accordion">
-        {entries.map((entry) => (
-          <Card key={entry._id} onClick={() => toggle(entry._id)}>
-            <div className="card-header d-flex justify-content-between">
-              <div className="entry-date d-flex flex-column align-items-center justify-content-center">
-                <p className="mb-0">
-                  {moment(entry.entryDate)
-                    .format('MMM DD')
-                    .toUpperCase()}
-                </p>
-                <p className="entry-day mb-0 mt-2">
-                  {moment(entry.entryDate)
-                    .format('dddd')
-                    .toUpperCase()}
-                </p>
-              </div>
-              <div className="entry-mood align-self-center d-flex justify-content-center">
-                <p className="mb-0">{entry.mood.name}</p>
-              </div>
-              <h5 className="mb-0 font-weight-bold entry-title align-self-center d-flex justify-content-center">
-                {entry.title}
-              </h5>
-              <div className="entry-time align-self-center d-flex justify-content-center">
-                <p className="mb-0">{moment(entry.entryDate).format('LT')}</p>
-              </div>
-              <div className="entry-expander align-self-center d-flex justify-content-center">
-                <Button size="sm" color="link">
-                  <img
-                    src={entry.isOpen ? upArrowIcon : downArrowIcon}
-                    alt="Arrow icon"
-                    width="15"
-                    height="15"
-                  />
-                </Button>
-              </div>
-            </div>
+        {entries.map((entry) => {
+          if (props.mood === entry.mood.name || props.mood === 'ALL') {
+            return (
+              <Card key={entry._id} onClick={() => toggle(entry._id)}>
+                <div className="card-header d-flex justify-content-between">
+                  <div className="entry-date d-flex flex-column align-items-center justify-content-center">
+                    <p className="mb-0">
+                      {moment(entry.entryDate)
+                        .format('MMM DD')
+                        .toUpperCase()}
+                    </p>
+                    <p className="entry-day mb-0 mt-2">
+                      {moment(entry.entryDate)
+                        .format('dddd')
+                        .toUpperCase()}
+                    </p>
+                  </div>
+                  <div className="entry-mood align-self-center d-flex justify-content-center">
+                    <p className="mb-0">{entry.mood.name}</p>
+                  </div>
+                  <h5 className="mb-0 font-weight-bold entry-title align-self-center d-flex justify-content-center">
+                    {entry.title}
+                  </h5>
+                  <div className="entry-time align-self-center d-flex justify-content-center">
+                    <p className="mb-0">
+                      {moment(entry.entryDate).format('LT')}
+                    </p>
+                  </div>
+                  <div className="entry-expander align-self-center d-flex justify-content-center">
+                    <Button size="sm" color="link">
+                      <img
+                        src={entry.isOpen ? upArrowIcon : downArrowIcon}
+                        alt="Arrow icon"
+                        width="15"
+                        height="15"
+                      />
+                    </Button>
+                  </div>
+                </div>
 
-            <Collapse isOpen={entry.isOpen}>
-              <CardBody>{entry.body}</CardBody>
-            </Collapse>
-          </Card>
-        ))}
+                <Collapse isOpen={entry.isOpen}>
+                  <CardBody>{entry.body}</CardBody>
+                </Collapse>
+              </Card>
+            );
+          }
+        })}
       </div>
     </Container>
   );
