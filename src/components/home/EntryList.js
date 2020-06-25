@@ -18,13 +18,25 @@ import pencilIcon from '../../images/pencil-icon.svg';
 import trashIcon from '../../images/trash-icon.svg';
 
 const EntryList = (props) => {
-  const addIsOpen = (newlyFetchedEntries) => {
-    const modifiedEntries = newlyFetchedEntries.map((entry) => ({
-      ...entry,
-      isOpen: false,
-    }));
+  const importAll = (r) => {
+    let images = {};
+    r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
+    return images;
+  }
+  
+  const moodIcons = importAll(require.context('../../images/moods', false, /\.(png|jpe?g|svg)$/));
+  console.log(moodIcons);
 
-    return modifiedEntries;
+  const addIsOpen = (newlyFetchedEntries) => {
+    if (newlyFetchedEntries) {
+      const modifiedEntries = newlyFetchedEntries.map((entry) => ({
+        ...entry,
+        isOpen: false,
+      }));
+  
+      return modifiedEntries;
+    }
+    else return [];
   };
 
   const [entries, setIsOpen] = useState(addIsOpen(props.entries));
@@ -78,8 +90,9 @@ const EntryList = (props) => {
                           .toUpperCase()}
                       </p>
                     </div>
-                    <div className="entry-mood align-self-md-center d-md-flex justify-content-md-center">
-                      <p className="mb-0">{entry.mood.name}</p>
+                    <div className="entry-mood d-md-flex flex-md-column justify-content-md-center align-items-md-center">
+                      <img src={moodIcons[`${entry.mood.name}.svg`]} alt="mood icon" width="48" height="48"/>
+                      <p className="mb-0 entry-mood-name">{entry.mood.name.toUpperCase()}</p>
                     </div>
                   </div>
                   <h5 className="mb-0 font-weight-bold entry-title align-self-center d-flex justify-content-center">
@@ -114,7 +127,7 @@ const EntryList = (props) => {
                         <div className="entry-activities d-flex mb-0 ml-2">
                           {entry.activities.map((activity) => {
                             return (
-                              <Badge color="success" className="mr-1 ml-1">
+                              <Badge key={activity._id} color="success" className="mr-1 ml-1">
                                 {activity.name}
                               </Badge>
                             );
