@@ -5,9 +5,6 @@ import moment from 'moment';
 const EntryNav = (props) => {
   return (
     <div className="d-xs-flex flex-xs-column align-items-xs-center d-md-flex justify-content-md-around align-items-md-center">
-      <Button size="sm" outline color="primary" className="new-view-all-btn">
-        New
-      </Button>
       <div className="d-flex align-items-center justify-content-center">
         <Button
           size="sm"
@@ -39,9 +36,6 @@ const EntryNav = (props) => {
           Next
         </Button>
       </div>
-      <Button size="sm" outline color="primary" className="new-view-all-btn">
-        View All
-      </Button>
     </div>
   );
 };

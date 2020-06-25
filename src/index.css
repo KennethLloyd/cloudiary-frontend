@@ -70,6 +70,18 @@ main {
   font-size: 0.85em;
 }
 
+.new-entry-container {
+  position: fixed;
+  bottom: 2%;
+  right: 10%;
+}
+
+.new-entry-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
 @media (max-width: 767px) {
   .new-view-all-btn {
     display: flex;
