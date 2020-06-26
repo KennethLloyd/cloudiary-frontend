@@ -3,7 +3,7 @@ import { Container } from 'reactstrap';
 import { connect } from 'react-redux';
 import Header from './Header';
 import Entries from './Entries';
-import { fetchMoods } from '../../actions';
+import { fetchMoods } from '../../actions/moodActions';
 
 const HomePage = (props) => {
   const [activeView, changeActiveView] = useState('Entries');

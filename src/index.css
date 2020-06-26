@@ -82,6 +82,21 @@ main {
   border-radius: 50%;
 }
 
+.new-entry-modal-greetings {
+  text-align: center;
+  width: 40%;
+}
+
+.new-entry-date-picker {
+  text-align: center;
+  width: 100%;
+}
+
+.new-entry-time-picker {
+  text-align: center;
+  width: 100%;
+}
+
 @media (max-width: 767px) {
   .new-view-all-btn {
     display: flex;

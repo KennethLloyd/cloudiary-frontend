@@ -14,7 +14,7 @@ import {
   Row,
 } from 'reactstrap';
 
-import { signUp } from '../../actions';
+import { signUp } from '../../actions/userActions';
 import '../../index.css';
 import projectLogo from '../../images/project-logo.svg';
 import projectLabel from '../../images/project-label.svg';
