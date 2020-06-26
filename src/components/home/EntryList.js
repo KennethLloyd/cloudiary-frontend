@@ -27,7 +27,6 @@ const EntryList = (props) => {
   const moodIcons = importAll(
     require.context('../../images/moods', false, /\.(png|jpe?g|svg)$/),
   );
-  console.log(moodIcons);
 
   const addIsOpen = (newlyFetchedEntries) => {
     if (newlyFetchedEntries) {
@@ -49,6 +48,7 @@ const EntryList = (props) => {
       if (entry._id === id) {
         entry.isOpen = !entry.isOpen;
       }
+      return entry;
     });
 
     setIsOpen(entriesCopy);
@@ -73,7 +73,7 @@ const EntryList = (props) => {
             return (
               <Card key={entry._id}>
                 <div
-                  className="card-header d-md-flex flex-md-row"
+                  className="card-header d-md-flex flex-md-row bg-secondary text-light"
                   onClick={() => toggle(entry._id)}
                 >
                   <div className="mood-and-date-section d-md-flex justify-content-md-between">
@@ -166,6 +166,7 @@ const EntryList = (props) => {
               </Card>
             );
           }
+          return '';
         })}
       </div>
     </Container>

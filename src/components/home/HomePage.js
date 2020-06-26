@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import Header from './Header';
 import Entries from './Entries';
 import { fetchMoods } from '../../actions/moodActions';
+import { fetchActivities } from '../../actions/activityActions';
 
 const HomePage = (props) => {
   const [activeView, changeActiveView] = useState('Entries');
 
   useEffect(() => {
     props.fetchMoods(props.token);
+    props.fetchActivities(props.token);
   }, []);
 
   return (
@@ -26,4 +28,6 @@ const mapStateToProps = (state) => {
   return { token: state.currentUser.token };
 };
 
-export default connect(mapStateToProps, { fetchMoods })(HomePage);
+export default connect(mapStateToProps, { fetchMoods, fetchActivities })(
+  HomePage,
+);

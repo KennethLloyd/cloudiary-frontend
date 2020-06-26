@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Button, Modal, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, ButtonGroup, Modal, ModalBody, ModalFooter } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addEntry } from '../../actions/entryActions';
@@ -11,9 +11,20 @@ const EntryModal = (props) => {
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [selectedMood, setSelectedMood] = useState('');
+  const [selectedActivity, setSelectedActivity] = useState([]);
 
   const toggle = () => {
     setModal(!modal);
+  };
+
+  const onCheckboxBtnClick = (selected) => {
+    const index = selectedActivity.indexOf(selected);
+    if (index < 0) {
+      selectedActivity.push(selected);
+    } else {
+      selectedActivity.splice(index, 1);
+    }
+    setSelectedActivity([...selectedActivity]);
   };
 
   const importAll = (r) => {
@@ -59,16 +70,16 @@ const EntryModal = (props) => {
       <div className="mt-2 d-flex justify-content-center new-entry-mood-container">
         {props.moods.map((mood) => {
           return (
-            <div className="mood-selector-container">
+            <div className="mood-selector-container" key={mood._id}>
               <Button
                 className={`mood-selector-btn ${
-                  selectedMood === mood.name ? 'border border-dark' : ''
+                  selectedMood === mood._id ? 'border border-dark' : ''
                 }`}
                 color="link"
-                onClick={() => setSelectedMood(mood.name)}
+                onClick={() => setSelectedMood(mood._id)}
               >
                 <img
-                  src={moodIcons[`${mood.name}.svg`]}
+                  src={moodIcons[`${mood.name}-dark.svg`]}
                   width="70"
                   height="70"
                   alt="mood icon"
@@ -84,7 +95,29 @@ const EntryModal = (props) => {
     );
   };
 
-  const renderActivitySelection = () => {};
+  const renderActivitySelection = () => {
+    return (
+      <div>
+        <p className="mb-1">Activities:</p>
+        <ButtonGroup size="sm">
+          {props.activities.map((activity) => {
+            return (
+              <Button
+                className="mr-1"
+                key={activity._id}
+                outline
+                color="primary"
+                onClick={() => onCheckboxBtnClick(activity._id)}
+                active={selectedActivity.includes(activity._id)}
+              >
+                {activity.name}
+              </Button>
+            );
+          })}
+        </ButtonGroup>
+      </div>
+    );
+  };
 
   return (
     <div className="new-entry-modal">
@@ -110,7 +143,11 @@ const EntryModal = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return { token: state.currentUser.token, moods: state.moods.moods };
+  return {
+    token: state.currentUser.token,
+    moods: state.moods.moods,
+    activities: state.activities.activities,
+  };
 };
 
 export default connect(mapStateToProps, { addEntry })(EntryModal);

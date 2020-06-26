@@ -84,11 +84,13 @@ class UserLogIn extends React.Component {
             <img
               className="img-fluid mx-auto d-block"
               src={projectLogo}
+              alt="project logo"
               style={{ width: '70%' }}
             />
             <img
               className="img-fluid mx-auto d-block"
               src={projectLabel}
+              alt="project label"
               style={{ width: '60%' }}
             />
             <Form
