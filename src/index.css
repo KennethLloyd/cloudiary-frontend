@@ -70,6 +70,47 @@ main {
   font-size: 0.85em;
 }
 
+.new-entry-container {
+  position: fixed;
+  bottom: 2%;
+  right: 10%;
+}
+
+.new-entry-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 3px 1px #888888;
+}
+
+.new-entry-modal-greetings {
+  text-align: center;
+  width: 40%;
+}
+
+.new-entry-date-picker {
+  text-align: center;
+  font-size: 0.8em;
+  width: 100%;
+}
+
+.new-entry-time-picker {
+  text-align: center;
+  font-size: 0.8em;
+  width: 100%;
+}
+
+.mood-selector-container {
+  width: 20%;
+  text-align: center;
+}
+
+.mood-selector-btn,
+.mood-selector-btn:hover {
+  width: 100%;
+  text-decoration: none;
+}
+
 @media (max-width: 767px) {
   .new-view-all-btn {
     display: flex;
@@ -99,8 +140,13 @@ main {
   .entry-mood {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     width: 100%;
     margin-left: auto;
+  }
+
+  .entry-mood-name {
+    margin-left: 1em;
   }
 
   .entry-title {
@@ -123,5 +169,45 @@ main {
     display: flex;
     justify-content: center;
     width: 20%;
+  }
+
+  .new-entry-header {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .new-entry-modal-greetings {
+    width: 100%;
+  }
+
+  .new-entry-mood-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .new-entry-date-picker-container {
+    text-align: center;
+    width: 100%;
+  }
+
+  .new-entry-time-picker-container {
+    text-align: center;
+    width: 100%;
+    margin-top: 2px;
+  }
+
+  .new-entry-date-picker {
+    text-align: center;
+    width: 100%;
+  }
+
+  .new-entry-time-picker {
+    text-align: center;
+    width: 100%;
+  }
+
+  .mood-selector-container {
+    width: 30%;
+    text-align: center;
   }
 }

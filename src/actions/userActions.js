@@ -1,14 +1,5 @@
-// Action Creators
 import api from '../apis/api';
-import {
-  LOG_IN,
-  SIGN_UP,
-  LOG_OUT,
-  FETCH_MOODS,
-  FETCH_ENTRIES,
-  SET_ERROR,
-  HIDE_ERROR,
-} from './types';
+import { LOG_IN, SIGN_UP, LOG_OUT, SET_ERROR, HIDE_ERROR } from './types';
 import history from '../history';
 import { toast } from 'react-toastify';
 
@@ -95,66 +86,4 @@ export const logOut = (token) => async (dispatch) => {
 
     history.push('/');
   }
-};
-
-export const fetchMoods = (token) => async (dispatch) => {
-  try {
-    const response = await api.get('/moods', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    dispatch({
-      type: FETCH_MOODS,
-      payload: response.data,
-    });
-  } catch (e) {
-    const errorMessage = e.response.data.error;
-
-    dispatch({
-      type: SET_ERROR,
-      error: errorMessage,
-    });
-
-    toast.error(errorMessage);
-  }
-};
-
-export const fetchEntries = (token, from, to) => async (dispatch) => {
-  try {
-    const response = await api.get('/entries', {
-      headers: { Authorization: `Bearer ${token}` },
-      params: {
-        from,
-        to,
-      },
-    });
-
-    dispatch({
-      type: FETCH_ENTRIES,
-      payload: response.data,
-    });
-  } catch (e) {
-    const errorMessage = e.response.data.error;
-
-    dispatch({
-      type: SET_ERROR,
-      error: errorMessage,
-    });
-
-    toast.error(errorMessage);
-  }
-};
-
-//manual triggers
-export const setError = (error) => async (dispatch) => {
-  dispatch({
-    type: SET_ERROR,
-    error,
-  });
-};
-
-export const hideError = () => async (dispatch) => {
-  dispatch({
-    type: HIDE_ERROR,
-  });
 };

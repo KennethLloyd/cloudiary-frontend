@@ -34,7 +34,7 @@ const SearchFilter = (props) => {
         onClick={(e) => e.preventDefault()}
       >
         <Input
-          size="sm"
+          bsSize="sm"
           className="mr-sm-2"
           type="search"
           placeholder="Search"

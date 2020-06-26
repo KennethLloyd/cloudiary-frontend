@@ -11,20 +11,32 @@ import {
   Col,
 } from 'reactstrap';
 import moment from 'moment';
-import { fetchEntries } from '../../actions';
+import { fetchEntries } from '../../actions/entryActions';
 import upArrowIcon from '../../images/up-arrow.svg';
 import downArrowIcon from '../../images/down-arrow.svg';
 import pencilIcon from '../../images/pencil-icon.svg';
 import trashIcon from '../../images/trash-icon.svg';
 
 const EntryList = (props) => {
-  const addIsOpen = (newlyFetchedEntries) => {
-    const modifiedEntries = newlyFetchedEntries.map((entry) => ({
-      ...entry,
-      isOpen: false,
-    }));
+  const importAll = (r) => {
+    let images = {};
+    r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
+    return images;
+  };
 
-    return modifiedEntries;
+  const moodIcons = importAll(
+    require.context('../../images/moods', false, /\.(png|jpe?g|svg)$/),
+  );
+
+  const addIsOpen = (newlyFetchedEntries) => {
+    if (newlyFetchedEntries) {
+      const modifiedEntries = newlyFetchedEntries.map((entry) => ({
+        ...entry,
+        isOpen: false,
+      }));
+
+      return modifiedEntries;
+    } else return [];
   };
 
   const [entries, setIsOpen] = useState(addIsOpen(props.entries));
@@ -36,6 +48,7 @@ const EntryList = (props) => {
       if (entry._id === id) {
         entry.isOpen = !entry.isOpen;
       }
+      return entry;
     });
 
     setIsOpen(entriesCopy);
@@ -43,9 +56,7 @@ const EntryList = (props) => {
 
   useEffect(() => {
     const thisMonth = moment(props.date).format('YYYY-MM');
-    const nextMonth = moment(props.date)
-      .add(1, 'month')
-      .format('YYYY-MM');
+    const nextMonth = moment(props.date).add(1, 'month').format('YYYY-MM');
 
     props.fetchEntries(props.token, `${thisMonth}-01`, `${nextMonth}-01`);
   }, [props.date]); //upon date change, do this
@@ -62,24 +73,28 @@ const EntryList = (props) => {
             return (
               <Card key={entry._id}>
                 <div
-                  className="card-header d-md-flex flex-md-row"
+                  className="card-header d-md-flex flex-md-row bg-secondary text-light"
                   onClick={() => toggle(entry._id)}
                 >
                   <div className="mood-and-date-section d-md-flex justify-content-md-between">
                     <div className="entry-date d-md-flex flex-md-column align-items-md-center justify-content-md-center">
                       <p className="mb-0">
-                        {moment(entry.entryDate)
-                          .format('MMM DD')
-                          .toUpperCase()}
+                        {moment(entry.entryDate).format('MMM DD').toUpperCase()}
                       </p>
                       <p className="entry-day mb-md-0 mt-md-2">
-                        {moment(entry.entryDate)
-                          .format('dddd')
-                          .toUpperCase()}
+                        {moment(entry.entryDate).format('dddd').toUpperCase()}
                       </p>
                     </div>
-                    <div className="entry-mood align-self-md-center d-md-flex justify-content-md-center">
-                      <p className="mb-0">{entry.mood.name}</p>
+                    <div className="entry-mood d-md-flex flex-md-column justify-content-md-center align-items-md-center">
+                      <img
+                        src={moodIcons[`${entry.mood.name}.svg`]}
+                        alt="mood icon"
+                        width="48"
+                        height="48"
+                      />
+                      <p className="mb-0 entry-mood-name">
+                        {entry.mood.name.toUpperCase()}
+                      </p>
                     </div>
                   </div>
                   <h5 className="mb-0 font-weight-bold entry-title align-self-center d-flex justify-content-center">
@@ -114,7 +129,11 @@ const EntryList = (props) => {
                         <div className="entry-activities d-flex mb-0 ml-2">
                           {entry.activities.map((activity) => {
                             return (
-                              <Badge color="success" className="mr-1 ml-1">
+                              <Badge
+                                key={activity._id}
+                                color="primary"
+                                className="mr-1 ml-1"
+                              >
                                 {activity.name}
                               </Badge>
                             );
@@ -147,6 +166,7 @@ const EntryList = (props) => {
               </Card>
             );
           }
+          return '';
         })}
       </div>
     </Container>

@@ -1,18 +1,16 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import moment from 'moment';
+import leftArrow from '../../images/left-arrow.svg';
+import rightArrow from '../../images/right-arrow.svg';
 
 const EntryNav = (props) => {
   return (
     <div className="d-xs-flex flex-xs-column align-items-xs-center d-md-flex justify-content-md-around align-items-md-center">
-      <Button size="sm" outline color="primary" className="new-view-all-btn">
-        New
-      </Button>
       <div className="d-flex align-items-center justify-content-center">
         <Button
           size="sm"
-          outline
-          color="primary"
+          color="link"
           onClick={() =>
             props.updateDate(
               moment(props.date, 'MMMM YYYY')
@@ -21,13 +19,12 @@ const EntryNav = (props) => {
             )
           }
         >
-          Back
+          <img src={leftArrow} alt="left arrow icon" width="20" height="20" />
         </Button>
         <h4 className="mr-5 ml-5 mt-2">{props.date}</h4>
         <Button
           size="sm"
-          outline
-          color="primary"
+          color="link"
           onClick={() =>
             props.updateDate(
               moment(props.date, 'MMMM YYYY')
@@ -36,12 +33,9 @@ const EntryNav = (props) => {
             )
           }
         >
-          Next
+          <img src={rightArrow} alt="right arrow icon" width="20" height="20" />
         </Button>
       </div>
-      <Button size="sm" outline color="primary" className="new-view-all-btn">
-        View All
-      </Button>
     </div>
   );
 };
