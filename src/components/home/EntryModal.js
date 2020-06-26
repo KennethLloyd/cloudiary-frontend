@@ -10,10 +10,21 @@ const EntryModal = (props) => {
   const [modal, setModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
+  const [selectedMood, setSelectedMood] = useState('');
 
   const toggle = () => {
     setModal(!modal);
   };
+
+  const importAll = (r) => {
+    let images = {};
+    r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
+    return images;
+  };
+
+  const moodIcons = importAll(
+    require.context('../../images/moods', false, /\.(png|jpe?g|svg)$/),
+  );
 
   const renderHeader = () => {
     return (
@@ -39,6 +50,36 @@ const EntryModal = (props) => {
     );
   };
 
+  const renderMoodSelection = () => {
+    return (
+      <div className="mt-2 d-flex justify-content-center">
+        {props.moods.map((mood) => {
+          return (
+            <div className="mood-selector-container">
+              <Button
+                className={`mood-selector-btn ${
+                  selectedMood === mood.name ? 'border border-dark' : ''
+                }`}
+                color="link"
+                onClick={() => setSelectedMood(mood.name)}
+              >
+                <img
+                  src={moodIcons[`${mood.name}.svg`]}
+                  width="70"
+                  height="70"
+                  alt="mood icon"
+                />
+                <p className="text-dark mood-selector-label">
+                  {mood.name.toUpperCase()}
+                </p>
+              </Button>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
     <div className="new-entry-modal">
       <div className="d-flex justify-content-end new-entry-container">
@@ -47,7 +88,9 @@ const EntryModal = (props) => {
         </Button>
       </div>
       <Modal size="lg" isOpen={modal} toggle={toggle}>
-        <ModalBody>{renderHeader()}</ModalBody>
+        <ModalBody>
+          {renderHeader()} {renderMoodSelection()}
+        </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
             Save
@@ -59,7 +102,7 @@ const EntryModal = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return { token: state.currentUser.token };
+  return { token: state.currentUser.token, moods: state.moods.moods };
 };
 
 export default connect(mapStateToProps, { addEntry })(EntryModal);

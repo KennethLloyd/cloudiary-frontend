@@ -131,7 +131,7 @@ const EntryList = (props) => {
                             return (
                               <Badge
                                 key={activity._id}
-                                color="success"
+                                color="primary"
                                 className="mr-1 ml-1"
                               >
                                 {activity.name}
