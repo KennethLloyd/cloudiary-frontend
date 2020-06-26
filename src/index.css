@@ -168,4 +168,44 @@ main {
     justify-content: center;
     width: 20%;
   }
+
+  .new-entry-header {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .new-entry-modal-greetings {
+    width: 100%;
+  }
+
+  .new-entry-mood-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .new-entry-date-picker-container {
+    text-align: center;
+    width: 100%;
+  }
+
+  .new-entry-time-picker-container {
+    text-align: center;
+    width: 100%;
+    margin-top: 2px;
+  }
+
+  .new-entry-date-picker {
+    text-align: center;
+    width: 100%;
+  }
+
+  .new-entry-time-picker {
+    text-align: center;
+    width: 100%;
+  }
+
+  .mood-selector-container {
+    width: 30%;
+    text-align: center;
+  }
 }

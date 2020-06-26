@@ -28,31 +28,35 @@ const EntryModal = (props) => {
 
   const renderHeader = () => {
     return (
-      <div className="d-flex justify-content-between align-items-center">
+      <div className="d-flex justify-content-between align-items-center new-entry-header">
         <p className="new-entry-modal-greetings mb-0">How are you?</p>
-        <DatePicker
-          selected={startDate}
-          onChange={(newDate) => setStartDate(newDate)}
-          dateFormat="MMMM d, yyyy"
-          className="new-entry-date-picker mr-1"
-        />
-        <DatePicker
-          selected={startTime}
-          onChange={(newTime) => setStartTime(newTime)}
-          showTimeSelect
-          showTimeSelectOnly
-          timeIntervals={15}
-          timeCaption="Time"
-          dateFormat="h:mm aa"
-          className="new-entry-time-picker ml-1"
-        />
+        <div className="new-entry-date-picker-container">
+          <DatePicker
+            selected={startDate}
+            onChange={(newDate) => setStartDate(newDate)}
+            dateFormat="MMMM d, yyyy"
+            className="new-entry-date-picker mr-md-1"
+          />
+        </div>
+        <div className="new-entry-time-picker-container">
+          <DatePicker
+            selected={startTime}
+            onChange={(newTime) => setStartTime(newTime)}
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={15}
+            timeCaption="Time"
+            dateFormat="h:mm aa"
+            className="new-entry-time-picker ml-md-1"
+          />
+        </div>
       </div>
     );
   };
 
   const renderMoodSelection = () => {
     return (
-      <div className="mt-2 d-flex justify-content-center">
+      <div className="mt-2 d-flex justify-content-center new-entry-mood-container">
         {props.moods.map((mood) => {
           return (
             <div className="mood-selector-container">
@@ -80,6 +84,8 @@ const EntryModal = (props) => {
     );
   };
 
+  const renderActivitySelection = () => {};
+
   return (
     <div className="new-entry-modal">
       <div className="d-flex justify-content-end new-entry-container">
@@ -89,7 +95,9 @@ const EntryModal = (props) => {
       </div>
       <Modal size="lg" isOpen={modal} toggle={toggle}>
         <ModalBody>
-          {renderHeader()} {renderMoodSelection()}
+          {renderHeader()}
+          {renderMoodSelection()}
+          {renderActivitySelection()}
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
