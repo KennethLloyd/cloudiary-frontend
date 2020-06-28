@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { Button, ButtonGroup, Modal, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Button,
+  ButtonGroup,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+} from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addEntry } from '../../actions/entryActions';
@@ -12,6 +22,8 @@ const EntryModal = (props) => {
   const [startTime, setStartTime] = useState(new Date());
   const [selectedMood, setSelectedMood] = useState('');
   const [selectedActivity, setSelectedActivity] = useState([]);
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
 
   const toggle = () => {
     setModal(!modal);
@@ -119,6 +131,33 @@ const EntryModal = (props) => {
     );
   };
 
+  const renderContentForm = () => {
+    return (
+      <Form className="mt-4">
+        <FormGroup>
+          <Label className="sr-only">Title</Label>
+          <Input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label className="sr-only">Body</Label>
+          <Input
+            type="textarea"
+            placeholder="Write something..."
+            className="new-entry-textarea"
+            rows="10"
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+          />
+        </FormGroup>
+      </Form>
+    );
+  };
+
   return (
     <div className="new-entry-modal">
       <div className="d-flex justify-content-end new-entry-container">
@@ -131,6 +170,7 @@ const EntryModal = (props) => {
           {renderHeader()}
           {renderMoodSelection()}
           {renderActivitySelection()}
+          {renderContentForm()}
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={toggle}>
