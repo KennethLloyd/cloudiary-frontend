@@ -1,5 +1,5 @@
 import api from '../apis/api';
-import { FETCH_ENTRIES, SET_ERROR } from './types';
+import { FETCH_ENTRIES, ADD_ENTRY, SET_ERROR } from './types';
 import { toast } from 'react-toastify';
 
 export const fetchEntries = (token, from, to) => async (dispatch) => {
@@ -28,4 +28,19 @@ export const fetchEntries = (token, from, to) => async (dispatch) => {
   }
 };
 
-export const addEntry = (token, entryDetails) => {};
+export const addEntry = (token, entryDetails) => async (dispatch) => {
+  try {
+    await api.post('/entries', entryDetails, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  } catch (e) {
+    const errorMessage = e.response.data.error;
+
+    dispatch({
+      type: SET_ERROR,
+      error: errorMessage,
+    });
+
+    toast.error(errorMessage);
+  }
+};

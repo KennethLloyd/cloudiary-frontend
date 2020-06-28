@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import {
   Button,
   ButtonGroup,
@@ -13,7 +14,7 @@ import {
 } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { addEntry } from '../../actions/entryActions';
+import { addEntry, fetchEntries } from '../../actions/entryActions';
 import newEntryIcon from '../../images/new-entry-icon.svg';
 
 const EntryModal = (props) => {
@@ -27,6 +28,16 @@ const EntryModal = (props) => {
 
   const toggle = () => {
     setModal(!modal);
+  };
+
+  const resetModal = () => {
+    setModal(false);
+    setStartDate(new Date());
+    setStartTime(new Date());
+    setSelectedMood('');
+    setSelectedActivity([]);
+    setTitle('');
+    setBody('');
   };
 
   const onCheckboxBtnClick = (selected) => {
@@ -158,6 +169,25 @@ const EntryModal = (props) => {
     );
   };
 
+  const saveEntry = () => {
+    const entryDetails = {
+      entryDate: `${moment(startDate).format('YYYY-MM-DD')} ${moment(
+        startTime,
+      ).format('HH:mm')}`,
+      title,
+      body,
+      mood: selectedMood,
+      activities: selectedActivity,
+    };
+
+    const thisMonth = moment(startDate).format('YYYY-MM');
+    const nextMonth = moment(startDate).add(1, 'month').format('YYYY-MM');
+
+    props.addEntry(props.token, entryDetails);
+    resetModal();
+    props.fetchEntries(props.token, `${thisMonth}-01`, `${nextMonth}-01`);
+  };
+
   return (
     <div className="new-entry-modal">
       <div className="d-flex justify-content-end new-entry-container">
@@ -165,19 +195,23 @@ const EntryModal = (props) => {
           <img src={newEntryIcon} alt="new entry icon" width="25" height="25" />
         </Button>
       </div>
-      <Modal size="lg" isOpen={modal} toggle={toggle}>
-        <ModalBody>
-          {renderHeader()}
-          {renderMoodSelection()}
-          {renderActivitySelection()}
-          {renderContentForm()}
-        </ModalBody>
-        <ModalFooter>
-          <Button color="primary" onClick={toggle}>
-            Save
-          </Button>
-        </ModalFooter>
-      </Modal>
+      {modal ? (
+        <Modal size="lg" isOpen={modal} toggle={toggle}>
+          <ModalBody>
+            {renderHeader()}
+            {renderMoodSelection()}
+            {renderActivitySelection()}
+            {renderContentForm()}
+          </ModalBody>
+          <ModalFooter>
+            <Button color="primary" onClick={saveEntry}>
+              Save
+            </Button>
+          </ModalFooter>
+        </Modal>
+      ) : (
+        ''
+      )}
     </div>
   );
 };
@@ -190,4 +224,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addEntry })(EntryModal);
+export default connect(mapStateToProps, { addEntry, fetchEntries })(EntryModal);
