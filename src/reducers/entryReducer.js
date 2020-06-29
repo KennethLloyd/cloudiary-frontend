@@ -1,6 +1,9 @@
 import { FETCH_ENTRIES, ADD_ENTRY } from '../actions/types';
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  entries: [],
+  addEntryToggle: false,
+};
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -8,11 +11,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         entries: action.payload,
+        addEntryToggle: state.addEntryToggle,
       };
     case ADD_ENTRY:
       return {
         ...state,
-        entries: [...state.entries, action.payload.entry],
+        addEntryToggle: !state.addEntryToggle, // allows us to trigger refetch after a successful new entry
       };
     default:
       return state;

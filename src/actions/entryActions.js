@@ -33,6 +33,10 @@ export const addEntry = (token, entryDetails) => async (dispatch) => {
     await api.post('/entries', entryDetails, {
       headers: { Authorization: `Bearer ${token}` },
     });
+
+    dispatch({
+      type: ADD_ENTRY,
+    });
   } catch (e) {
     const errorMessage = e.response.data.error;
 

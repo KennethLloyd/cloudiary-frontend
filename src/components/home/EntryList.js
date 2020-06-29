@@ -59,7 +59,7 @@ const EntryList = (props) => {
     const nextMonth = moment(props.date).add(1, 'month').format('YYYY-MM');
 
     props.fetchEntries(props.token, `${thisMonth}-01`, `${nextMonth}-01`);
-  }, [props.date]); //upon date change, do this
+  }, [props.date, props.addEntryToggle]); //upon date change or new entry, refetch entries
 
   useEffect(() => {
     setIsOpen(addIsOpen(props.entries));
@@ -174,7 +174,11 @@ const EntryList = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return { token: state.currentUser.token, entries: state.entries.entries };
+  return {
+    token: state.currentUser.token,
+    entries: state.entries.entries,
+    addEntryToggle: state.entries.addEntryToggle,
+  };
 };
 
 export default connect(mapStateToProps, { fetchEntries })(EntryList);

@@ -91,7 +91,9 @@ const EntryModal = (props) => {
   const renderMoodSelection = () => {
     return (
       <div className="mt-2 d-flex justify-content-center new-entry-mood-container">
-        {props.moods.map((mood) => {
+        {props.moods.map((mood, index) => {
+          if (selectedMood === '' && !index) setSelectedMood(mood._id);
+
           return (
             <div className="mood-selector-container" key={mood._id}>
               <Button
@@ -180,12 +182,8 @@ const EntryModal = (props) => {
       activities: selectedActivity,
     };
 
-    const thisMonth = moment(startDate).format('YYYY-MM');
-    const nextMonth = moment(startDate).add(1, 'month').format('YYYY-MM');
-
     props.addEntry(props.token, entryDetails);
     resetModal();
-    props.fetchEntries(props.token, `${thisMonth}-01`, `${nextMonth}-01`);
   };
 
   return (
