@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import {
@@ -43,6 +43,10 @@ const AddEntryModal = (props) => {
     clearEntry();
     setModal(false);
   };
+
+  useEffect(() => {
+    resetModal();
+  }, [props.refetchEntryTrigger]);
 
   const onCheckboxBtnClick = (selected) => {
     const index = selectedActivity.indexOf(selected);
@@ -187,7 +191,6 @@ const AddEntryModal = (props) => {
     };
 
     props.addEntry(props.token, entryDetails);
-    resetModal();
   };
 
   return (
@@ -226,6 +229,7 @@ const mapStateToProps = (state) => {
     token: state.currentUser.token,
     moods: state.moods.moods,
     activities: state.activities.activities,
+    refetchEntryTrigger: state.entries.refetchEntryTrigger,
   };
 };
 
