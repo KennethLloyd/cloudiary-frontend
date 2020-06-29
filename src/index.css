@@ -138,6 +138,11 @@ main {
     margin-left: auto;
   }
 
+  .entry-mood img {
+    width: 20px;
+    height: 20px;
+  }
+
   .entry-mood-name {
     margin-left: 1em;
   }

@@ -30,14 +30,18 @@ const AddEntryModal = (props) => {
     setModal(!modal);
   };
 
-  const resetModal = () => {
-    setModal(false);
+  const clearEntry = () => {
     setStartDate(new Date());
     setStartTime(new Date());
     setSelectedMood('');
     setSelectedActivity([]);
     setTitle('');
     setBody('');
+  };
+
+  const resetModal = () => {
+    clearEntry();
+    setModal(false);
   };
 
   const onCheckboxBtnClick = (selected) => {
@@ -202,6 +206,9 @@ const AddEntryModal = (props) => {
             {renderContentForm()}
           </ModalBody>
           <ModalFooter>
+            <Button color="secondary" onClick={clearEntry}>
+              Clear
+            </Button>
             <Button color="primary" onClick={saveEntry}>
               Save
             </Button>
