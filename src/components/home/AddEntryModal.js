@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { addEntry, fetchEntries } from '../../actions/entryActions';
+import { addEntry } from '../../actions/entryActions';
 import newEntryIcon from '../../images/new-entry-icon.svg';
 
 const AddEntryModal = (props) => {
@@ -222,6 +222,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addEntry, fetchEntries })(
-  AddEntryModal,
-);
+export default connect(mapStateToProps, { addEntry })(AddEntryModal);

@@ -1,8 +1,8 @@
-import { FETCH_ENTRIES, ADD_ENTRY } from '../actions/types';
+import { FETCH_ENTRIES, ADD_ENTRY, EDIT_ENTRY } from '../actions/types';
 
 const INITIAL_STATE = {
   entries: [],
-  addEntryToggle: false,
+  refetchEntryTrigger: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -13,9 +13,10 @@ export default (state = INITIAL_STATE, action) => {
         entries: action.payload,
       };
     case ADD_ENTRY:
+    case EDIT_ENTRY:
       return {
         ...state,
-        addEntryToggle: !state.addEntryToggle, // allows us to trigger refetch after a successful new entry
+        refetchEntryTrigger: !state.refetchEntryTrigger, // allows us to trigger refetch after a successful new entry
       };
     default:
       return state;

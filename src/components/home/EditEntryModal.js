@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { addEntry, fetchEntries } from '../../actions/entryActions';
+import { editEntry } from '../../actions/entryActions';
 import pencilIcon from '../../images/pencil-icon.svg';
 
 const EditEntryModal = (props) => {
@@ -30,16 +30,6 @@ const EditEntryModal = (props) => {
 
   const toggle = () => {
     setModal(!modal);
-  };
-
-  const resetModal = () => {
-    setModal(false);
-    setStartDate(new Date());
-    setStartTime(new Date());
-    setSelectedMood('');
-    setSelectedActivity([]);
-    setTitle('');
-    setBody('');
   };
 
   const onCheckboxBtnClick = (selected) => {
@@ -184,8 +174,17 @@ const EditEntryModal = (props) => {
       activities: selectedActivity,
     };
 
-    props.addEntry(props.token, entryDetails);
-    resetModal();
+    props.editEntry(props.token, props.entry._id, entryDetails);
+    toggle();
+  };
+
+  const resetEntry = () => {
+    setStartDate(new Date(props.entry.entryDate));
+    setStartTime(new Date(props.entry.entryDate));
+    setSelectedMood(props.entry.mood._id);
+    setSelectedActivity(props.entry.activities.map((item) => item._id));
+    setTitle(props.entry.title);
+    setBody(props.entry.body);
   };
 
   return (
@@ -204,6 +203,9 @@ const EditEntryModal = (props) => {
             {renderContentForm()}
           </ModalBody>
           <ModalFooter>
+            <Button color="secondary" onClick={resetEntry}>
+              Reset
+            </Button>
             <Button color="primary" onClick={saveEntry}>
               Save
             </Button>
@@ -224,6 +226,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addEntry, fetchEntries })(
-  EditEntryModal,
-);
+export default connect(mapStateToProps, { editEntry })(EditEntryModal);
