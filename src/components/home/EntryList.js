@@ -29,7 +29,7 @@ const EntryList = (props) => {
         {props.entries.map((entry) => {
           entry.moodSrc = moodIcons[`${entry.mood.name}.svg`];
           if (props.mood === entry.mood.name || props.mood === 'ALL') {
-            return <Entry content={entry} />;
+            return <Entry key={entry._id} content={entry} />;
           } else return '';
         })}
       </div>

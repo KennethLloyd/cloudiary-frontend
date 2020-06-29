@@ -59,10 +59,10 @@ export const signUp = (formValues) => async (dispatch) => {
   }
 };
 
-export const logOut = (token) => async (dispatch) => {
+export const logOut = () => async (dispatch, getState) => {
   try {
     await api.post('/users/logout', null, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
 
     dispatch({
