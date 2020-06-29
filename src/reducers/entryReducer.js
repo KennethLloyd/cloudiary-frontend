@@ -11,7 +11,6 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         entries: action.payload,
-        addEntryToggle: state.addEntryToggle,
       };
     case ADD_ENTRY:
       return {

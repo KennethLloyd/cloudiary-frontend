@@ -17,7 +17,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { addEntry, fetchEntries } from '../../actions/entryActions';
 import newEntryIcon from '../../images/new-entry-icon.svg';
 
-const EntryModal = (props) => {
+const AddEntryModal = (props) => {
   const [modal, setModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
@@ -62,17 +62,17 @@ const EntryModal = (props) => {
 
   const renderHeader = () => {
     return (
-      <div className="d-flex justify-content-between align-items-center new-entry-header">
-        <p className="new-entry-modal-greetings mb-0">How are you?</p>
-        <div className="new-entry-date-picker-container">
+      <div className="d-flex justify-content-between align-items-center modal-entry-header">
+        <p className="modal-entry-modal-greetings mb-0">How are you?</p>
+        <div className="modal-entry-date-picker-container">
           <DatePicker
             selected={startDate}
             onChange={(newDate) => setStartDate(newDate)}
             dateFormat="MMMM d, yyyy"
-            className="new-entry-date-picker mr-md-1"
+            className="modal-entry-date-picker mr-md-1"
           />
         </div>
-        <div className="new-entry-time-picker-container">
+        <div className="modal-entry-time-picker-container">
           <DatePicker
             selected={startTime}
             onChange={(newTime) => setStartTime(newTime)}
@@ -81,7 +81,7 @@ const EntryModal = (props) => {
             timeIntervals={15}
             timeCaption="Time"
             dateFormat="h:mm aa"
-            className="new-entry-time-picker ml-md-1"
+            className="modal-entry-time-picker ml-md-1"
           />
         </div>
       </div>
@@ -90,7 +90,7 @@ const EntryModal = (props) => {
 
   const renderMoodSelection = () => {
     return (
-      <div className="mt-2 d-flex justify-content-center new-entry-mood-container">
+      <div className="mt-2 d-flex justify-content-center modal-entry-mood-container">
         {props.moods.map((mood, index) => {
           if (selectedMood === '' && !index) setSelectedMood(mood._id);
 
@@ -161,7 +161,7 @@ const EntryModal = (props) => {
           <Input
             type="textarea"
             placeholder="Write something..."
-            className="new-entry-textarea"
+            className="modal-entry-textarea"
             rows="10"
             value={body}
             onChange={(e) => setBody(e.target.value)}
@@ -187,9 +187,9 @@ const EntryModal = (props) => {
   };
 
   return (
-    <div className="new-entry-modal">
-      <div className="d-flex justify-content-end new-entry-container">
-        <Button color="primary" className="new-entry-btn" onClick={toggle}>
+    <div className="modal-entry-modal">
+      <div className="d-flex justify-content-end modal-entry-container">
+        <Button color="primary" className="modal-entry-btn" onClick={toggle}>
           <img src={newEntryIcon} alt="new entry icon" width="25" height="25" />
         </Button>
       </div>
@@ -222,4 +222,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { addEntry, fetchEntries })(EntryModal);
+export default connect(mapStateToProps, { addEntry, fetchEntries })(
+  AddEntryModal,
+);

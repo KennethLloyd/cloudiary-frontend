@@ -3,7 +3,7 @@ import moment from 'moment';
 import EntryNav from './EntryNav';
 import SearchFilter from './SearchFilter';
 import EntryList from './EntryList';
-import EntryModal from './EntryModal';
+import AddEntryModal from './AddEntryModal';
 
 const Entries = () => {
   const [date, updateDate] = useState(moment().format('MMMM YYYY'));
@@ -14,7 +14,7 @@ const Entries = () => {
       <EntryNav date={date} updateDate={updateDate} />
       <SearchFilter mood={mood} updateMood={updateMood} />
       <EntryList date={date} mood={mood} />
-      <EntryModal />
+      <AddEntryModal />
     </div>
   );
 };

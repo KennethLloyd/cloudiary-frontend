@@ -11,10 +11,10 @@ import {
   Col,
 } from 'reactstrap';
 import moment from 'moment';
+import EditEntryModal from './EditEntryModal';
 import { fetchEntries } from '../../actions/entryActions';
 import upArrowIcon from '../../images/up-arrow.svg';
 import downArrowIcon from '../../images/down-arrow.svg';
-import pencilIcon from '../../images/pencil-icon.svg';
 import trashIcon from '../../images/trash-icon.svg';
 
 const EntryList = (props) => {
@@ -141,14 +141,7 @@ const EntryList = (props) => {
                         </div>
                       </Col>
                       <Col className="modify-entry-section d-flex justify-content-end align-items-center mb-4">
-                        <Button size="sm" color="link" className="mr-1 ml-1">
-                          <img
-                            src={pencilIcon}
-                            alt="Pencil icon"
-                            width="15"
-                            height="15"
-                          />
-                        </Button>
+                        <EditEntryModal entry={entry} />
                         <Button size="sm" color="link" className="mr-1 ml-1">
                           <img
                             src={trashIcon}
