@@ -14,30 +14,22 @@ import {
 } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { addEntry, fetchEntries } from '../../actions/entryActions';
-import newEntryIcon from '../../images/new-entry-icon.svg';
+import { editEntry } from '../../actions/entryActions';
+import pencilIcon from '../../images/pencil-icon.svg';
 
-const EntryModal = (props) => {
+const EditEntryModal = (props) => {
   const [modal, setModal] = useState(false);
-  const [startDate, setStartDate] = useState(new Date());
-  const [startTime, setStartTime] = useState(new Date());
-  const [selectedMood, setSelectedMood] = useState('');
-  const [selectedActivity, setSelectedActivity] = useState([]);
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [startDate, setStartDate] = useState(new Date(props.entry.entryDate));
+  const [startTime, setStartTime] = useState(new Date(props.entry.entryDate));
+  const [selectedMood, setSelectedMood] = useState(props.entry.mood._id);
+  const [selectedActivity, setSelectedActivity] = useState(
+    props.entry.activities.map((item) => item._id),
+  );
+  const [title, setTitle] = useState(props.entry.title);
+  const [body, setBody] = useState(props.entry.body);
 
   const toggle = () => {
     setModal(!modal);
-  };
-
-  const resetModal = () => {
-    setModal(false);
-    setStartDate(new Date());
-    setStartTime(new Date());
-    setSelectedMood('');
-    setSelectedActivity([]);
-    setTitle('');
-    setBody('');
   };
 
   const onCheckboxBtnClick = (selected) => {
@@ -62,17 +54,17 @@ const EntryModal = (props) => {
 
   const renderHeader = () => {
     return (
-      <div className="d-flex justify-content-between align-items-center new-entry-header">
-        <p className="new-entry-modal-greetings mb-0">How are you?</p>
-        <div className="new-entry-date-picker-container">
+      <div className="d-flex justify-content-between align-items-center modal-entry-header">
+        <p className="modal-entry-modal-greetings mb-0">How are you?</p>
+        <div className="modal-entry-date-picker-container">
           <DatePicker
             selected={startDate}
             onChange={(newDate) => setStartDate(newDate)}
             dateFormat="MMMM d, yyyy"
-            className="new-entry-date-picker mr-md-1"
+            className="modal-entry-date-picker mr-md-1"
           />
         </div>
-        <div className="new-entry-time-picker-container">
+        <div className="modal-entry-time-picker-container">
           <DatePicker
             selected={startTime}
             onChange={(newTime) => setStartTime(newTime)}
@@ -81,7 +73,7 @@ const EntryModal = (props) => {
             timeIntervals={15}
             timeCaption="Time"
             dateFormat="h:mm aa"
-            className="new-entry-time-picker ml-md-1"
+            className="modal-entry-time-picker ml-md-1"
           />
         </div>
       </div>
@@ -90,8 +82,10 @@ const EntryModal = (props) => {
 
   const renderMoodSelection = () => {
     return (
-      <div className="mt-2 d-flex justify-content-center new-entry-mood-container">
-        {props.moods.map((mood) => {
+      <div className="mt-2 d-flex justify-content-center modal-entry-mood-container">
+        {props.moods.map((mood, index) => {
+          if (selectedMood === '' && !index) setSelectedMood(mood._id);
+
           return (
             <div className="mood-selector-container" key={mood._id}>
               <Button
@@ -159,7 +153,7 @@ const EntryModal = (props) => {
           <Input
             type="textarea"
             placeholder="Write something..."
-            className="new-entry-textarea"
+            className="modal-entry-textarea"
             rows="10"
             value={body}
             onChange={(e) => setBody(e.target.value)}
@@ -180,19 +174,24 @@ const EntryModal = (props) => {
       activities: selectedActivity,
     };
 
-    const thisMonth = moment(startDate).format('YYYY-MM');
-    const nextMonth = moment(startDate).add(1, 'month').format('YYYY-MM');
+    props.editEntry(props.entry._id, entryDetails);
+    toggle();
+  };
 
-    props.addEntry(props.token, entryDetails);
-    resetModal();
-    props.fetchEntries(props.token, `${thisMonth}-01`, `${nextMonth}-01`);
+  const resetEntry = () => {
+    setStartDate(new Date(props.entry.entryDate));
+    setStartTime(new Date(props.entry.entryDate));
+    setSelectedMood(props.entry.mood._id);
+    setSelectedActivity(props.entry.activities.map((item) => item._id));
+    setTitle(props.entry.title);
+    setBody(props.entry.body);
   };
 
   return (
-    <div className="new-entry-modal">
-      <div className="d-flex justify-content-end new-entry-container">
-        <Button color="primary" className="new-entry-btn" onClick={toggle}>
-          <img src={newEntryIcon} alt="new entry icon" width="25" height="25" />
+    <div className="edit-entry-modal">
+      <div className="d-flex justify-content-end edit-entry-container">
+        <Button size="sm" color="link" className="mr-1 ml-1" onClick={toggle}>
+          <img src={pencilIcon} alt="Pencil icon" width="15" height="15" />
         </Button>
       </div>
       {modal ? (
@@ -204,6 +203,9 @@ const EntryModal = (props) => {
             {renderContentForm()}
           </ModalBody>
           <ModalFooter>
+            <Button color="secondary" onClick={resetEntry}>
+              Reset
+            </Button>
             <Button color="primary" onClick={saveEntry}>
               Save
             </Button>
@@ -218,10 +220,9 @@ const EntryModal = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.currentUser.token,
     moods: state.moods.moods,
     activities: state.activities.activities,
   };
 };
 
-export default connect(mapStateToProps, { addEntry, fetchEntries })(EntryModal);
+export default connect(mapStateToProps, { editEntry })(EditEntryModal);

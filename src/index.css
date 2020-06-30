@@ -70,31 +70,31 @@ main {
   font-size: 0.85em;
 }
 
-.new-entry-container {
+.modal-entry-container {
   position: fixed;
   bottom: 2%;
   right: 10%;
 }
 
-.new-entry-btn {
+.modal-entry-btn {
   width: 70px;
   height: 70px;
   border-radius: 50%;
   box-shadow: 1px 1px 3px 1px #888888;
 }
 
-.new-entry-modal-greetings {
+.modal-entry-modal-greetings {
   text-align: center;
   width: 40%;
 }
 
-.new-entry-date-picker {
+.modal-entry-date-picker {
   text-align: center;
   font-size: 0.8em;
   width: 100%;
 }
 
-.new-entry-time-picker {
+.modal-entry-time-picker {
   text-align: center;
   font-size: 0.8em;
   width: 100%;
@@ -112,13 +112,6 @@ main {
 }
 
 @media (max-width: 767px) {
-  .new-view-all-btn {
-    display: flex;
-    margin-right: auto;
-    margin-left: auto;
-    width: 100%;
-  }
-
   .mood-and-date-section {
     display: flex;
     margin-right: 0px;
@@ -143,6 +136,11 @@ main {
     align-items: center;
     width: 100%;
     margin-left: auto;
+  }
+
+  .entry-mood img {
+    width: 20px;
+    height: 20px;
   }
 
   .entry-mood-name {
@@ -171,37 +169,37 @@ main {
     width: 20%;
   }
 
-  .new-entry-header {
+  .modal-entry-header {
     display: flex;
     flex-wrap: wrap;
   }
 
-  .new-entry-modal-greetings {
+  .modal-entry-modal-greetings {
     width: 100%;
   }
 
-  .new-entry-mood-container {
+  .modal-entry-mood-container {
     display: flex;
     flex-wrap: wrap;
   }
 
-  .new-entry-date-picker-container {
+  .modal-entry-date-picker-container {
     text-align: center;
     width: 100%;
   }
 
-  .new-entry-time-picker-container {
+  .modal-entry-time-picker-container {
     text-align: center;
     width: 100%;
     margin-top: 2px;
   }
 
-  .new-entry-date-picker {
+  .modal-entry-date-picker {
     text-align: center;
     width: 100%;
   }
 
-  .new-entry-time-picker {
+  .modal-entry-time-picker {
     text-align: center;
     width: 100%;
   }

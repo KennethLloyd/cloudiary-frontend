@@ -1,7 +1,7 @@
 import api from '../apis/api';
-import { LOG_IN, SIGN_UP, LOG_OUT, SET_ERROR, HIDE_ERROR } from './types';
+import { LOG_IN, SIGN_UP, LOG_OUT } from './types';
 import history from '../history';
-import { toast } from 'react-toastify';
+import { setError, clearErrors } from './errorActions';
 
 export const logIn = (formValues) => async (dispatch) => {
   try {
@@ -12,21 +12,11 @@ export const logIn = (formValues) => async (dispatch) => {
       payload: response.data,
     });
 
-    dispatch({
-      type: HIDE_ERROR,
-    });
+    dispatch(clearErrors());
 
     history.push('/');
   } catch (e) {
-    const errorMessage = e.response.data.error;
-
-    dispatch({
-      type: SET_ERROR,
-      error: errorMessage,
-    });
-
-    toast.error(errorMessage);
-
+    dispatch(setError(e));
     history.push('/login');
   }
 };
@@ -40,50 +30,30 @@ export const signUp = (formValues) => async (dispatch) => {
       payload: response.data,
     });
 
-    dispatch({
-      type: HIDE_ERROR,
-    });
+    dispatch(clearErrors());
 
     history.push('/');
   } catch (e) {
-    const errorMessage = e.response.data.error;
-
-    dispatch({
-      type: SET_ERROR,
-      error: errorMessage,
-    });
-
-    toast.error(errorMessage);
-
+    dispatch(setError(e));
     history.push('/signup');
   }
 };
 
-export const logOut = (token) => async (dispatch) => {
+export const logOut = () => async (dispatch, getState) => {
   try {
     await api.post('/users/logout', null, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
 
     dispatch({
       type: LOG_OUT,
     });
 
-    dispatch({
-      type: HIDE_ERROR,
-    });
+    dispatch(clearErrors());
 
     history.push('/login');
   } catch (e) {
-    const errorMessage = e.response.data.error;
-
-    dispatch({
-      type: SET_ERROR,
-      error: errorMessage,
-    });
-
-    toast.error(errorMessage);
-
+    dispatch(setError(e));
     history.push('/');
   }
 };

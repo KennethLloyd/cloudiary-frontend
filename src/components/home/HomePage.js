@@ -10,8 +10,8 @@ const HomePage = (props) => {
   const [activeView, changeActiveView] = useState('Entries');
 
   useEffect(() => {
-    props.fetchMoods(props.token);
-    props.fetchActivities(props.token);
+    props.fetchMoods();
+    props.fetchActivities();
   }, []);
 
   return (
@@ -24,10 +24,4 @@ const HomePage = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { token: state.currentUser.token };
-};
-
-export default connect(mapStateToProps, { fetchMoods, fetchActivities })(
-  HomePage,
-);
+export default connect(null, { fetchMoods, fetchActivities })(HomePage);
