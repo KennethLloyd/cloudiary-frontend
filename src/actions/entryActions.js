@@ -2,10 +2,10 @@ import api from '../apis/api';
 import { FETCH_ENTRIES, ADD_ENTRY, EDIT_ENTRY, SET_ERROR } from './types';
 import { toast } from 'react-toastify';
 
-export const fetchEntries = (token, from, to) => async (dispatch) => {
+export const fetchEntries = (from, to) => async (dispatch, getState) => {
   try {
     const response = await api.get('/entries', {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
       params: {
         from,
         to,
@@ -28,10 +28,10 @@ export const fetchEntries = (token, from, to) => async (dispatch) => {
   }
 };
 
-export const addEntry = (token, entryDetails) => async (dispatch) => {
+export const addEntry = (entryDetails) => async (dispatch, getState) => {
   try {
     await api.post('/entries', entryDetails, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
 
     dispatch({
@@ -49,10 +49,13 @@ export const addEntry = (token, entryDetails) => async (dispatch) => {
   }
 };
 
-export const editEntry = (token, entryId, entryDetails) => async (dispatch) => {
+export const editEntry = (entryId, entryDetails) => async (
+  dispatch,
+  getState,
+) => {
   try {
     await api.put(`/entries/${entryId}`, entryDetails, {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
 
     dispatch({

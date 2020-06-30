@@ -2,10 +2,10 @@ import api from '../apis/api';
 import { FETCH_ACTIVITIES, SET_ERROR } from './types';
 import { toast } from 'react-toastify';
 
-export const fetchActivities = (token) => async (dispatch) => {
+export const fetchActivities = () => async (dispatch, getState) => {
   try {
     const response = await api.get('/activities', {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
 
     dispatch({

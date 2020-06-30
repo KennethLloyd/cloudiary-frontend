@@ -190,7 +190,7 @@ const AddEntryModal = (props) => {
       activities: selectedActivity,
     };
 
-    props.addEntry(props.token, entryDetails);
+    props.addEntry(entryDetails);
   };
 
   return (
@@ -226,7 +226,6 @@ const AddEntryModal = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.currentUser.token,
     moods: state.moods.moods,
     activities: state.activities.activities,
     refetchEntryTrigger: state.entries.refetchEntryTrigger,

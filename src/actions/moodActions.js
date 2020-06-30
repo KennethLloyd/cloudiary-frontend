@@ -2,10 +2,10 @@ import api from '../apis/api';
 import { FETCH_MOODS, SET_ERROR } from './types';
 import { toast } from 'react-toastify';
 
-export const fetchMoods = (token) => async (dispatch) => {
+export const fetchMoods = () => async (dispatch, getState) => {
   try {
     const response = await api.get('/moods', {
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
 
     dispatch({

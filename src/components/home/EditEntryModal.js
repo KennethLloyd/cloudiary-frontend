@@ -174,7 +174,7 @@ const EditEntryModal = (props) => {
       activities: selectedActivity,
     };
 
-    props.editEntry(props.token, props.entry._id, entryDetails);
+    props.editEntry(props.entry._id, entryDetails);
     toggle();
   };
 
@@ -220,7 +220,6 @@ const EditEntryModal = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    token: state.currentUser.token,
     moods: state.moods.moods,
     activities: state.activities.activities,
   };
