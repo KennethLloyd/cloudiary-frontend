@@ -28,8 +28,19 @@ const EntryList = (props) => {
       <div id="accordion">
         {props.entries.map((entry) => {
           entry.moodSrc = moodIcons[`${entry.mood.name}.svg`];
-          if (props.mood === entry.mood.name || props.mood === 'ALL') {
-            return <Entry key={entry._id} content={entry} />;
+          if (
+            props.mood.toLowerCase() === entry.mood.name.toLowerCase() ||
+            props.mood.toUpperCase() === 'ALL'
+          ) {
+            if (
+              props.searchKey === '' ||
+              entry.body
+                .toLowerCase()
+                .includes(props.searchKey.toLowerCase()) ||
+              entry.title.toLowerCase().includes(props.searchKey.toLowerCase())
+            ) {
+              return <Entry key={entry._id} content={entry} />;
+            }
           } else return '';
         })}
       </div>

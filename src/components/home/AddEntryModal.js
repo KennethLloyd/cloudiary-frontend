@@ -138,8 +138,7 @@ const AddEntryModal = (props) => {
               <Button
                 className="mr-1"
                 key={activity._id}
-                outline
-                color="primary"
+                color="success"
                 onClick={() => onCheckboxBtnClick(activity._id)}
                 active={selectedActivity.includes(activity._id)}
               >

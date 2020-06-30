@@ -1,0 +1,221 @@
+@import '../scss/_variables.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  background: url('./images/cloudiary-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body,
+main {
+  min-height: 100vh;
+  font-family: 'Lato', sans-serif;
+}
+
+.eye-icon {
+  right: 20px;
+  cursor: pointer;
+}
+
+.navbar-link:hover {
+  cursor: pointer;
+}
+
+.entries-container {
+  height: 75vh;
+  overflow: auto;
+}
+
+.mood-and-date-section {
+  width: 30%;
+}
+
+.entry-date {
+  width: 50%;
+}
+
+.entry-day {
+  font-size: 0.75em;
+}
+
+.entry-mood {
+  width: 50%;
+  font-size: 0.75em;
+}
+
+.entry-title {
+  width: 40%;
+  font-size: 0.9em;
+}
+
+.time-and-more-section {
+  width: 30%;
+}
+
+.entry-time {
+  width: 50%;
+  font-size: 0.75em;
+}
+
+.entry-expander {
+  width: 50%;
+}
+
+.entry-activities-label {
+  font-size: 0.9em;
+}
+
+.entry-body {
+  font-size: 0.85em;
+}
+
+.modal-entry-container {
+  position: fixed;
+  bottom: 2%;
+  right: 10%;
+}
+
+.modal-entry-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  box-shadow: 1px 1px 3px 1px #888888;
+}
+
+.modal-entry-modal-greetings {
+  text-align: center;
+  width: 40%;
+}
+
+.modal-entry-date-picker {
+  text-align: center;
+  font-size: 0.8em;
+  width: 100%;
+}
+
+.modal-entry-time-picker {
+  text-align: center;
+  font-size: 0.8em;
+  width: 100%;
+}
+
+.mood-selector-container {
+  width: 20%;
+  text-align: center;
+}
+
+.mood-selector-btn,
+.mood-selector-btn:hover {
+  width: 100%;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  html,
+  body {
+    background-image: none;
+  }
+
+  .mood-and-date-section {
+    display: flex;
+    margin-right: 0px;
+    width: 100%;
+  }
+
+  .entry-date {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: auto;
+  }
+
+  .entry-day {
+    margin: 0 5px;
+    align-self: center;
+  }
+
+  .entry-mood {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    margin-left: auto;
+  }
+
+  .entry-mood img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .entry-mood-name {
+    margin-left: 1em;
+  }
+
+  .entry-title {
+    width: 100%;
+  }
+
+  .time-and-more-section {
+    display: flex;
+    width: 100%;
+  }
+
+  .entry-time {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 80%;
+  }
+
+  .entry-expander {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+  }
+
+  .modal-entry-header {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .modal-entry-modal-greetings {
+    width: 100%;
+  }
+
+  .modal-entry-mood-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .modal-entry-date-picker-container {
+    text-align: center;
+    width: 100%;
+  }
+
+  .modal-entry-time-picker-container {
+    text-align: center;
+    width: 100%;
+    margin-top: 2px;
+  }
+
+  .modal-entry-date-picker {
+    text-align: center;
+    width: 100%;
+  }
+
+  .modal-entry-time-picker {
+    text-align: center;
+    width: 100%;
+  }
+
+  .mood-selector-container {
+    width: 30%;
+    text-align: center;
+  }
+}

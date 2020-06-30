@@ -1,0 +1,22 @@
+$primary: rgb(65, 174, 231);
+$success: rgb(151, 223, 144);
+$secondary: rgb(60, 162, 137);
+$enable-gradients: true;
+$enable-shadows: true;
+$enable-hover-media-query: true;
+$enable-responsive-font-sizes: true;
+$font-weight-light: 200;
+$font-weight-base: $font-weight-light;
+$font-size-base: 1rem;
+$font-size-sm: $font-size-base * 0.85;
+$info: rgb(65, 170, 187);
+$warning: rgb(150, 165, 37);
+$danger: rgb(194, 93, 59);
+$modal-lg: 850px;
+$headings-font-weight: 400;
+$small-font-size: 75%;
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;1,700&display=swap');
+
+// Bootstrap and its default variables
+@import '../node_modules/bootstrap/scss/bootstrap';

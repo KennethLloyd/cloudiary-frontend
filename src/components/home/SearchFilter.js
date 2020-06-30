@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Container, Form, Button, Label, Input } from 'reactstrap';
 
 const SearchFilter = (props) => {
   const moods = useSelector((state) => state.moods.moods);
+  const [searchValue, updateSearchValue] = useState('');
 
   const renderDropDown = () => {
     return (
@@ -19,7 +20,9 @@ const SearchFilter = (props) => {
           <option>ALL</option>
           {moods
             ? moods.map((mood) => {
-                return <option key={mood._id}>{mood.name}</option>;
+                return (
+                  <option key={mood._id}>{mood.name.toUpperCase()}</option>
+                );
               })
             : ''}
         </Input>
@@ -39,13 +42,16 @@ const SearchFilter = (props) => {
           type="search"
           placeholder="Search"
           aria-label="Search"
+          value={searchValue}
+          onChange={(e) => updateSearchValue(e.target.value)}
+          onBlur={() => (searchValue === '' ? props.updateSearchKey('') : '')}
         />
         <Button
           size="sm"
-          outline
           color="secondary"
           className="my-2 my-sm-0 ml-2 ml-md-0"
           type="submit"
+          onClick={() => props.updateSearchKey(searchValue)}
         >
           Search
         </Button>

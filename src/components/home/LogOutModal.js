@@ -16,7 +16,7 @@ const LogOutModal = (props) => {
 
   return (
     <div>
-      <Button size="sm" color="danger" onClick={toggle}>
+      <Button size="sm" color="secondary" onClick={toggle}>
         {props.buttonLabel}
       </Button>
       <Modal isOpen={modal} toggle={toggle} className={props.className}>
