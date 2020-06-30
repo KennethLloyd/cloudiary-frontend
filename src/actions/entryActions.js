@@ -60,7 +60,7 @@ export const editEntry = (entryId, entryDetails) => async (
 
 export const deleteEntry = (entryId) => async (dispatch, getState) => {
   try {
-    await api.delete(`/entries/${entryId}`, {
+    const response = await api.delete(`/entries/${entryId}`, {
       headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
 
@@ -68,6 +68,7 @@ export const deleteEntry = (entryId) => async (dispatch, getState) => {
 
     dispatch({
       type: DELETE_ENTRY,
+      payload: response.data.entry,
     });
   } catch (e) {
     dispatch(setError(e));

@@ -1,6 +1,6 @@
 import api from '../apis/api';
-import { FETCH_ACTIVITIES, SET_ERROR } from './types';
-import { toast } from 'react-toastify';
+import { FETCH_ACTIVITIES } from './types';
+import { setError, clearErrors } from './errorActions';
 
 export const fetchActivities = () => async (dispatch, getState) => {
   try {
@@ -8,18 +8,13 @@ export const fetchActivities = () => async (dispatch, getState) => {
       headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
 
+    dispatch(clearErrors());
+
     dispatch({
       type: FETCH_ACTIVITIES,
       payload: response.data,
     });
   } catch (e) {
-    const errorMessage = e.response.data.error;
-
-    dispatch({
-      type: SET_ERROR,
-      error: errorMessage,
-    });
-
-    toast.error(errorMessage);
+    dispatch(setError(e));
   }
 };

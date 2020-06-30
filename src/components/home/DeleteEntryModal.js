@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { deleteEntry } from '../../actions/entryActions';
 import trashIcon from '../../images/trash-icon.svg';
 
 const DeleteEntryModal = (props) => {
@@ -8,6 +10,7 @@ const DeleteEntryModal = (props) => {
 
   const toggle = (confirm) => {
     if (confirm === 'yes') {
+      props.deleteEntry(props.entry._id);
     }
 
     setModal(!modal);
@@ -38,4 +41,4 @@ const DeleteEntryModal = (props) => {
   );
 };
 
-export default DeleteEntryModal;
+export default connect(null, { deleteEntry })(DeleteEntryModal);
