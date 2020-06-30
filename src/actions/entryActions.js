@@ -1,6 +1,6 @@
 import api from '../apis/api';
-import { FETCH_ENTRIES, ADD_ENTRY, EDIT_ENTRY, SET_ERROR } from './types';
-import { toast } from 'react-toastify';
+import { FETCH_ENTRIES, ADD_ENTRY, EDIT_ENTRY, DELETE_ENTRY } from './types';
+import { setError, clearErrors } from './errorActions';
 
 export const fetchEntries = (from, to) => async (dispatch, getState) => {
   try {
@@ -12,19 +12,14 @@ export const fetchEntries = (from, to) => async (dispatch, getState) => {
       },
     });
 
+    dispatch(clearErrors());
+
     dispatch({
       type: FETCH_ENTRIES,
       payload: response.data,
     });
   } catch (e) {
-    const errorMessage = e.response.data.error;
-
-    dispatch({
-      type: SET_ERROR,
-      error: errorMessage,
-    });
-
-    toast.error(errorMessage);
+    dispatch(setError(e));
   }
 };
 
@@ -34,18 +29,13 @@ export const addEntry = (entryDetails) => async (dispatch, getState) => {
       headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
 
+    dispatch(clearErrors());
+
     dispatch({
       type: ADD_ENTRY,
     });
   } catch (e) {
-    const errorMessage = e.response.data.error;
-
-    dispatch({
-      type: SET_ERROR,
-      error: errorMessage,
-    });
-
-    toast.error(errorMessage);
+    dispatch(setError(e));
   }
 };
 
@@ -58,17 +48,28 @@ export const editEntry = (entryId, entryDetails) => async (
       headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
 
+    dispatch(clearErrors());
+
     dispatch({
       type: EDIT_ENTRY,
     });
   } catch (e) {
-    const errorMessage = e.response.data.error;
+    dispatch(setError(e));
+  }
+};
 
-    dispatch({
-      type: SET_ERROR,
-      error: errorMessage,
+export const deleteEntry = (entryId) => async (dispatch, getState) => {
+  try {
+    await api.delete(`/entries/${entryId}`, {
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
 
-    toast.error(errorMessage);
+    dispatch(clearErrors());
+
+    dispatch({
+      type: DELETE_ENTRY,
+    });
+  } catch (e) {
+    dispatch(setError(e));
   }
 };

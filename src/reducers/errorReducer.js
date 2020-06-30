@@ -1,4 +1,4 @@
-import { SET_ERROR, HIDE_ERROR } from '../actions/types';
+import { SET_ERROR, CLEAR_ERRORS } from '../actions/types';
 
 const INITIAL_STATE = {
   error: null,
@@ -12,7 +12,7 @@ export default (state = INITIAL_STATE, action) => {
         error: action.error,
         isOpen: true,
       };
-    case HIDE_ERROR:
+    case CLEAR_ERRORS:
       return {
         error: null,
         isOpen: false,
