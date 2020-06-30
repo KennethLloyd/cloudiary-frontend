@@ -15,7 +15,7 @@ import {
 } from 'reactstrap';
 
 import { logIn } from '../../actions/userActions';
-import '../../index.css';
+import '../../index.scss';
 import projectLogo from '../../images/project-logo.svg';
 import projectLabel from '../../images/project-label.svg';
 import passwordShown from '../../images/password-shown.svg';
@@ -78,63 +78,63 @@ class UserLogIn extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Row className="align-items-center" style={{ height: '100vh' }}>
-          <Col md={{ size: 4, offset: 4 }}>
-            <img
-              className="img-fluid mx-auto d-block"
-              src={projectLogo}
-              alt="project logo"
-              style={{ width: '70%' }}
-            />
-            <img
-              className="img-fluid mx-auto d-block"
-              src={projectLabel}
-              alt="project label"
-              style={{ width: '60%' }}
-            />
-            <Form
-              onSubmit={this.props.handleSubmit(this.onSubmit)}
-              className="mt-5"
-            >
-              <FormGroup>
-                <Field
-                  type="email"
-                  name="email"
-                  id="userEmail"
-                  placeholder="Email Address"
-                  component={this.renderInput}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Field
-                  type={this.state.passwordType}
-                  name="password"
-                  id="userPassword"
-                  placeholder="Password"
-                  component={this.renderInput}
-                />
-              </FormGroup>
-              <FormText className="text-right">
-                <Link to="/forgot-password" className="text-primary">
-                  Forgot password?
-                </Link>
-              </FormText>
-              <div className="text-center mt-2">
-                <Button color="primary" size="sm">
-                  Log In
-                </Button>
-              </div>
-              <FormText color="secondary" className="text-center">
-                Don't have an account?{' '}
-                <Link to="/signup" className="text-primary">
-                  Sign Up
-                </Link>
-              </FormText>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
+      <div className="bg-primary">
+        <Container>
+          <Row className="align-items-center" style={{ height: '100vh' }}>
+            <Col md={{ size: 4, offset: 4 }}>
+              <img
+                className="img-fluid mx-auto d-block"
+                src={projectLogo}
+                alt="project logo"
+                style={{ width: '70%' }}
+              />
+              <img
+                className="img-fluid mx-auto d-block"
+                src={projectLabel}
+                alt="project label"
+                style={{ width: '60%' }}
+              />
+              <Form
+                onSubmit={this.props.handleSubmit(this.onSubmit)}
+                className="mt-5"
+              >
+                <FormGroup>
+                  <Field
+                    type="email"
+                    name="email"
+                    id="userEmail"
+                    placeholder="Email Address"
+                    component={this.renderInput}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Field
+                    type={this.state.passwordType}
+                    name="password"
+                    id="userPassword"
+                    placeholder="Password"
+                    component={this.renderInput}
+                  />
+                </FormGroup>
+                <FormText className="text-right">
+                  <Link to="/forgot-password" className="text-light">
+                    Forgot password?
+                  </Link>
+                </FormText>
+                <div className="text-center mt-2">
+                  <Button size="sm">Log In</Button>
+                </div>
+                <FormText color="light" className="text-center">
+                  Don't have an account?{' '}
+                  <Link to="/signup" className="text-dark">
+                    Sign Up
+                  </Link>
+                </FormText>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     );
   }
 }

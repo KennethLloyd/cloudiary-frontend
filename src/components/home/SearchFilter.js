@@ -20,7 +20,9 @@ const SearchFilter = (props) => {
           <option>ALL</option>
           {moods
             ? moods.map((mood) => {
-                return <option key={mood._id}>{mood.name}</option>;
+                return (
+                  <option key={mood._id}>{mood.name.toUpperCase()}</option>
+                );
               })
             : ''}
         </Input>
@@ -46,7 +48,6 @@ const SearchFilter = (props) => {
         />
         <Button
           size="sm"
-          outline
           color="secondary"
           className="my-2 my-sm-0 ml-2 ml-md-0"
           type="submit"

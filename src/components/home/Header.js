@@ -23,7 +23,7 @@ const Header = (props) => {
 
   return (
     <div className="shadow bg-white rounded mb-3">
-      <Navbar color="light" light expand="md">
+      <Navbar color="primary" light expand="md">
         <NavbarBrand className="mr-5">
           <img src={projectLogo} alt="Project logo" width="60" height="30" />
           <img src={projectLabel} alt="Project label" width="90" height="30" />
