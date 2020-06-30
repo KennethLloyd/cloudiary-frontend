@@ -6,7 +6,7 @@ import { logOut } from '../../actions/userActions';
 const LogOutModal = (props) => {
   const [modal, setModal] = useState(false);
 
-  const toggle = (logOut = 'yes') => {
+  const toggle = (logOut) => {
     if (logOut === 'yes') {
       props.logOut();
     }
@@ -23,11 +23,11 @@ const LogOutModal = (props) => {
         <ModalHeader toggle={toggle}>Log Out</ModalHeader>
         <ModalBody>Are you sure you want to log out?</ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={() => toggle('yes')}>
-            Yes
-          </Button>{' '}
           <Button color="secondary" onClick={toggle}>
             No
+          </Button>
+          <Button color="primary" onClick={() => toggle('yes')}>
+            Yes
           </Button>
         </ModalFooter>
       </Modal>

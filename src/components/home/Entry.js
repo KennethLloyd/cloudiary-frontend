@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Card, CardBody, Button, Collapse, Badge, Row, Col } from 'reactstrap';
 import moment from 'moment';
 import EditEntryModal from './EditEntryModal';
+import DeleteEntryModal from './DeleteEntryModal';
 import upArrowIcon from '../../images/up-arrow.svg';
 import downArrowIcon from '../../images/down-arrow.svg';
-import trashIcon from '../../images/trash-icon.svg';
 
 const Entry = ({ content }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,9 +72,7 @@ const Entry = ({ content }) => {
             </Col>
             <Col className="modify-entry-section d-flex justify-content-end align-items-center mb-4">
               <EditEntryModal entry={content} />
-              <Button size="sm" color="link" className="mr-1 ml-1">
-                <img src={trashIcon} alt="Trash icon" width="15" height="15" />
-              </Button>
+              <DeleteEntryModal entry={content} />
             </Col>
           </Row>
 
