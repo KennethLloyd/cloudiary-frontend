@@ -6,7 +6,7 @@ import EntryList from './EntryList';
 import AddEntryModal from './AddEntryModal';
 
 const Entries = () => {
-  const [date, updateDate] = useState(moment().format('MMMM YYYY'));
+  const [date, updateDate] = useState(moment().format('YYYY-MM-DD'));
   const [mood, updateMood] = useState('ALL');
   const [searchKey, updateSearchKey] = useState('');
 
