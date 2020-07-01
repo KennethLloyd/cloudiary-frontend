@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import moment from 'moment';
 import {
   Button,
@@ -11,10 +11,12 @@ import {
   FormGroup,
   Label,
   Input,
+  Alert,
 } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { editEntry } from '../../actions/entryActions';
+import { clearErrors } from '../../actions/errorActions';
 import pencilIcon from '../../images/pencil-icon.svg';
 
 const EditEntryModal = (props) => {
@@ -27,10 +29,35 @@ const EditEntryModal = (props) => {
   );
   const [title, setTitle] = useState(props.entry.title);
   const [body, setBody] = useState(props.entry.body);
+  const dispatch = useDispatch();
+
+  const onAlertDismiss = () => {
+    dispatch(clearErrors());
+  };
 
   const toggle = () => {
     setModal(!modal);
   };
+
+  const resetEntry = () => {
+    setStartDate(new Date(props.entry.entryDate));
+    setStartTime(new Date(props.entry.entryDate));
+    setSelectedMood(props.entry.mood._id);
+    setSelectedActivity(props.entry.activities.map((item) => item._id));
+    setTitle(props.entry.title);
+    setBody(props.entry.body);
+
+    onAlertDismiss();
+  };
+
+  const resetModal = () => {
+    resetEntry();
+    setModal(false);
+  };
+
+  useEffect(() => {
+    resetModal();
+  }, [props.refetchEntryTrigger]);
 
   const onCheckboxBtnClick = (selected) => {
     const index = selectedActivity.indexOf(selected);
@@ -174,16 +201,6 @@ const EditEntryModal = (props) => {
     };
 
     props.editEntry(props.entry._id, entryDetails);
-    toggle();
-  };
-
-  const resetEntry = () => {
-    setStartDate(new Date(props.entry.entryDate));
-    setStartTime(new Date(props.entry.entryDate));
-    setSelectedMood(props.entry.mood._id);
-    setSelectedActivity(props.entry.activities.map((item) => item._id));
-    setTitle(props.entry.title);
-    setBody(props.entry.body);
   };
 
   return (
@@ -200,6 +217,13 @@ const EditEntryModal = (props) => {
             {renderMoodSelection()}
             {renderActivitySelection()}
             {renderContentForm()}
+            <Alert
+              color="danger"
+              isOpen={props.hasError}
+              toggle={onAlertDismiss}
+            >
+              {props.error}
+            </Alert>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={resetEntry}>
@@ -221,6 +245,9 @@ const mapStateToProps = (state) => {
   return {
     moods: state.moods.moods,
     activities: state.activities.activities,
+    refetchEntryTrigger: state.entries.refetchEntryTrigger,
+    error: state.errors.error,
+    hasError: state.errors.isOpen,
   };
 };
 
