@@ -106,7 +106,7 @@ const AddEntryModal = (props) => {
             <div className="mood-selector-container" key={mood._id}>
               <Button
                 className={`mood-selector-btn ${
-                  selectedMood === mood._id ? 'border border-dark' : ''
+                  selectedMood === mood._id ? 'selected-mood' : ''
                 }`}
                 color="link"
                 onClick={() => setSelectedMood(mood._id)}
@@ -195,7 +195,7 @@ const AddEntryModal = (props) => {
   return (
     <div className="modal-entry-modal">
       <div className="d-flex justify-content-end modal-entry-container">
-        <Button color="primary" className="modal-entry-btn" onClick={toggle}>
+        <Button color="secondary" className="modal-entry-btn" onClick={toggle}>
           <img src={newEntryIcon} alt="new entry icon" width="25" height="25" />
         </Button>
       </div>

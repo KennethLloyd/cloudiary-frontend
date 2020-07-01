@@ -18,6 +18,12 @@ main {
   font-family: 'Lato', sans-serif;
 }
 
+.landing-page {
+  background: url('./images/landing-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .eye-icon {
   right: 20px;
   cursor: pointer;
@@ -34,6 +40,10 @@ main {
 
 .mood-and-date-section {
   width: 30%;
+}
+
+.entry-card {
+  background-color: darken($color: $primary, $amount: 10%);
 }
 
 .entry-date {
@@ -85,7 +95,7 @@ main {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  box-shadow: 1px 1px 3px 1px #888888;
+  box-shadow: $box-shadow-lg;
 }
 
 .modal-entry-modal-greetings {
@@ -114,6 +124,11 @@ main {
 .mood-selector-btn:hover {
   width: 100%;
   text-decoration: none;
+}
+
+.selected-mood {
+  background: lighten($color: $primary, $amount: 10%);
+  box-shadow: $box-shadow;
 }
 
 @media (max-width: 767px) {

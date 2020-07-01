@@ -90,7 +90,7 @@ const EditEntryModal = (props) => {
             <div className="mood-selector-container" key={mood._id}>
               <Button
                 className={`mood-selector-btn ${
-                  selectedMood === mood._id ? 'border border-dark' : ''
+                  selectedMood === mood._id ? 'selected-mood' : ''
                 }`}
                 color="link"
                 onClick={() => setSelectedMood(mood._id)}
@@ -122,8 +122,7 @@ const EditEntryModal = (props) => {
               <Button
                 className="mr-1"
                 key={activity._id}
-                outline
-                color="primary"
+                color="success"
                 onClick={() => onCheckboxBtnClick(activity._id)}
                 active={selectedActivity.includes(activity._id)}
               >

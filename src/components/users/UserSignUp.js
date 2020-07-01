@@ -84,7 +84,7 @@ class UserSignUp extends React.Component {
 
   render() {
     return (
-      <div className="bg-primary">
+      <div className="landing-page">
         <Container>
           <Row className="align-items-center" style={{ height: '100vh' }}>
             <Col md={{ size: 4, offset: 4 }} className="mt-auto">
