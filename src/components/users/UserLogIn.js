@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   Button,
   Form,
@@ -111,14 +110,14 @@ const UserLogIn = (props) => {
                 </div>
               </FormGroup>
               <FormText className="text-right">
-                <Link to="/forgot-password" className="text-light">
+                <Link to="/forgot-password" className="landing-questions">
                   Forgot password?
                 </Link>
               </FormText>
               <div className="text-center mt-2">
                 <Button size="sm">Log In</Button>
               </div>
-              <FormText color="light" className="text-center">
+              <FormText className="text-center landing-questions">
                 Don't have an account?{' '}
                 <Link to="/signup" className="text-dark">
                   Sign Up

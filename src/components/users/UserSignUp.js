@@ -1,8 +1,6 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
+import React, { useState } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   Button,
   Form,
@@ -12,161 +10,155 @@ import {
   Container,
   Col,
   Row,
+  Alert,
 } from 'reactstrap';
 
 import { signUp } from '../../actions/userActions';
-import '../../index.scss';
+import { clearErrors } from '../../actions/errorActions';
 import projectLogo from '../../images/project-logo.svg';
 import projectLabel from '../../images/project-label.svg';
 import passwordShown from '../../images/password-shown.svg';
 import passwordHidden from '../../images/password-hidden.svg';
 
-class UserSignUp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      passwordType: 'password',
-      eyeIcon: passwordHidden,
-    };
-  }
+const UserSignUp = (props) => {
+  const [passwordType, setPasswordType] = useState('password');
+  const [eyeIcon, setEyeIcon] = useState(passwordHidden);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
-  togglePasswordVisibility = () => {
-    if (this.state.passwordType === 'password') {
-      this.setState({
-        passwordType: 'text',
-        eyeIcon: passwordShown,
-      });
+  const togglePasswordVisibility = () => {
+    if (passwordType === 'password') {
+      setPasswordType('text');
+      setEyeIcon(passwordShown);
     } else {
-      this.setState({
-        passwordType: 'password',
-        eyeIcon: passwordHidden,
-      });
+      setPasswordType('password');
+      setEyeIcon(passwordHidden);
     }
   };
 
-  renderInput = (formProps) => {
-    const { input, type, id, placeholder, meta } = formProps;
-    const hasError = meta.touched && meta.error;
-    const className = `${hasError ? 'border border-danger' : ''}`;
+  const onSubmit = (e) => {
+    e.preventDefault();
 
-    return (
-      <div>
-        <span className="position-relative d-flex flex-column justify-content-center">
-          {id === 'userPassword' ? (
+    const formValues = {
+      email,
+      password,
+      firstName,
+      lastName,
+    };
+
+    props.signUp(formValues);
+  };
+
+  const onAlertDismiss = () => {
+    dispatch(clearErrors());
+  };
+
+  return (
+    <div className="landing-page">
+      <Container>
+        <Row className="align-items-center" style={{ height: '100vh' }}>
+          <Col md={{ size: 4, offset: 4 }} className="mt-auto">
             <img
-              onClick={() => this.togglePasswordVisibility()}
-              src={this.state.eyeIcon}
-              className="position-absolute eye-icon align-self-end"
-              alt="Password visibility icon"
-              width="25"
-              height="20"
+              className="img-fluid mx-auto d-block"
+              src={projectLogo}
+              alt="project logo"
+              style={{ width: '70%' }}
             />
-          ) : (
-            ''
-          )}
-          <Input
-            className={className}
-            {...input}
-            type={type}
-            id={id}
-            placeholder={placeholder}
-            required
-          />
-        </span>
-        <FormText color="danger">{hasError ? meta.error : ''}</FormText>
-      </div>
-    );
-  };
-
-  onSubmit = (formValues) => {
-    this.props.signUp(formValues);
-  };
-
-  render() {
-    return (
-      <div className="landing-page">
-        <Container>
-          <Row className="align-items-center" style={{ height: '100vh' }}>
-            <Col md={{ size: 4, offset: 4 }} className="mt-auto">
-              <img
-                className="img-fluid mx-auto d-block"
-                src={projectLogo}
-                alt="project logo"
-                style={{ width: '70%' }}
-              />
-              <img
-                className="img-fluid mx-auto d-block"
-                src={projectLabel}
-                alt="project label"
-                style={{ width: '60%' }}
-              />
-            </Col>
-            <Col md={{ size: 6, offset: 3 }} className="mb-auto mt-5">
-              <Form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-                <FormGroup className="d-xl-flex justify-content-xl-around">
-                  <Field
+            <img
+              className="img-fluid mx-auto d-block"
+              src={projectLabel}
+              alt="project label"
+              style={{ width: '60%' }}
+            />
+          </Col>
+          <Col md={{ size: 6, offset: 3 }} className="mb-auto mt-5">
+            <Form onSubmit={(e) => onSubmit(e)}>
+              <Alert
+                color="danger"
+                isOpen={props.hasError}
+                toggle={onAlertDismiss}
+              >
+                {props.error}
+              </Alert>
+              <FormGroup className="d-md-flex justify-content-md-center">
+                <div className="position-relative d-flex flex-column justify-content-center mr-auto sign-up-field">
+                  <Input
                     type="text"
                     name="firstName"
                     id="userFirstName"
                     placeholder="First Name"
-                    component={this.renderInput}
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                   />
-                  <Field
+                </div>
+
+                <div className="position-relative d-flex flex-column justify-content-center ml-auto sign-up-field">
+                  <Input
                     type="text"
                     name="lastName"
                     id="userLastName"
                     placeholder="Last Name"
-                    component={this.renderInput}
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                   />
-                </FormGroup>
-                <FormGroup className="d-xl-flex justify-content-xl-around">
-                  <Field
+                </div>
+              </FormGroup>
+              <FormGroup className="d-md-flex justify-content-md-center">
+                <div className="position-relative d-flex flex-column justify-content-center mr-auto sign-up-field">
+                  <Input
                     type="email"
                     name="email"
                     id="userEmail"
                     placeholder="Email Address"
-                    component={this.renderInput}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
-                  <Field
-                    type={this.state.passwordType}
+                </div>
+
+                <div className="position-relative d-flex flex-column justify-content-center ml-auto sign-up-field">
+                  <img
+                    onClick={() => togglePasswordVisibility()}
+                    src={eyeIcon}
+                    className="position-absolute eye-icon align-self-end"
+                    alt="Password visibility icon"
+                    width="25"
+                    height="20"
+                  />
+                  <Input
+                    type={passwordType}
                     name="password"
                     id="userPassword"
                     placeholder="Password"
-                    component={this.renderInput}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
-                </FormGroup>
-                <div className="text-center mt-2">
-                  <Button size="sm">Sign Up</Button>
                 </div>
-                <FormText color="light" className="text-center">
-                  Already have an account?{' '}
-                  <Link to="/login" className="text-dark">
-                    Log In
-                  </Link>
-                </FormText>
-              </Form>
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
-}
-
-const validate = (values) => {
-  const errors = {};
-  if (values.password && values.password.length < 8) {
-    errors.password = 'Password is too short';
-  }
-  if (values.confirmPassword !== values.password) {
-    errors.confirmPassword = 'Passwords did not match';
-  }
-  return errors;
+              </FormGroup>
+              <div className="text-center mt-2">
+                <Button size="sm">Sign Up</Button>
+              </div>
+              <FormText className="text-center landing-questions">
+                Already have an account?{' '}
+                <Link to="/login" className="text-dark">
+                  Log In
+                </Link>
+              </FormText>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
 };
 
-const formWrapped = reduxForm({
-  form: 'UserSignUp',
-  validate,
-})(UserSignUp);
+const mapStateToProps = (state) => {
+  return {
+    error: state.errors.error,
+    hasError: state.errors.isOpen,
+  };
+};
 
-export default connect(null, { signUp })(formWrapped);
+export default connect(mapStateToProps, { signUp })(UserSignUp);

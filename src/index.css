@@ -11084,6 +11084,14 @@ main {
   background-size: cover;
 }
 
+.landing-questions {
+  color: #f8f9fa !important;
+}
+
+.sign-up-field {
+  width: 45%;
+}
+
 .eye-icon {
   right: 20px;
   cursor: pointer;
@@ -11197,6 +11205,13 @@ main {
   html,
   body {
     background-image: none;
+  }
+  .sign-up-field {
+    width: 100%;
+    margin-top: 7px;
+  }
+  .landing-questions {
+    color: #626d78 !important;
   }
   .mood-and-date-section {
     display: -webkit-box;
