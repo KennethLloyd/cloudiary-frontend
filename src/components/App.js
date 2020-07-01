@@ -1,7 +1,5 @@
 import React from 'react';
 import { Router, Switch } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import UnauthenticatedRoute from './UnauthenticatedRoute';
 import UserSignUp from './users/UserSignUp';
@@ -21,7 +19,6 @@ const App = () => {
           </Switch>
         </div>
       </Router>
-      <ToastContainer />
     </div>
   );
 };
