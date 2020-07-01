@@ -10,12 +10,27 @@ body {
   background: url('./images/cloudiary-background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: 0px 60px;
 }
 
 body,
 main {
   min-height: 100vh;
   font-family: 'Lato', sans-serif;
+}
+
+.landing-page {
+  background: url('./images/landing-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.landing-questions {
+  color: $light !important;
+}
+
+.sign-up-field {
+  width: 45%;
 }
 
 .eye-icon {
@@ -34,6 +49,10 @@ main {
 
 .mood-and-date-section {
   width: 30%;
+}
+
+.entry-card {
+  background-color: darken($color: $primary, $amount: 10%);
 }
 
 .entry-date {
@@ -85,7 +104,7 @@ main {
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  box-shadow: 1px 1px 3px 1px #888888;
+  box-shadow: $box-shadow-lg;
 }
 
 .modal-entry-modal-greetings {
@@ -116,10 +135,24 @@ main {
   text-decoration: none;
 }
 
+.selected-mood {
+  background: lighten($color: $primary, $amount: 10%);
+  box-shadow: $box-shadow;
+}
+
 @media (max-width: 767px) {
   html,
   body {
     background-image: none;
+  }
+
+  .sign-up-field {
+    width: 100%;
+    margin-top: 7px;
+  }
+
+  .landing-questions {
+    color: lighten($color: $dark, $amount: 20%) !important;
   }
 
   .mood-and-date-section {

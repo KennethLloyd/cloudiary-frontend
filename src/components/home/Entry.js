@@ -12,7 +12,7 @@ const Entry = ({ content }) => {
   return (
     <Card key={content._id}>
       <div
-        className="card-header d-md-flex flex-md-row bg-primary text-light"
+        className="card-header d-md-flex flex-md-row entry-card text-light"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div className="mood-and-date-section d-md-flex justify-content-md-between">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import moment from 'moment';
 import {
   Button,
@@ -11,10 +11,12 @@ import {
   FormGroup,
   Label,
   Input,
+  Alert,
 } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addEntry } from '../../actions/entryActions';
+import { clearErrors } from '../../actions/errorActions';
 import newEntryIcon from '../../images/new-entry-icon.svg';
 
 const AddEntryModal = (props) => {
@@ -25,6 +27,11 @@ const AddEntryModal = (props) => {
   const [selectedActivity, setSelectedActivity] = useState([]);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const dispatch = useDispatch();
+
+  const onAlertDismiss = () => {
+    dispatch(clearErrors());
+  };
 
   const toggle = () => {
     setModal(!modal);
@@ -37,6 +44,8 @@ const AddEntryModal = (props) => {
     setSelectedActivity([]);
     setTitle('');
     setBody('');
+
+    onAlertDismiss();
   };
 
   const resetModal = () => {
@@ -106,7 +115,7 @@ const AddEntryModal = (props) => {
             <div className="mood-selector-container" key={mood._id}>
               <Button
                 className={`mood-selector-btn ${
-                  selectedMood === mood._id ? 'border border-dark' : ''
+                  selectedMood === mood._id ? 'selected-mood' : ''
                 }`}
                 color="link"
                 onClick={() => setSelectedMood(mood._id)}
@@ -195,7 +204,7 @@ const AddEntryModal = (props) => {
   return (
     <div className="modal-entry-modal">
       <div className="d-flex justify-content-end modal-entry-container">
-        <Button color="primary" className="modal-entry-btn" onClick={toggle}>
+        <Button color="secondary" className="modal-entry-btn" onClick={toggle}>
           <img src={newEntryIcon} alt="new entry icon" width="25" height="25" />
         </Button>
       </div>
@@ -206,6 +215,13 @@ const AddEntryModal = (props) => {
             {renderMoodSelection()}
             {renderActivitySelection()}
             {renderContentForm()}
+            <Alert
+              color="danger"
+              isOpen={props.hasError}
+              toggle={onAlertDismiss}
+            >
+              {props.error}
+            </Alert>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={clearEntry}>
@@ -228,6 +244,8 @@ const mapStateToProps = (state) => {
     moods: state.moods.moods,
     activities: state.activities.activities,
     refetchEntryTrigger: state.entries.refetchEntryTrigger,
+    error: state.errors.error,
+    hasError: state.errors.isOpen,
   };
 };
 
