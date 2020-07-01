@@ -114,13 +114,13 @@ main {
 
 .modal-entry-date-picker {
   text-align: center;
-  font-size: 0.8em;
+  font-size: $font-size-sm;
   width: 100%;
 }
 
 .modal-entry-time-picker {
   text-align: center;
-  font-size: 0.8em;
+  font-size: $font-size-sm;
   width: 100%;
 }
 
@@ -136,7 +136,7 @@ main {
 }
 
 .selected-mood {
-  background: lighten($color: $primary, $amount: 10%);
+  background: $success;
   box-shadow: $box-shadow;
 }
 
