@@ -52,6 +52,13 @@ const UserLogIn = (props) => {
     dispatch(clearErrors());
   };
 
+  const logInAsGuest = () => {
+    props.logIn({
+      email: process.env.REACT_APP_GUEST_EMAIL,
+      password: process.env.REACT_APP_GUEST_PASSWORD,
+    });
+  };
+
   return (
     <div className="landing-page">
       <Container>
@@ -116,6 +123,11 @@ const UserLogIn = (props) => {
               </FormText>
               <div className="text-center mt-2">
                 <Button size="sm">Log In</Button>
+              </div>
+              <div className="text-center mt-2">
+                <Button size="sm" onClick={logInAsGuest}>
+                  Log In As Guest
+                </Button>
               </div>
               <FormText className="text-center landing-questions">
                 Don't have an account?{' '}

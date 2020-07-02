@@ -89,6 +89,9 @@ const EditEntryModal = (props) => {
         <div className="modal-entry-date-picker-container">
           <DatePicker
             selected={startDate}
+            filterDate={(date) => {
+              return moment() > date;
+            }}
             onChange={(newDate) => setStartDate(newDate)}
             dateFormat="MMMM d, yyyy"
             className="modal-entry-date-picker mr-md-1"
@@ -152,6 +155,7 @@ const EditEntryModal = (props) => {
               <Button
                 className="mr-1"
                 key={activity._id}
+                outline
                 color="success"
                 onClick={() => onCheckboxBtnClick(activity._id)}
                 active={selectedActivity.includes(activity._id)}
