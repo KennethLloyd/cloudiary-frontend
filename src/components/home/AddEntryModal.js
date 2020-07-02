@@ -5,6 +5,7 @@ import {
   Button,
   ButtonGroup,
   Modal,
+  ModalHeader,
   ModalBody,
   ModalFooter,
   Form,
@@ -80,7 +81,9 @@ const AddEntryModal = (props) => {
   const renderHeader = () => {
     return (
       <div className="d-flex justify-content-between align-items-center modal-entry-header">
-        <p className="modal-entry-modal-greetings mb-0">How are you?</p>
+        <p className="modal-entry-modal-greetings mb-0 text-light">
+          How are you?
+        </p>
         <div className="modal-entry-date-picker-container">
           <DatePicker
             selected={startDate}
@@ -210,8 +213,10 @@ const AddEntryModal = (props) => {
       </div>
       {modal ? (
         <Modal size="lg" isOpen={modal} toggle={toggle}>
-          <ModalBody>
+          <ModalHeader className="bg-primary shadow-sm" toggle={toggle}>
             {renderHeader()}
+          </ModalHeader>
+          <ModalBody>
             {renderMoodSelection()}
             {renderActivitySelection()}
             {renderContentForm()}

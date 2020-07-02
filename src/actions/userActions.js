@@ -16,6 +16,7 @@ export const logIn = (formValues) => async (dispatch) => {
 
     history.push('/');
   } catch (e) {
+    console.log(e);
     dispatch(setError(e));
     history.push('/login');
   }
