@@ -87,6 +87,9 @@ const AddEntryModal = (props) => {
         <div className="modal-entry-date-picker-container">
           <DatePicker
             selected={startDate}
+            filterDate={(date) => {
+              return moment() > date;
+            }}
             onChange={(newDate) => setStartDate(newDate)}
             dateFormat="MMMM d, yyyy"
             className="modal-entry-date-picker mr-md-1"
