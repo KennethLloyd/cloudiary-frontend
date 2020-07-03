@@ -58,7 +58,7 @@ const EditEntryModal = (props) => {
 
   useEffect(() => {
     resetModal();
-  }, [props.refetchEntryTrigger]);
+  }, [props.refetchEntryTrigger, props.entry]);
 
   const onCheckboxBtnClick = (selected) => {
     const index = selectedActivity.indexOf(selected);

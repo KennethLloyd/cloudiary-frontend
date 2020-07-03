@@ -155,6 +155,10 @@ main {
   height: 16.1%;
 }
 
+.calendar-day.blank {
+  background-color: lighten($color: $dark, $amount: 60%);
+}
+
 @media (max-width: 767px) {
   html,
   body {

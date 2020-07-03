@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { Container, Row, Col } from 'reactstrap';
 import CalendarColumn from './CalendarColumn';
+import BlankCalendarColumn from './BlankCalendarColumn';
 import { fetchEntries } from '../../actions/entryActions';
 
 const Calendar = (props) => {
@@ -54,35 +55,41 @@ const Calendar = (props) => {
     let blanks = [];
     for (let i = 0; i < firstDayOfMonth; i++) {
       blanks.push(
-        <CalendarColumn
+        <Col
           key={`blank-${i}`}
-          className="calendar-day empty border border-dark"
-          day=""
-          entry={null}
+          className="calendar-day blank border border-dark"
         />,
       );
     }
 
     let daysInMonth = [];
     for (let d = 1; d <= moment(new Date(props.date)).daysInMonth(); d++) {
-      daysInMonth.push(
-        <CalendarColumn
-          key={d}
-          className="calendar-day border border-dark d-flex justify-content-between"
-          day={d}
-          entry={calendarEntryProps[d - 1]}
-        />,
-      );
+      if (calendarEntryProps[d - 1]) {
+        daysInMonth.push(
+          <CalendarColumn
+            key={d}
+            className="calendar-day border border-dark d-flex justify-content-between bg-success"
+            day={d}
+            entry={calendarEntryProps[d - 1]}
+          />,
+        );
+      } else {
+        daysInMonth.push(
+          <BlankCalendarColumn
+            key={d}
+            className="calendar-day empty border border-dark"
+            day={d}
+          />,
+        );
+      }
     }
 
     const totalSlots = [...blanks, ...daysInMonth];
     for (let i = totalSlots.length; i < 42; i++) {
       totalSlots.push(
-        <CalendarColumn
+        <Col
           key={`blank-${i}`}
-          className="calendar-day empty border border-dark"
-          day=""
-          entry={null}
+          className="calendar-day blank border border-dark"
         />,
       );
     }
