@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import { Container, Row, Col } from 'reactstrap';
 import CalendarColumn from './CalendarColumn';
+import { fetchEntries } from '../../actions/entryActions';
 
 const Calendar = (props) => {
   const [row1, setRow1] = useState([]);
@@ -11,7 +13,40 @@ const Calendar = (props) => {
   const [row5, setRow5] = useState([]);
   const [row6, setRow6] = useState([]);
 
+  const importAll = (r) => {
+    let images = {};
+    r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
+    return images;
+  };
+
+  const moodIcons = importAll(
+    require.context('../../images/moods', false, /\.(png|jpe?g|svg)$/),
+  );
+
+  const getDay = (entryDate) => {
+    const dateOnly = entryDate.split(' ')[0];
+    const dayOnly = parseInt(dateOnly.split('-')[2]);
+
+    return dayOnly;
+  };
+
   useEffect(() => {
+    const thisMonth = moment(props.date).format('YYYY-MM');
+    const nextMonth = moment(props.date).add(1, 'month').format('YYYY-MM');
+
+    props.fetchEntries(`${thisMonth}-01`, `${nextMonth}-01`);
+  }, [props.date, props.refetchEntryTrigger]);
+
+  useEffect(() => {
+    const calendarEntryProps = new Array(31).fill(null);
+
+    props.entries.map((entry) => {
+      entry.moodSrc = moodIcons[`${entry.mood.name}-dark.svg`];
+      const entryDay = getDay(entry.entryDate);
+
+      calendarEntryProps[entryDay - 1] = entry;
+    });
+
     const firstDayOfMonth = moment(new Date(props.date))
       .startOf('month')
       .format('d');
@@ -23,6 +58,7 @@ const Calendar = (props) => {
           key={`blank-${i}`}
           className="calendar-day empty border border-dark"
           day=""
+          entry={null}
         />,
       );
     }
@@ -32,8 +68,9 @@ const Calendar = (props) => {
       daysInMonth.push(
         <CalendarColumn
           key={d}
-          className="calendar-day border border-dark"
+          className="calendar-day border border-dark d-flex justify-content-between"
           day={d}
+          entry={calendarEntryProps[d - 1]}
         />,
       );
     }
@@ -45,6 +82,7 @@ const Calendar = (props) => {
           key={`blank-${i}`}
           className="calendar-day empty border border-dark"
           day=""
+          entry={null}
         />,
       );
     }
@@ -78,7 +116,7 @@ const Calendar = (props) => {
     setRow4(fourthRow);
     setRow5(fifthRow);
     setRow6(sixthRow);
-  }, [props.date]);
+  }, [props.entries]);
 
   return (
     <div>
@@ -142,4 +180,11 @@ const Calendar = (props) => {
   );
 };
 
-export default Calendar;
+const mapStateToProps = (state) => {
+  return {
+    entries: state.entries.entries,
+    refetchEntryTrigger: state.entries.refetchEntryTrigger,
+  };
+};
+
+export default connect(mapStateToProps, { fetchEntries })(Calendar);
