@@ -146,6 +146,15 @@ main {
   box-shadow: $box-shadow;
 }
 
+.calendar-container {
+  height: 80vh;
+  margin-top: 20px;
+}
+
+.calendar-row {
+  height: 19.3%;
+}
+
 @media (max-width: 767px) {
   html,
   body {

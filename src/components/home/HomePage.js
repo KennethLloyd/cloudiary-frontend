@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import Header from './Header';
 import Entries from './Entries';
+import Calendar from './Calendar';
 import { fetchMoods } from '../../actions/moodActions';
 import { fetchActivities } from '../../actions/activityActions';
 
@@ -44,7 +45,7 @@ const HomePage = (props) => {
     <div>
       <Header setActive={changeActiveView} />
       <Container fluid>
-        <div>{activeView === 'Entries' ? <Entries /> : ''}</div>
+        <div>{activeView === 'Entries' ? <Entries /> : <Calendar />}</div>
         <Alert className="welcome-alert" isOpen={alertOpen} toggle={closeAlert}>
           {`${greet()} ${props.firstName}!`}
         </Alert>
