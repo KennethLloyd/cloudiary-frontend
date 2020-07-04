@@ -14,7 +14,7 @@ const CalendarColumn = (props) => {
       <Col className={props.className} onClick={toggle}>
         {props.day}
         <img
-          className="align-self-end mb-1"
+          className="align-self-end mb-1 calendar-mood"
           src={props.entry.moodSrc}
           width="48"
           height="48"

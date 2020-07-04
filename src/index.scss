@@ -151,6 +151,10 @@ main {
   margin-top: 20px;
 }
 
+.calendar-days-shorten {
+  display: none;
+}
+
 .calendar-row {
   height: 16.1%;
 }
@@ -269,5 +273,33 @@ main {
   .mood-selector-container {
     width: 30%;
     text-align: center;
+  }
+
+  .calendar-container {
+    height: 50vh;
+    margin-top: 20px;
+  }
+
+  .calendar-row {
+    height: 16.1%;
+  }
+
+  .calendar-days-complete {
+    display: none;
+  }
+
+  .calendar-days-shorten {
+    display: flex;
+    background-color: orange;
+  }
+
+  .calendar-day {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .calendar-mood {
+    width: 25px;
+    height: 25px;
   }
 }

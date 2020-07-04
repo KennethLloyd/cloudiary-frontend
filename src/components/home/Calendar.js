@@ -128,27 +128,51 @@ const Calendar = (props) => {
   return (
     <div>
       <Container className="bg-light calendar-container">
-        <Row className="calendar-header">
-          <Col className="border border-dark bg-secondary text-light">
+        <Row className="calendar-header calendar-days-complete">
+          <Col className="border border-dark bg-secondary text-light text-center">
             Sunday
           </Col>
-          <Col className="border border-dark bg-secondary text-light">
+          <Col className="border border-dark bg-secondary text-light text-center">
             Monday
           </Col>
-          <Col className="border border-dark bg-secondary text-light">
+          <Col className="border border-dark bg-secondary text-light text-center">
             Tueday
           </Col>
-          <Col className="border border-dark bg-secondary text-light">
+          <Col className="border border-dark bg-secondary text-light text-center">
             Wednesday
           </Col>
-          <Col className="border border-dark bg-secondary text-light">
+          <Col className="border border-dark bg-secondary text-light text-center">
             Thursday
           </Col>
-          <Col className="border border-dark bg-secondary text-light">
+          <Col className="border border-dark bg-secondary text-light text-center">
             Friday
           </Col>
-          <Col className="border border-dark bg-secondary text-light">
+          <Col className="border border-dark bg-secondary text-light text-center">
             Saturday
+          </Col>
+        </Row>
+
+        <Row className="calendar-header calendar-days-shorten">
+          <Col className="border border-dark bg-secondary text-light text-center">
+            Sun
+          </Col>
+          <Col className="border border-dark bg-secondary text-light text-center">
+            Mon
+          </Col>
+          <Col className="border border-dark bg-secondary text-light text-center">
+            Tue
+          </Col>
+          <Col className="border border-dark bg-secondary text-light text-center">
+            Wed
+          </Col>
+          <Col className="border border-dark bg-secondary text-light text-center">
+            Thu
+          </Col>
+          <Col className="border border-dark bg-secondary text-light text-center">
+            Fri
+          </Col>
+          <Col className="border border-dark bg-secondary text-light text-center">
+            Sat
           </Col>
         </Row>
 
