@@ -18,10 +18,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { addEntry } from '../../actions/entryActions';
 import { clearErrors } from '../../actions/errorActions';
-import newEntryIcon from '../../images/new-entry-icon.svg';
 
 const AddEntryModal = (props) => {
-  const [modal, setModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [selectedMood, setSelectedMood] = useState('');
@@ -35,7 +33,7 @@ const AddEntryModal = (props) => {
   };
 
   const toggle = () => {
-    setModal(!modal);
+    props.setModal(!props.modal);
   };
 
   const clearEntry = () => {
@@ -51,7 +49,7 @@ const AddEntryModal = (props) => {
 
   const resetModal = () => {
     clearEntry();
-    setModal(false);
+    props.setModal(false);
   };
 
   useEffect(() => {
@@ -210,13 +208,8 @@ const AddEntryModal = (props) => {
 
   return (
     <div className="modal-entry-modal">
-      <div className="d-flex justify-content-end modal-entry-container">
-        <Button color="secondary" className="modal-entry-btn" onClick={toggle}>
-          <img src={newEntryIcon} alt="new entry icon" width="25" height="25" />
-        </Button>
-      </div>
-      {modal ? (
-        <Modal size="lg" isOpen={modal} toggle={toggle}>
+      {props.modal ? (
+        <Modal size="lg" isOpen={props.modal} toggle={toggle}>
           <ModalHeader className="bg-primary shadow-sm" toggle={toggle}>
             {renderHeader()}
           </ModalHeader>
