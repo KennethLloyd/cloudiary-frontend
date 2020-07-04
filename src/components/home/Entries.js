@@ -1,25 +1,37 @@
 import React, { useState } from 'react';
-import moment from 'moment';
-import EntryNav from './EntryNav';
+import { Button } from 'reactstrap';
 import SearchFilter from './SearchFilter';
 import EntryList from './EntryList';
 import AddEntryModal from './AddEntryModal';
+import newEntryIcon from '../../images/new-entry-icon.svg';
 
-const Entries = () => {
-  const [date, updateDate] = useState(moment().format('YYYY-MM-DD'));
+const Entries = (props) => {
   const [mood, updateMood] = useState('ALL');
   const [searchKey, updateSearchKey] = useState('');
+  const [addModal, setAddModal] = useState(false);
+
+  const toggleAddModal = () => {
+    setAddModal(!addModal);
+  };
 
   return (
     <div>
-      <EntryNav date={date} updateDate={updateDate} />
       <SearchFilter
         mood={mood}
         updateMood={updateMood}
         updateSearchKey={updateSearchKey}
       />
-      <EntryList date={date} mood={mood} searchKey={searchKey} />
-      <AddEntryModal />
+      <EntryList date={props.date} mood={mood} searchKey={searchKey} />
+      <div className="d-flex justify-content-end modal-entry-container">
+        <Button
+          color="primary"
+          className="modal-entry-btn shadow-lg"
+          onClick={toggleAddModal}
+        >
+          <img src={newEntryIcon} alt="new entry icon" width="25" height="25" />
+        </Button>
+      </div>
+      <AddEntryModal modal={addModal} setModal={setAddModal} />
     </div>
   );
 };

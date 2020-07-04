@@ -5,9 +5,15 @@ import EditEntryModal from './EditEntryModal';
 import DeleteEntryModal from './DeleteEntryModal';
 import upArrowIcon from '../../images/up-arrow.svg';
 import downArrowIcon from '../../images/down-arrow.svg';
+import pencilIcon from '../../images/pencil-icon.svg';
 
 const Entry = ({ content }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+
+  const toggleEditModal = () => {
+    setEditModal(!editModal);
+  };
 
   return (
     <Card key={content._id}>
@@ -71,7 +77,24 @@ const Entry = ({ content }) => {
               </div>
             </Col>
             <Col className="modify-entry-section d-flex justify-content-end align-items-center mb-4">
-              <EditEntryModal entry={content} />
+              <div
+                className="d-flex justify-content-end edit-entry-container"
+                onClick={toggleEditModal}
+              >
+                <Button size="sm" color="link" className="mr-1 ml-1">
+                  <img
+                    src={pencilIcon}
+                    alt="Pencil icon"
+                    width="15"
+                    height="15"
+                  />
+                </Button>
+              </div>
+              <EditEntryModal
+                entry={content}
+                modal={editModal}
+                setModal={setEditModal}
+              />
               <DeleteEntryModal entry={content} />
             </Col>
           </Row>

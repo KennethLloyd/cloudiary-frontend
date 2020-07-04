@@ -33,7 +33,7 @@ const Header = (props) => {
           <Nav className="mr-auto" navbar>
             <NavItem className={isActive === 'Entries' ? 'active' : ''}>
               <NavLink
-                className="navbar-link"
+                className="navbar-link text-light"
                 onClick={() => {
                   setIsActive('Entries');
                   props.setActive('Entries');
@@ -44,7 +44,7 @@ const Header = (props) => {
             </NavItem>
             <NavItem className={isActive === 'Calendar' ? 'active' : ''}>
               <NavLink
-                className="navbar-link"
+                className="navbar-link text-light"
                 onClick={() => {
                   setIsActive('Calendar');
                   props.setActive('Calendar');
@@ -54,7 +54,7 @@ const Header = (props) => {
               </NavLink>
             </NavItem>
             <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
+              <DropdownToggle nav caret className="text-light">
                 Customize
               </DropdownToggle>
               <DropdownMenu right>

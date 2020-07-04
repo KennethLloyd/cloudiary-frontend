@@ -12,7 +12,6 @@ import {
   Row,
   Alert,
 } from 'reactstrap';
-
 import { logIn } from '../../actions/userActions';
 import { clearErrors } from '../../actions/errorActions';
 import projectLogo from '../../images/project-logo.svg';
@@ -122,10 +121,12 @@ const UserLogIn = (props) => {
                 </Link>
               </FormText>
               <div className="text-center mt-2">
-                <Button size="sm">Log In</Button>
+                <Button color="primary" size="sm">
+                  Log In
+                </Button>
               </div>
               <div className="text-center mt-2">
-                <Button size="sm" onClick={logInAsGuest}>
+                <Button color="primary" size="sm" onClick={logInAsGuest}>
                   Log In As Guest
                 </Button>
               </div>
