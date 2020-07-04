@@ -27,7 +27,6 @@ export const logIn = (formValues) => async (dispatch) => {
     history.push('/');
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    console.log(e);
     dispatch(setError(e));
     history.push('/login');
   }

@@ -1,9 +1,18 @@
 import api from '../apis/api';
-import { FETCH_ENTRIES, ADD_ENTRY, EDIT_ENTRY, DELETE_ENTRY } from './types';
+import {
+  FETCH_ENTRIES,
+  ADD_ENTRY,
+  EDIT_ENTRY,
+  DELETE_ENTRY,
+  START_LOADING,
+  FINISH_LOADING,
+} from './types';
 import { setError, clearErrors } from './errorActions';
 
 export const fetchEntries = (from, to) => async (dispatch, getState) => {
   try {
+    dispatch({ type: START_LOADING });
+
     const response = await api.get('/entries', {
       headers: { Authorization: `Bearer ${getState().currentUser.token}` },
       params: {
@@ -12,6 +21,8 @@ export const fetchEntries = (from, to) => async (dispatch, getState) => {
       },
     });
 
+    dispatch({ type: FINISH_LOADING });
+
     dispatch(clearErrors());
 
     dispatch({
@@ -19,15 +30,20 @@ export const fetchEntries = (from, to) => async (dispatch, getState) => {
       payload: response.data,
     });
   } catch (e) {
+    dispatch({ type: FINISH_LOADING });
     dispatch(setError(e));
   }
 };
 
 export const addEntry = (entryDetails) => async (dispatch, getState) => {
   try {
+    dispatch({ type: START_LOADING });
+
     await api.post('/entries', entryDetails, {
       headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
+
+    dispatch({ type: FINISH_LOADING });
 
     dispatch(clearErrors());
 
@@ -35,6 +51,7 @@ export const addEntry = (entryDetails) => async (dispatch, getState) => {
       type: ADD_ENTRY,
     });
   } catch (e) {
+    dispatch({ type: FINISH_LOADING });
     dispatch(setError(e));
   }
 };
@@ -44,9 +61,13 @@ export const editEntry = (entryId, entryDetails) => async (
   getState,
 ) => {
   try {
+    dispatch({ type: START_LOADING });
+
     await api.put(`/entries/${entryId}`, entryDetails, {
       headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
+
+    dispatch({ type: FINISH_LOADING });
 
     dispatch(clearErrors());
 
@@ -60,9 +81,13 @@ export const editEntry = (entryId, entryDetails) => async (
 
 export const deleteEntry = (entryId) => async (dispatch, getState) => {
   try {
+    dispatch({ type: START_LOADING });
+
     const response = await api.delete(`/entries/${entryId}`, {
       headers: { Authorization: `Bearer ${getState().currentUser.token}` },
     });
+
+    dispatch({ type: FINISH_LOADING });
 
     dispatch(clearErrors());
 
@@ -71,6 +96,7 @@ export const deleteEntry = (entryId) => async (dispatch, getState) => {
       payload: response.data.entry,
     });
   } catch (e) {
+    dispatch({ type: FINISH_LOADING });
     dispatch(setError(e));
   }
 };
