@@ -1,25 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import moment from 'moment';
-import {
-  Button,
-  ButtonGroup,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Alert,
-  Col,
-} from 'reactstrap';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState } from 'react';
+import { Col } from 'reactstrap';
 import EditEntryModal from './EditEntryModal';
-import { editEntry } from '../../actions/entryActions';
-import { clearErrors } from '../../actions/errorActions';
 
 const CalendarColumn = (props) => {
   const [modal, setModal] = useState(false);
