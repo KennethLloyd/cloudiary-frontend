@@ -138,7 +138,9 @@ const UserSignUp = (props) => {
                 </div>
               </FormGroup>
               <div className="text-center mt-2">
-                <Button size="sm">Sign Up</Button>
+                <Button color="primary" size="sm">
+                  Sign Up
+                </Button>
               </div>
               <FormText className="text-center landing-questions">
                 Already have an account?{' '}

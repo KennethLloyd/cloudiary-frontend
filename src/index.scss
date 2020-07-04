@@ -58,7 +58,7 @@ main {
 }
 
 .entry-card {
-  background-color: darken($color: $primary, $amount: 10%);
+  background-color: $secondary;
 }
 
 .entry-date {
@@ -97,7 +97,7 @@ main {
 }
 
 .entry-body {
-  font-size: 0.85em;
+  font-size: 0.9em;
 }
 
 .modal-entry-container {
@@ -144,6 +144,37 @@ main {
 .selected-mood {
   background: $success;
   box-shadow: $box-shadow;
+}
+
+.calendar-container {
+  height: 80vh;
+  margin-top: 20px;
+}
+
+.calendar-days-shorten {
+  display: none;
+}
+
+.calendar-row {
+  height: 16.1%;
+}
+
+.calendar-day {
+  cursor: pointer;
+}
+
+.calendar-day.blank {
+  background-color: darken($color: $light, $amount: 10%);
+  cursor: initial;
+}
+
+.popover {
+  box-shadow: $box-shadow-sm;
+}
+
+.popover-header {
+  color: $light;
+  background-color: $primary;
 }
 
 @media (max-width: 767px) {
@@ -256,5 +287,33 @@ main {
   .mood-selector-container {
     width: 30%;
     text-align: center;
+  }
+
+  .calendar-container {
+    height: 50vh;
+    margin-top: 20px;
+  }
+
+  .calendar-row {
+    height: 16.1%;
+  }
+
+  .calendar-days-complete {
+    display: none;
+  }
+
+  .calendar-days-shorten {
+    display: flex;
+    background-color: orange;
+  }
+
+  .calendar-day {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .calendar-mood {
+    width: 25px;
+    height: 25px;
   }
 }

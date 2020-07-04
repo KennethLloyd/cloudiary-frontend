@@ -18,10 +18,8 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { editEntry } from '../../actions/entryActions';
 import { clearErrors } from '../../actions/errorActions';
-import pencilIcon from '../../images/pencil-icon.svg';
 
 const EditEntryModal = (props) => {
-  const [modal, setModal] = useState(false);
   const [startDate, setStartDate] = useState(new Date(props.entry.entryDate));
   const [startTime, setStartTime] = useState(new Date(props.entry.entryDate));
   const [selectedMood, setSelectedMood] = useState(props.entry.mood._id);
@@ -37,7 +35,7 @@ const EditEntryModal = (props) => {
   };
 
   const toggle = () => {
-    setModal(!modal);
+    props.setModal(!props.modal);
   };
 
   const resetEntry = () => {
@@ -53,12 +51,12 @@ const EditEntryModal = (props) => {
 
   const resetModal = () => {
     resetEntry();
-    setModal(false);
+    props.setModal(false);
   };
 
   useEffect(() => {
     resetModal();
-  }, [props.refetchEntryTrigger]);
+  }, [props.refetchEntryTrigger, props.entry]);
 
   const onCheckboxBtnClick = (selected) => {
     const index = selectedActivity.indexOf(selected);
@@ -153,7 +151,7 @@ const EditEntryModal = (props) => {
           {props.activities.map((activity) => {
             return (
               <Button
-                className="mr-1"
+                className="mr-1 text-dark"
                 key={activity._id}
                 outline
                 color="success"
@@ -212,13 +210,8 @@ const EditEntryModal = (props) => {
 
   return (
     <div className="edit-entry-modal">
-      <div className="d-flex justify-content-end edit-entry-container">
-        <Button size="sm" color="link" className="mr-1 ml-1" onClick={toggle}>
-          <img src={pencilIcon} alt="Pencil icon" width="15" height="15" />
-        </Button>
-      </div>
-      {modal ? (
-        <Modal size="lg" isOpen={modal} toggle={toggle}>
+      {props.modal ? (
+        <Modal size="lg" isOpen={props.modal} toggle={toggle}>
           <ModalHeader className="bg-primary shadow-sm" toggle={toggle}>
             {renderHeader()}
           </ModalHeader>
