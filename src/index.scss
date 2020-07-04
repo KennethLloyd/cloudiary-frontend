@@ -163,6 +163,15 @@ main {
   background-color: lighten($color: $dark, $amount: 60%);
 }
 
+.popover {
+  box-shadow: $box-shadow-sm;
+}
+
+.popover-header {
+  color: $light;
+  background-color: $primary;
+}
+
 @media (max-width: 767px) {
   html,
   body {
