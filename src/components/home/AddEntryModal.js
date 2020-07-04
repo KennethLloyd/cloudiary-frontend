@@ -20,7 +20,9 @@ import { addEntry } from '../../actions/entryActions';
 import { clearErrors } from '../../actions/errorActions';
 
 const AddEntryModal = (props) => {
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(
+    props.entryDate ? new Date(props.entryDate) : new Date(),
+  );
   const [startTime, setStartTime] = useState(new Date());
   const [selectedMood, setSelectedMood] = useState('');
   const [selectedActivity, setSelectedActivity] = useState([]);
@@ -37,7 +39,7 @@ const AddEntryModal = (props) => {
   };
 
   const clearEntry = () => {
-    setStartDate(new Date());
+    setStartDate(props.entryDate ? new Date(props.entryDate) : new Date());
     setStartTime(new Date());
     setSelectedMood('');
     setSelectedActivity([]);

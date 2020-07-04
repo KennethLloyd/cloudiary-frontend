@@ -79,6 +79,7 @@ const Calendar = (props) => {
             key={d}
             className="calendar-day empty border border-dark"
             day={d}
+            date={props.date}
           />,
         );
       }
