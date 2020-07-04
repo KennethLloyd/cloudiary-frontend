@@ -10,3 +10,5 @@ export const EDIT_ENTRY = 'EDIT_ENTRY';
 export const DELETE_ENTRY = 'DELETE_ENTRY';
 export const SET_ERROR = 'SET_ERROR';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const START_LOADING = 'START_LOADING';
+export const FINISH_LOADING = 'FINISH_LOADING';

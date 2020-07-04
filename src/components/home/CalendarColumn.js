@@ -16,6 +16,7 @@ const CalendarColumn = (props) => {
         <img
           className="align-self-end mb-1 calendar-mood"
           src={props.entry.moodSrc}
+          alt="calendar mood"
           width="48"
           height="48"
         />

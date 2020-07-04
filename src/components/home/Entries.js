@@ -25,7 +25,7 @@ const Entries = (props) => {
       <div className="d-flex justify-content-end modal-entry-container">
         <Button
           color="primary"
-          className="modal-entry-btn"
+          className="modal-entry-btn shadow-lg"
           onClick={toggleAddModal}
         >
           <img src={newEntryIcon} alt="new entry icon" width="25" height="25" />

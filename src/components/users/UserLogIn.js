@@ -12,7 +12,6 @@ import {
   Row,
   Alert,
 } from 'reactstrap';
-
 import { logIn } from '../../actions/userActions';
 import { clearErrors } from '../../actions/errorActions';
 import projectLogo from '../../images/project-logo.svg';

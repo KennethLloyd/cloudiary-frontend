@@ -97,7 +97,7 @@ main {
 }
 
 .entry-body {
-  font-size: 0.85em;
+  font-size: 0.9em;
 }
 
 .modal-entry-container {
@@ -164,7 +164,7 @@ main {
 }
 
 .calendar-day.blank {
-  background-color: lighten($color: $dark, $amount: 60%);
+  background-color: darken($color: $light, $amount: 10%);
   cursor: initial;
 }
 
