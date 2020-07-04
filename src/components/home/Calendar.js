@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { Container, Row, Col } from 'reactstrap';
 import CalendarColumn from './CalendarColumn';
-import BlankCalendarColumn from './BlankCalendarColumn';
+import CalendarColumnEmpty from './CalendarColumnEmpty';
 import { fetchEntries } from '../../actions/entryActions';
 
 const Calendar = (props) => {
@@ -75,7 +75,7 @@ const Calendar = (props) => {
         );
       } else {
         daysInMonth.push(
-          <BlankCalendarColumn
+          <CalendarColumnEmpty
             key={d}
             className="calendar-day empty border border-dark"
             day={d}

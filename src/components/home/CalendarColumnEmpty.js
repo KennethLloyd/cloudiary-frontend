@@ -3,7 +3,7 @@ import { Col, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import moment from 'moment';
 import AddEntryModal from './AddEntryModal';
 
-const BlankCalendarColumn = (props) => {
+const CalendarColumnEmpty = (props) => {
   const [modal, setModal] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
 
@@ -35,7 +35,7 @@ const BlankCalendarColumn = (props) => {
 
   return (
     <React.Fragment>
-      <Col className={props.className} onClick={toggle} id="Popover1">
+      <Col className={props.className} onClick={toggle} id="calendarCol">
         {props.day}
       </Col>
       {isValidDate(fullDate) ? (
@@ -44,7 +44,7 @@ const BlankCalendarColumn = (props) => {
         <Popover
           placement="bottom"
           isOpen={popoverOpen}
-          target="Popover1"
+          target="calendarCol"
           toggle={togglePopOver}
         >
           <PopoverHeader>Add Entry</PopoverHeader>
@@ -57,4 +57,4 @@ const BlankCalendarColumn = (props) => {
   );
 };
 
-export default BlankCalendarColumn;
+export default CalendarColumnEmpty;

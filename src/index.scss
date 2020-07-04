@@ -159,8 +159,13 @@ main {
   height: 16.1%;
 }
 
+.calendar-day {
+  cursor: pointer;
+}
+
 .calendar-day.blank {
   background-color: lighten($color: $dark, $amount: 60%);
+  cursor: initial;
 }
 
 .popover {
