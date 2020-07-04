@@ -15,16 +15,6 @@ const Entry = ({ content }) => {
     setEditModal(!editModal);
   };
 
-  const getPencilIcon = () => {
-    return (
-      <div className="d-flex justify-content-end edit-entry-container">
-        <Button size="sm" color="link" className="mr-1 ml-1">
-          <img src={pencilIcon} alt="Pencil icon" width="15" height="15" />
-        </Button>
-      </div>
-    );
-  };
-
   return (
     <Card key={content._id}>
       <div

@@ -149,7 +149,7 @@ const AddEntryModal = (props) => {
           {props.activities.map((activity) => {
             return (
               <Button
-                className="mr-1"
+                className="mr-1 text-dark"
                 key={activity._id}
                 outline
                 color="success"

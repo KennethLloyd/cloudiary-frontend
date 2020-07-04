@@ -24,7 +24,7 @@ const Entries = (props) => {
       <EntryList date={props.date} mood={mood} searchKey={searchKey} />
       <div className="d-flex justify-content-end modal-entry-container">
         <Button
-          color="secondary"
+          color="primary"
           className="modal-entry-btn"
           onClick={toggleAddModal}
         >

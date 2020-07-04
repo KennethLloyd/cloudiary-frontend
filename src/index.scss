@@ -58,7 +58,7 @@ main {
 }
 
 .entry-card {
-  background-color: darken($color: $primary, $amount: 10%);
+  background-color: $secondary;
 }
 
 .entry-date {
