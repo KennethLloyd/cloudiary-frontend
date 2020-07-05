@@ -16,10 +16,16 @@ import {
 import projectLogo from '../../images/project-logo.svg';
 import projectLabel from '../../images/project-label.svg';
 import LogOutModal from './LogOutModal';
+import CustomizeActivityModal from '../customize/CustomizeActivityModal';
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState('Entries');
+  const [activityModal, setActivityModal] = useState(false);
+
+  const toggleActivityModal = () => {
+    setActivityModal(!activityModal);
+  };
 
   return (
     <div className="shadow bg-white rounded mb-3">
@@ -59,7 +65,13 @@ const Header = (props) => {
               </DropdownToggle>
               <DropdownMenu right>
                 <DropdownItem>Moods</DropdownItem>
-                <DropdownItem>Activities</DropdownItem>
+                <DropdownItem onClick={toggleActivityModal}>
+                  Activities
+                </DropdownItem>
+                <CustomizeActivityModal
+                  activityModal={activityModal}
+                  setActivityModal={setActivityModal}
+                />
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>

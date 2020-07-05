@@ -20,8 +20,12 @@ import { editEntry } from '../../actions/entryActions';
 import { clearErrors } from '../../actions/errorActions';
 
 const EditEntryModal = (props) => {
-  const [startDate, setStartDate] = useState(new Date(props.entry.entryDate));
-  const [startTime, setStartTime] = useState(new Date(props.entry.entryDate));
+  const [startDate, setStartDate] = useState(
+    new Date(moment(props.entry.entryDate)),
+  );
+  const [startTime, setStartTime] = useState(
+    new Date(moment(props.entry.entryDate)),
+  );
   const [selectedMood, setSelectedMood] = useState(props.entry.mood._id);
   const [selectedActivity, setSelectedActivity] = useState(
     props.entry.activities.map((item) => item._id),
@@ -39,8 +43,8 @@ const EditEntryModal = (props) => {
   };
 
   const resetEntry = () => {
-    setStartDate(new Date(props.entry.entryDate));
-    setStartTime(new Date(props.entry.entryDate));
+    setStartDate(new Date(moment(props.entry.entryDate)));
+    setStartTime(new Date(moment(props.entry.entryDate)));
     setSelectedMood(props.entry.mood._id);
     setSelectedActivity(props.entry.activities.map((item) => item._id));
     setTitle(props.entry.title);
@@ -97,7 +101,7 @@ const EditEntryModal = (props) => {
         </div>
         <div className="modal-entry-time-picker-container">
           <DatePicker
-            selected={startTime}
+            selected={startDate}
             onChange={(newTime) => setStartTime(newTime)}
             showTimeSelect
             showTimeSelectOnly
