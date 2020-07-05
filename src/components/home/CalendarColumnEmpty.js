@@ -3,11 +3,18 @@ import { Col, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import moment from 'moment';
 import AddEntryModal from './AddEntryModal';
 
+const padZero = (num) => {
+  if (num.toString().length === 1) {
+    return `0${num}`;
+  }
+  return num;
+};
+
 const CalendarColumnEmpty = (props) => {
   const [modal, setModal] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
   const yearAndMonth = moment(props.date).format('YYYY-MM');
-  const fullDate = `${yearAndMonth}-${props.day}`;
+  const fullDate = `${yearAndMonth}-${padZero(props.day)}`;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,10 +24,7 @@ const CalendarColumnEmpty = (props) => {
   });
 
   const isValidDate = (date) => {
-    if (
-      moment(new Date(date)).format('YYYY-MM-DD') >
-      moment(new Date()).format('YYYY-MM-DD')
-    ) {
+    if (new Date(moment(date)).getTime() > new Date().getTime()) {
       return false;
     }
     return true;
@@ -31,7 +35,6 @@ const CalendarColumnEmpty = (props) => {
   };
 
   const togglePopOver = () => {
-    console.log(fullDate);
     setPopoverOpen(!popoverOpen);
   };
 

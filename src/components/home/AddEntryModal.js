@@ -21,7 +21,7 @@ import { clearErrors } from '../../actions/errorActions';
 
 const AddEntryModal = (props) => {
   const [startDate, setStartDate] = useState(
-    props.entryDate ? new Date(props.entryDate) : new Date(),
+    props.entryDate ? new Date(moment(props.entryDate)) : new Date(),
   );
   const [startTime, setStartTime] = useState(new Date());
   const [selectedMood, setSelectedMood] = useState('');
@@ -39,7 +39,9 @@ const AddEntryModal = (props) => {
   };
 
   const clearEntry = () => {
-    setStartDate(props.entryDate ? new Date(props.entryDate) : new Date());
+    setStartDate(
+      props.entryDate ? new Date(moment(props.entryDate)) : new Date(),
+    );
     setStartTime(new Date());
     setSelectedMood('');
     setSelectedActivity([]);
@@ -79,7 +81,6 @@ const AddEntryModal = (props) => {
   );
 
   const renderHeader = () => {
-    console.log(`Add: ${startDate}`);
     return (
       <div className="d-flex justify-content-between align-items-center modal-entry-header">
         <p className="modal-entry-modal-greetings mb-0 text-light">
