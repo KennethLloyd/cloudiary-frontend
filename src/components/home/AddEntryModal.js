@@ -79,6 +79,7 @@ const AddEntryModal = (props) => {
   );
 
   const renderHeader = () => {
+    console.log(`Add: ${startDate}`);
     return (
       <div className="d-flex justify-content-between align-items-center modal-entry-header">
         <p className="modal-entry-modal-greetings mb-0 text-light">
