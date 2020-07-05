@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import {
   Button,
   Modal,
@@ -7,11 +7,14 @@ import {
   ModalBody,
   ModalFooter,
   ListGroup,
+  Alert,
 } from 'reactstrap';
 import CustomizeActivity from './CustomizeActivity';
+import { clearErrors } from '../../actions/errorActions';
 
 const CustomizeActivityModal = (props) => {
   const [activities, updateActivities] = useState(props.activities);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     updateActivities(props.activities);
@@ -39,6 +42,10 @@ const CustomizeActivityModal = (props) => {
     updateActivities(remainingItems);
   };
 
+  const onAlertDismiss = () => {
+    dispatch(clearErrors());
+  };
+
   const renderBody = () => {
     return (
       <div>
@@ -53,14 +60,6 @@ const CustomizeActivityModal = (props) => {
             );
           })}
         </ListGroup>
-        <div className="d-flex justify-content-between">
-          <Button color="secondary" className="mt-2" onClick={addItem}>
-            Add
-          </Button>
-          <Button color="primary" className="mt-2" onClick={toggle}>
-            Finish
-          </Button>
-        </div>
       </div>
     );
   };
@@ -73,14 +72,36 @@ const CustomizeActivityModal = (props) => {
         className={props.className}
       >
         <ModalHeader toggle={toggle}>Customize Activities</ModalHeader>
-        <ModalBody>{renderBody()}</ModalBody>
+        <ModalBody>
+          {renderBody()}
+          <Alert
+            className="mt-2"
+            color="danger"
+            isOpen={props.hasError}
+            toggle={onAlertDismiss}
+          >
+            {props.error}
+          </Alert>
+        </ModalBody>
+        <ModalFooter className="d-flex justify-content-between">
+          <Button color="secondary" className="mt-2" onClick={addItem}>
+            Add
+          </Button>
+          <Button color="primary" className="mt-2" onClick={toggle}>
+            Finish
+          </Button>
+        </ModalFooter>
       </Modal>
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  return { activities: state.activities.activities };
+  return {
+    activities: state.activities.activities,
+    error: state.errors.error,
+    hasError: state.errors.isOpen,
+  };
 };
 
 export default connect(mapStateToProps, null)(CustomizeActivityModal);
