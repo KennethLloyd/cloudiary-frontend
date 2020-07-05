@@ -2,6 +2,7 @@ import api from '../apis/api';
 import {
   FETCH_ACTIVITIES,
   ADD_ACTIVITY,
+  EDIT_ACTIVITY,
   DELETE_ACTIVITY,
   START_LOADING,
   FINISH_LOADING,
@@ -44,6 +45,37 @@ export const addActivity = (activityDetails) => async (dispatch, getState) => {
 
     dispatch({
       type: ADD_ACTIVITY,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({ type: FINISH_LOADING });
+    dispatch(setError(e));
+  }
+};
+
+export const editActivity = (activityId, activityDetails) => async (
+  dispatch,
+  getState,
+) => {
+  try {
+    dispatch({ type: START_LOADING });
+
+    const response = await api.put(
+      `/activities/${activityId}`,
+      activityDetails,
+      {
+        headers: { Authorization: `Bearer ${getState().currentUser.token}` },
+      },
+    );
+
+    response.data.oldId = activityId;
+
+    dispatch({ type: FINISH_LOADING });
+
+    dispatch(clearErrors());
+
+    dispatch({
+      type: EDIT_ACTIVITY,
       payload: response.data,
     });
   } catch (e) {
