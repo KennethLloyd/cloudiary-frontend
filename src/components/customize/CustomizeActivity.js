@@ -2,12 +2,25 @@ import React, { useState } from 'react';
 import { ListGroupItem, Input, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const CustomizeActivity = ({ activity }) => {
-  const [readOnly, setReadOnly] = useState(true);
+const CustomizeActivity = ({ activity, deleteItemFromUI }) => {
+  const [name, setName] = useState(activity.name);
+  const [readOnly, setReadOnly] = useState(activity.new ? false : true);
+
+  const exitInput = () => {
+    if (activity.new && name === '') {
+      deleteItemFromUI(activity._id);
+    } else {
+      setReadOnly(!readOnly);
+    }
+  };
 
   return (
     <ListGroupItem className="d-flex">
-      <Input defaultValue={activity.name} readOnly={readOnly} />
+      <Input
+        readOnly={readOnly}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
       {readOnly ? (
         <Button
           size="sm"
@@ -34,9 +47,7 @@ const CustomizeActivity = ({ activity }) => {
           size="sm"
           color="link"
           className="mr-1 ml-1"
-          onClick={() => {
-            setReadOnly(!readOnly);
-          }}
+          onClick={exitInput}
         >
           <FontAwesomeIcon icon="times" className="text-dark" />
         </Button>

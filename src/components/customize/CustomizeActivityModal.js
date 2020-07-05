@@ -27,9 +27,18 @@ const CustomizeActivityModal = (props) => {
     const newItem = {
       _id: new Date().getTime(),
       name: '',
+      new: true,
     };
 
     updateActivities([...activities, newItem]);
+  };
+
+  const deleteItemFromUI = (activityId) => {
+    const remainingItems = activities.filter(
+      (activity) => activity._id !== activityId,
+    );
+
+    updateActivities(remainingItems);
   };
 
   const renderBody = () => {
@@ -37,14 +46,20 @@ const CustomizeActivityModal = (props) => {
       <div>
         <ListGroup>
           {activities.map((activity) => {
-            return <CustomizeActivity key={activity._id} activity={activity} />;
+            return (
+              <CustomizeActivity
+                key={activity._id}
+                activity={activity}
+                deleteItemFromUI={deleteItemFromUI}
+              />
+            );
           })}
         </ListGroup>
         <div className="d-flex justify-content-between">
           <Button color="secondary" className="mt-2" onClick={addItem}>
             Add
           </Button>
-          <Button color="primary" className="mt-2">
+          <Button color="primary" className="mt-2" onClick={toggle}>
             Finish
           </Button>
         </div>
