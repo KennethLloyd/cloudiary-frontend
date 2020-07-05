@@ -3,39 +3,48 @@ import { Col, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import moment from 'moment';
 import AddEntryModal from './AddEntryModal';
 
+const padZero = (num) => {
+  if (num.toString().length === 1) {
+    return `0${num}`;
+  }
+  return num;
+};
+
 const CalendarColumnEmpty = (props) => {
   const [modal, setModal] = useState(false);
   const [popoverOpen, setPopoverOpen] = useState(false);
+  const yearAndMonth = moment(props.date).format('YYYY-MM');
+  const fullDate = `${yearAndMonth}-${padZero(props.day)}`;
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setPopoverOpen(false);
-    }, 3000);
+    }, 2000);
     return () => clearTimeout(timer);
   });
 
   const isValidDate = (date) => {
-    if (
-      moment(new Date(date)).format('YYYY-MM-DD') >
-      moment(new Date()).format('YYYY-MM-DD')
-    ) {
+    if (new Date(moment(date)).getTime() > new Date().getTime()) {
       return false;
     }
     return true;
   };
 
-  const togglePopOver = () => setPopoverOpen(!popoverOpen);
-
-  const yearAndMonth = moment(props.date).format('YYYY-MM');
-  const fullDate = `${yearAndMonth}-${props.day}`;
-
   const toggle = () => {
     setModal(!modal);
   };
 
+  const togglePopOver = () => {
+    setPopoverOpen(!popoverOpen);
+  };
+
   return (
     <React.Fragment>
-      <Col className={props.className} onClick={toggle} id="calendarCol">
+      <Col
+        className={props.className}
+        onClick={toggle}
+        id={`calendarCol-${props.day}`}
+      >
         {props.day}
       </Col>
       {isValidDate(fullDate) ? (
@@ -44,7 +53,7 @@ const CalendarColumnEmpty = (props) => {
         <Popover
           placement="bottom"
           isOpen={popoverOpen}
-          target="calendarCol"
+          target={`calendarCol-${props.day}`}
           toggle={togglePopOver}
         >
           <PopoverHeader>Add Entry</PopoverHeader>

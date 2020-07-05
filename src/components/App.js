@@ -2,6 +2,13 @@ import React from 'react';
 import { Router, Switch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import RiseLoader from 'react-spinners/RiseLoader';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import {
+  faPen,
+  faTrash,
+  faTimes,
+  faCheck,
+} from '@fortawesome/free-solid-svg-icons';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import UnauthenticatedRoute from './UnauthenticatedRoute';
 import UserSignUp from './users/UserSignUp';
@@ -10,6 +17,7 @@ import HomePage from './home/HomePage';
 import history from '../history';
 
 const App = () => {
+  library.add(faPen, faTrash, faTimes, faCheck);
   const isLoading = useSelector((state) => state.loader.isLoading);
 
   return (
