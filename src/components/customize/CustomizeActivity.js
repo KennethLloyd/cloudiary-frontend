@@ -10,6 +10,7 @@ const CustomizeActivity = ({ activity, deleteItemFromUI }) => {
     if (activity.new && name === '') {
       deleteItemFromUI(activity._id);
     } else {
+      setName(activity.name);
       setReadOnly(!readOnly);
     }
   };
