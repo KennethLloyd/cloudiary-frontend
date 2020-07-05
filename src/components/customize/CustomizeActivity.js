@@ -2,9 +2,14 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { ListGroupItem, Input, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { addActivity } from '../../actions/activityActions';
+import { addActivity, deleteActivity } from '../../actions/activityActions';
 
-const CustomizeActivity = ({ activity, deleteItemFromUI, addActivity }) => {
+const CustomizeActivity = ({
+  activity,
+  deleteItemFromUI,
+  addActivity,
+  deleteActivity,
+}) => {
   const [name, setName] = useState(activity.name);
   const [readOnly, setReadOnly] = useState(activity.new ? false : true);
 
@@ -60,7 +65,12 @@ const CustomizeActivity = ({ activity, deleteItemFromUI, addActivity }) => {
       )}
 
       {readOnly ? (
-        <Button size="sm" color="link" className="mr-1 ml-1">
+        <Button
+          size="sm"
+          color="link"
+          className="mr-1 ml-1"
+          onClick={() => deleteActivity(activity._id)}
+        >
           <FontAwesomeIcon icon="trash" className="text-dark" />
         </Button>
       ) : (
@@ -77,4 +87,6 @@ const CustomizeActivity = ({ activity, deleteItemFromUI, addActivity }) => {
   );
 };
 
-export default connect(null, { addActivity })(CustomizeActivity);
+export default connect(null, { addActivity, deleteActivity })(
+  CustomizeActivity,
+);

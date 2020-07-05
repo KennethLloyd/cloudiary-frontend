@@ -5,6 +5,7 @@ export const LOG_OUT = 'LOG_OUT';
 export const FETCH_MOODS = 'FETCH_MOODS';
 export const FETCH_ACTIVITIES = 'FETCH_ACTIVITIES';
 export const ADD_ACTIVITY = 'ADD_ACTIVITY';
+export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
 export const FETCH_ENTRIES = 'FETCH_ENTRIES';
 export const ADD_ENTRY = 'ADD_ENTRY';
 export const EDIT_ENTRY = 'EDIT_ENTRY';

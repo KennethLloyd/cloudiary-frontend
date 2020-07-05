@@ -7,8 +7,6 @@ import {
   ModalBody,
   ModalFooter,
   ListGroup,
-  ListGroupItem,
-  Input,
 } from 'reactstrap';
 import CustomizeActivity from './CustomizeActivity';
 
