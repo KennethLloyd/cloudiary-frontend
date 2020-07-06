@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { ListGroupItem, Input, Button } from 'reactstrap';
+import { Input, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   addActivity,
@@ -46,7 +46,7 @@ const CustomizeActivity = ({
   };
 
   return (
-    <ListGroupItem className="d-flex">
+    <li className="d-flex justify-content-between mt-2 ">
       <Input
         readOnly={readOnly}
         value={name}
@@ -93,7 +93,7 @@ const CustomizeActivity = ({
           <FontAwesomeIcon icon="times" className="text-dark" />
         </Button>
       )}
-    </ListGroupItem>
+    </li>
   );
 };
 

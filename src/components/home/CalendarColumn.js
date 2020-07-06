@@ -16,7 +16,7 @@ const CalendarColumn = (props) => {
         {props.day}
         <FontAwesomeIcon
           icon={props.entry.mood.icon}
-          className="text-primary align-self-end mb-1 calendar-mood"
+          className="text-secondary align-self-end mb-1 calendar-mood"
           size="3x"
         />
       </Col>

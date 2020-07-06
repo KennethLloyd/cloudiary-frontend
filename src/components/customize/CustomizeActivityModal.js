@@ -1,14 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  ListGroup,
-  Alert,
-} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Alert } from 'reactstrap';
 import CustomizeActivity from './CustomizeActivity';
 import { clearErrors } from '../../actions/errorActions';
 
@@ -49,7 +41,7 @@ const CustomizeActivityModal = (props) => {
   const renderBody = () => {
     return (
       <div>
-        <ListGroup>
+        <ul className="d-flex flex-column justify-content-center">
           {activities.map((activity) => {
             return (
               <CustomizeActivity
@@ -59,7 +51,7 @@ const CustomizeActivityModal = (props) => {
               />
             );
           })}
-        </ListGroup>
+        </ul>
       </div>
     );
   };
@@ -82,15 +74,12 @@ const CustomizeActivityModal = (props) => {
           >
             {props.error}
           </Alert>
+          <div className="d-flex justify-content-end">
+            <Button color="secondary" className="mt-2" onClick={addItem}>
+              Add
+            </Button>
+          </div>
         </ModalBody>
-        <ModalFooter className="d-flex justify-content-between">
-          <Button color="secondary" className="mt-2" onClick={addItem}>
-            Add
-          </Button>
-          <Button color="primary" className="mt-2" onClick={toggle}>
-            Finish
-          </Button>
-        </ModalFooter>
       </Modal>
     </div>
   );
