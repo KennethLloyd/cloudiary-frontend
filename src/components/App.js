@@ -12,6 +12,11 @@ import {
   faPlus,
   faEye,
   faEyeSlash,
+  faSmileBeam,
+  faSmile,
+  faMeh,
+  faFrown,
+  faSadTear,
 } from '@fortawesome/free-solid-svg-icons';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import UnauthenticatedRoute from './UnauthenticatedRoute';
@@ -30,6 +35,11 @@ const App = () => {
     faPlus,
     faEye,
     faEyeSlash,
+    faSmileBeam,
+    faSmile,
+    faMeh,
+    faFrown,
+    faSadTear,
   );
   const isLoading = useSelector((state) => state.loader.isLoading);
 

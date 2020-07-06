@@ -6,16 +6,6 @@ import Entry from './Entry';
 import { fetchEntries } from '../../actions/entryActions';
 
 const EntryList = (props) => {
-  const importAll = (r) => {
-    let images = {};
-    r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
-    return images;
-  };
-
-  const moodIcons = importAll(
-    require.context('../../images/moods', false, /\.(png|jpe?g|svg)$/),
-  );
-
   useEffect(() => {
     const thisMonth = moment(props.date).format('YYYY-MM');
     const nextMonth = moment(props.date).add(1, 'month').format('YYYY-MM');
@@ -27,7 +17,6 @@ const EntryList = (props) => {
     <Container className="mt-3 entries-container">
       <div id="accordion">
         {props.entries.map((entry) => {
-          entry.moodSrc = moodIcons[`${entry.mood.name}.svg`];
           if (
             props.mood.toLowerCase() === entry.mood.name.toLowerCase() ||
             props.mood.toUpperCase() === 'ALL'

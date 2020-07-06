@@ -29,7 +29,11 @@ const Entry = ({ content }) => {
             </p>
           </div>
           <div className="entry-mood d-md-flex flex-md-column justify-content-md-center align-items-md-center">
-            <img src={content.moodSrc} alt="mood icon" width="48" height="48" />
+            <FontAwesomeIcon
+              icon={content.mood.icon}
+              className="text-light"
+              size="3x"
+            />
             <p className="mb-0 entry-mood-name">
               {content.mood.name.toUpperCase()}
             </p>
