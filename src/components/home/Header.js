@@ -17,14 +17,20 @@ import projectLogo from '../../images/project-logo.svg';
 import projectLabel from '../../images/project-label.svg';
 import LogOutModal from './LogOutModal';
 import CustomizeActivityModal from '../customize/CustomizeActivityModal';
+import CustomizeMoodModal from '../customize/CustomizeMoodModal';
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isActive, setIsActive] = useState('Entries');
   const [activityModal, setActivityModal] = useState(false);
+  const [moodModal, setMoodModal] = useState(false);
 
   const toggleActivityModal = () => {
     setActivityModal(!activityModal);
+  };
+
+  const toggleMoodModal = () => {
+    setMoodModal(!moodModal);
   };
 
   return (
@@ -64,7 +70,11 @@ const Header = (props) => {
                 Customize
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>Moods</DropdownItem>
+                <DropdownItem onClick={toggleMoodModal}>Moods</DropdownItem>
+                <CustomizeMoodModal
+                  moodModal={moodModal}
+                  setMoodModal={setMoodModal}
+                />
                 <DropdownItem onClick={toggleActivityModal}>
                   Activities
                 </DropdownItem>

@@ -6,6 +6,7 @@ import {
   DELETE_ACTIVITY,
   START_LOADING,
   FINISH_LOADING,
+  REFETCH_ENTRIES,
 } from './types';
 import { setError, clearErrors } from './errorActions';
 
@@ -27,7 +28,7 @@ export const fetchActivities = () => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -49,7 +50,7 @@ export const addActivity = (activityDetails) => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -78,9 +79,13 @@ export const editActivity = (activityId, activityDetails) => async (
       type: EDIT_ACTIVITY,
       payload: response.data,
     });
+
+    dispatch({
+      type: REFETCH_ENTRIES,
+    });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -102,6 +107,6 @@ export const deleteActivity = (activityId) => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };

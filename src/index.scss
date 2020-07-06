@@ -177,6 +177,10 @@ main {
   background-color: $primary;
 }
 
+.add-activity-btn {
+  border-radius: 50%;
+}
+
 @media (max-width: 767px) {
   html,
   body {

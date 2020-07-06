@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SearchFilter from './SearchFilter';
 import EntryList from './EntryList';
 import AddEntryModal from './AddEntryModal';
-import newEntryIcon from '../../images/new-entry-icon.svg';
 
 const Entries = (props) => {
   const [mood, updateMood] = useState('ALL');
@@ -28,7 +28,7 @@ const Entries = (props) => {
           className="modal-entry-btn shadow-lg"
           onClick={toggleAddModal}
         >
-          <img src={newEntryIcon} alt="new entry icon" width="25" height="25" />
+          <FontAwesomeIcon icon="plus" className="text-light" size="lg" />
         </Button>
       </div>
       <AddEntryModal modal={addModal} setModal={setAddModal} />

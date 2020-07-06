@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Button,
   ButtonGroup,
@@ -70,16 +71,6 @@ const AddEntryModal = (props) => {
     setSelectedActivity([...selectedActivity]);
   };
 
-  const importAll = (r) => {
-    let images = {};
-    r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
-    return images;
-  };
-
-  const moodIcons = importAll(
-    require.context('../../images/moods', false, /\.(png|jpe?g|svg)$/),
-  );
-
   const renderHeader = () => {
     return (
       <div className="d-flex justify-content-between align-items-center modal-entry-header">
@@ -128,11 +119,12 @@ const AddEntryModal = (props) => {
                 color="link"
                 onClick={() => setSelectedMood(mood._id)}
               >
-                <img
-                  src={moodIcons[`${mood.name}-dark.svg`]}
-                  width="70"
-                  height="70"
-                  alt="mood icon"
+                <FontAwesomeIcon
+                  icon={mood.icon}
+                  className={
+                    selectedMood === mood._id ? 'text-light' : 'text-primary'
+                  }
+                  size="3x"
                 />
                 <p className="text-dark mood-selector-label">
                   {mood.name.toUpperCase()}
