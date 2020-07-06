@@ -133,7 +133,9 @@ const EditEntryModal = (props) => {
               >
                 <FontAwesomeIcon
                   icon={mood.icon}
-                  className="text-secondary"
+                  className={
+                    selectedMood === mood._id ? 'text-light' : 'text-primary'
+                  }
                   size="3x"
                 />
                 <p className="text-dark mood-selector-label">
