@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Button,
   ButtonGroup,
@@ -130,11 +131,10 @@ const EditEntryModal = (props) => {
                 color="link"
                 onClick={() => setSelectedMood(mood._id)}
               >
-                <img
-                  src={moodIcons[`${mood.name}-dark.svg`]}
-                  width="70"
-                  height="70"
-                  alt="mood icon"
+                <FontAwesomeIcon
+                  icon={mood.icon}
+                  className="text-primary"
+                  size="3x"
                 />
                 <p className="text-dark mood-selector-label">
                   {mood.name.toUpperCase()}
