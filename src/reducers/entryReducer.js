@@ -3,6 +3,7 @@ import {
   ADD_ENTRY,
   EDIT_ENTRY,
   DELETE_ENTRY,
+  REFETCH_ENTRIES,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -19,6 +20,7 @@ export default (state = INITIAL_STATE, action) => {
       };
     case ADD_ENTRY:
     case EDIT_ENTRY:
+    case REFETCH_ENTRIES:
       return {
         ...state,
         refetchEntryTrigger: !state.refetchEntryTrigger, // allows us to trigger refetch after a successful new entry

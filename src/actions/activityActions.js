@@ -6,6 +6,7 @@ import {
   DELETE_ACTIVITY,
   START_LOADING,
   FINISH_LOADING,
+  REFETCH_ENTRIES,
 } from './types';
 import { setError, clearErrors } from './errorActions';
 
@@ -77,6 +78,10 @@ export const editActivity = (activityId, activityDetails) => async (
     dispatch({
       type: EDIT_ACTIVITY,
       payload: response.data,
+    });
+
+    dispatch({
+      type: REFETCH_ENTRIES,
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
