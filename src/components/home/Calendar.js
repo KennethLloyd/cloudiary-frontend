@@ -14,16 +14,6 @@ const Calendar = (props) => {
   const [row5, setRow5] = useState([]);
   const [row6, setRow6] = useState([]);
 
-  const importAll = (r) => {
-    let images = {};
-    r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
-    return images;
-  };
-
-  const moodIcons = importAll(
-    require.context('../../images/moods', false, /\.(png|jpe?g|svg)$/),
-  );
-
   const getDay = (entryDate) => {
     const dateOnly = entryDate.split(' ')[0];
     const dayOnly = parseInt(dateOnly.split('-')[2]);
@@ -42,7 +32,6 @@ const Calendar = (props) => {
     const calendarEntryProps = new Array(31).fill(null);
 
     props.entries.map((entry) => {
-      entry.moodSrc = moodIcons[`${entry.mood.name}-dark.svg`];
       const entryDay = getDay(entry.entryDate);
 
       calendarEntryProps[entryDay - 1] = entry;

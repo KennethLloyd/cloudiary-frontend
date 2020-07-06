@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Col } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EditEntryModal from './EditEntryModal';
 
 const CalendarColumn = (props) => {
@@ -13,12 +14,10 @@ const CalendarColumn = (props) => {
     <React.Fragment>
       <Col className={props.className} onClick={toggle}>
         {props.day}
-        <img
-          className="align-self-end mb-1 calendar-mood"
-          src={props.entry.moodSrc}
-          alt="calendar mood"
-          width="48"
-          height="48"
+        <FontAwesomeIcon
+          icon={props.entry.mood.icon}
+          className="text-primary align-self-end mb-1 calendar-mood"
+          size="3x"
         />
       </Col>
       <EditEntryModal entry={props.entry} modal={modal} setModal={setModal} />
