@@ -28,6 +28,13 @@ export default (state = INITIAL_STATE, action) => {
           ),
         ],
       };
+    case DELETE_MOOD:
+      return {
+        ...state,
+        moods: [
+          ...state.moods.filter((mood) => mood._id !== action.payload.mood._id),
+        ],
+      };
     default:
       return state;
   }

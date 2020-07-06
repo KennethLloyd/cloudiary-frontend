@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Input, Button } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { editMood } from '../../actions/moodActions';
+import { editMood, deleteMood } from '../../actions/moodActions';
 
-const InUseMood = ({ mood, editMood }) => {
+const InUseMood = ({ mood, editMood, deleteMood }) => {
   const [name, setName] = useState(mood.name);
   const [icon, setIcon] = useState(mood.icon);
   const [readOnly, setReadOnly] = useState(true);
@@ -55,7 +55,7 @@ const InUseMood = ({ mood, editMood }) => {
             size="sm"
             color="link"
             className="mr-1 ml-1"
-            // onClick={() => deleteActivity(activity._id)}
+            onClick={() => deleteMood(mood._id)}
           >
             <FontAwesomeIcon icon="trash" className="text-dark" />
           </Button>
@@ -84,4 +84,4 @@ const InUseMood = ({ mood, editMood }) => {
   );
 };
 
-export default connect(null, { editMood })(InUseMood);
+export default connect(null, { editMood, deleteMood })(InUseMood);

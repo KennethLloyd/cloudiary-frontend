@@ -17,10 +17,7 @@ import { addMood } from '../../actions/moodActions';
 import { clearErrors } from '../../actions/errorActions';
 
 const CustomizeMoodModal = (props) => {
-  const [moods, updateMoods] = useState(props.moods);
-  const [selectedIcon, setSelectedIcon] = useState(null);
-  const [newMoodName, setNewMoodName] = useState('');
-  const [availableIcons, setAvailableIcons] = useState([
+  const allIcons = [
     'smile-beam',
     'smile',
     'meh',
@@ -57,7 +54,12 @@ const CustomizeMoodModal = (props) => {
     'flushed',
     'dizzy',
     'angry',
-  ]);
+  ];
+
+  const [moods, updateMoods] = useState(props.moods);
+  const [selectedIcon, setSelectedIcon] = useState(null);
+  const [newMoodName, setNewMoodName] = useState('');
+  const [availableIcons, setAvailableIcons] = useState([...allIcons]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -66,8 +68,8 @@ const CustomizeMoodModal = (props) => {
 
     const usedIcons = props.moods.map((mood) => mood.icon);
 
-    const filteredAvailableIcons = availableIcons.filter(
-      (availableIcon) => !usedIcons.includes(availableIcon),
+    const filteredAvailableIcons = allIcons.filter(
+      (icon) => !usedIcons.includes(icon),
     );
 
     setAvailableIcons(filteredAvailableIcons);
@@ -86,16 +88,6 @@ const CustomizeMoodModal = (props) => {
     };
 
     props.addMood(moodDetails);
-  };
-
-  const addItem = () => {
-    const newItem = {
-      _id: new Date().getTime(),
-      name: '',
-      new: true,
-    };
-
-    updateMoods([...moods, newItem]);
   };
 
   const deleteItemFromUI = (moodId) => {

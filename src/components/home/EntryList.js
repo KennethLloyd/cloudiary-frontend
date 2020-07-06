@@ -17,6 +17,14 @@ const EntryList = (props) => {
     <Container className="mt-3 entries-container">
       <div id="accordion">
         {props.entries.map((entry) => {
+          if (!entry.mood) {
+            entry.mood = {
+              _id: new Date().getTime(),
+              name: 'unknown',
+              icon: 'question-circle',
+            };
+          }
+
           if (
             props.mood.toLowerCase() === entry.mood.name.toLowerCase() ||
             props.mood.toUpperCase() === 'ALL'

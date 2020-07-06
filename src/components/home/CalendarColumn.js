@@ -3,24 +3,33 @@ import { Col } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EditEntryModal from './EditEntryModal';
 
-const CalendarColumn = (props) => {
+const CalendarColumn = ({ entry, className, day }) => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => {
     setModal(!modal);
   };
 
+  if (!entry.mood) {
+    entry.mood = {
+      _id: new Date().getTime(),
+      name: 'unknown',
+      icon: 'question-circle',
+    };
+  }
+
   return (
     <React.Fragment>
-      <Col className={props.className} onClick={toggle}>
-        {props.day}
+      <Col className={className} onClick={toggle}>
+        {day}
+
         <FontAwesomeIcon
-          icon={props.entry.mood.icon}
+          icon={entry.mood.icon}
           className="text-light align-self-md-end align-self-xs-center mb-1 calendar-mood"
           size="3x"
         />
       </Col>
-      <EditEntryModal entry={props.entry} modal={modal} setModal={setModal} />
+      <EditEntryModal entry={entry} modal={modal} setModal={setModal} />
     </React.Fragment>
   );
 };

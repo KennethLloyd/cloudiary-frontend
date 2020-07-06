@@ -48,6 +48,7 @@ import {
   faSmileWink,
   faSurprise,
   faTired,
+  faQuestionCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import UnauthenticatedRoute from './UnauthenticatedRoute';
@@ -102,6 +103,7 @@ const App = () => {
     faFlushed,
     faDizzy,
     faAngry,
+    faQuestionCircle,
   );
   const isLoading = useSelector((state) => state.loader.isLoading);
 

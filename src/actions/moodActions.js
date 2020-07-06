@@ -76,3 +76,25 @@ export const editMood = (moodId, moodDetails) => async (dispatch, getState) => {
     dispatch(setError(e));
   }
 };
+
+export const deleteMood = (moodId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: START_LOADING });
+
+    const response = await api.delete(`/moods/${moodId}`, {
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
+    });
+
+    dispatch({ type: FINISH_LOADING });
+
+    dispatch(clearErrors());
+
+    dispatch({
+      type: DELETE_MOOD,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({ type: FINISH_LOADING });
+    dispatch(setError(e));
+  }
+};
