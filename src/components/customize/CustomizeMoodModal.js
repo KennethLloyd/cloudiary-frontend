@@ -5,6 +5,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  ModalFooter,
   Alert,
   Badge,
   Container,
@@ -166,12 +167,12 @@ const CustomizeMoodModal = (props) => {
           >
             {props.error}
           </Alert>
-          <div className="d-flex justify-content-end">
-            <Button color="primary" className="mt-2" onClick={toggle}>
-              Finish
-            </Button>
-          </div>
         </ModalBody>
+        <ModalFooter className="d-flex justify-content-end">
+          <Button color="primary" className="mt-2" onClick={toggle}>
+            Finish
+          </Button>
+        </ModalFooter>
       </Modal>
     </div>
   );

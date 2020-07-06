@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import { Button, Modal, ModalHeader, ModalBody, Alert } from 'reactstrap';
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Alert,
+  Container,
+} from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CustomizeActivity from './CustomizeActivity';
 import { clearErrors } from '../../actions/errorActions';
 
@@ -74,12 +83,17 @@ const CustomizeActivityModal = (props) => {
           >
             {props.error}
           </Alert>
-          <div className="d-flex justify-content-end">
+          <Container className="d-flex justify-content-start ml-4">
             <Button color="secondary" className="mt-2" onClick={addItem}>
-              Add
+              <FontAwesomeIcon icon="plus" className="text-light" size="sm" />
             </Button>
-          </div>
+          </Container>
         </ModalBody>
+        <ModalFooter className="d-flex justify-content-end">
+          <Button color="primary" className="mt-2" onClick={toggle}>
+            Finish
+          </Button>
+        </ModalFooter>
       </Modal>
     </div>
   );
