@@ -79,6 +79,7 @@ const CustomizeMoodModal = (props) => {
 
   const toggle = () => {
     props.setMoodModal(!props.moodModal);
+    dispatch(clearErrors());
   };
 
   const saveMood = () => {

@@ -12,7 +12,7 @@ const CalendarColumn = ({ entry, className, day }) => {
 
   if (!entry.mood) {
     entry.mood = {
-      _id: new Date().getTime(),
+      _id: `unknown-${new Date().getTime()}`,
       name: 'unknown',
       icon: 'question-circle',
     };

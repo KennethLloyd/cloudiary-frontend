@@ -23,6 +23,7 @@ const CustomizeActivityModal = (props) => {
 
   const toggle = () => {
     props.setActivityModal(!props.activityModal);
+    dispatch(clearErrors());
   };
 
   const addItem = () => {

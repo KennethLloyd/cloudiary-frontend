@@ -23,7 +23,7 @@ export const fetchMoods = () => async (dispatch, getState) => {
       payload: response.data,
     });
   } catch (e) {
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -45,7 +45,7 @@ export const addMood = (moodDetails) => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -73,7 +73,7 @@ export const editMood = (moodId, moodDetails) => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -95,6 +95,6 @@ export const deleteMood = (moodId) => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };

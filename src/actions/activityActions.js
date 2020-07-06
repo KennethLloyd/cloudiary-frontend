@@ -28,7 +28,7 @@ export const fetchActivities = () => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -50,7 +50,7 @@ export const addActivity = (activityDetails) => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -85,7 +85,7 @@ export const editActivity = (activityId, activityDetails) => async (
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -107,6 +107,6 @@ export const deleteActivity = (activityId) => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };

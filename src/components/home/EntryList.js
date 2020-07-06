@@ -19,7 +19,7 @@ const EntryList = (props) => {
         {props.entries.map((entry) => {
           if (!entry.mood) {
             entry.mood = {
-              _id: new Date().getTime(),
+              _id: `unknown-${new Date().getTime()}`,
               name: 'unknown',
               icon: 'question-circle',
             };
