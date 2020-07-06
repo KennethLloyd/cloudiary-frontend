@@ -14,16 +14,6 @@ const Calendar = (props) => {
   const [row5, setRow5] = useState([]);
   const [row6, setRow6] = useState([]);
 
-  const importAll = (r) => {
-    let images = {};
-    r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
-    return images;
-  };
-
-  const moodIcons = importAll(
-    require.context('../../images/moods', false, /\.(png|jpe?g|svg)$/),
-  );
-
   const getDay = (entryDate) => {
     const dateOnly = entryDate.split(' ')[0];
     const dayOnly = parseInt(dateOnly.split('-')[2]);
@@ -42,7 +32,6 @@ const Calendar = (props) => {
     const calendarEntryProps = new Array(31).fill(null);
 
     props.entries.map((entry) => {
-      entry.moodSrc = moodIcons[`${entry.mood.name}-dark.svg`];
       const entryDay = getDay(entry.entryDate);
 
       calendarEntryProps[entryDay - 1] = entry;
@@ -68,7 +57,7 @@ const Calendar = (props) => {
         daysInMonth.push(
           <CalendarColumn
             key={d}
-            className="calendar-day border border-dark d-flex justify-content-between bg-success"
+            className="calendar-day border border-dark d-flex justify-content-between bg-secondary"
             day={d}
             entry={calendarEntryProps[d - 1]}
           />,
@@ -130,49 +119,49 @@ const Calendar = (props) => {
     <div>
       <Container className="bg-light calendar-container">
         <Row className="calendar-header calendar-days-complete">
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Sunday
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Monday
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Tueday
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Wednesday
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Thursday
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Friday
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Saturday
           </Col>
         </Row>
 
         <Row className="calendar-header calendar-days-shorten">
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Sun
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Mon
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Tue
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Wed
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Thu
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Fri
           </Col>
-          <Col className="border border-dark bg-secondary text-light text-center">
+          <Col className="border border-dark bg-primary text-light text-center">
             Sat
           </Col>
         </Row>

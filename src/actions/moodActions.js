@@ -1,5 +1,13 @@
 import api from '../apis/api';
-import { FETCH_MOODS } from './types';
+import {
+  FETCH_MOODS,
+  ADD_MOOD,
+  EDIT_MOOD,
+  DELETE_MOOD,
+  START_LOADING,
+  FINISH_LOADING,
+  REFETCH_ENTRIES,
+} from './types';
 import { setError, clearErrors } from './errorActions';
 
 export const fetchMoods = () => async (dispatch, getState) => {
@@ -15,6 +23,78 @@ export const fetchMoods = () => async (dispatch, getState) => {
       payload: response.data,
     });
   } catch (e) {
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
+  }
+};
+
+export const addMood = (moodDetails) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: START_LOADING });
+
+    const response = await api.post('/moods', moodDetails, {
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
+    });
+
+    dispatch({ type: FINISH_LOADING });
+
+    dispatch(clearErrors());
+
+    dispatch({
+      type: ADD_MOOD,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({ type: FINISH_LOADING });
+    dispatch(setError(e.response.data.error));
+  }
+};
+
+export const editMood = (moodId, moodDetails) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: START_LOADING });
+
+    const response = await api.put(`/moods/${moodId}`, moodDetails, {
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
+    });
+
+    response.data.oldId = moodId;
+
+    dispatch({ type: FINISH_LOADING });
+
+    dispatch(clearErrors());
+
+    dispatch({
+      type: EDIT_MOOD,
+      payload: response.data,
+    });
+
+    dispatch({
+      type: REFETCH_ENTRIES,
+    });
+  } catch (e) {
+    dispatch({ type: FINISH_LOADING });
+    dispatch(setError(e.response.data.error));
+  }
+};
+
+export const deleteMood = (moodId) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: START_LOADING });
+
+    const response = await api.delete(`/moods/${moodId}`, {
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
+    });
+
+    dispatch({ type: FINISH_LOADING });
+
+    dispatch(clearErrors());
+
+    dispatch({
+      type: DELETE_MOOD,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({ type: FINISH_LOADING });
+    dispatch(setError(e.response.data.error));
   }
 };

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Card, CardBody, Button, Collapse, Badge, Row, Col } from 'reactstrap';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EditEntryModal from './EditEntryModal';
 import DeleteEntryModal from './DeleteEntryModal';
-import upArrowIcon from '../../images/up-arrow.svg';
-import downArrowIcon from '../../images/down-arrow.svg';
-import pencilIcon from '../../images/pencil-icon.svg';
 
 const Entry = ({ content }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +29,11 @@ const Entry = ({ content }) => {
             </p>
           </div>
           <div className="entry-mood d-md-flex flex-md-column justify-content-md-center align-items-md-center">
-            <img src={content.moodSrc} alt="mood icon" width="48" height="48" />
+            <FontAwesomeIcon
+              icon={content.mood.icon}
+              className="text-light"
+              size="3x"
+            />
             <p className="mb-0 entry-mood-name">
               {content.mood.name.toUpperCase()}
             </p>
@@ -46,11 +48,10 @@ const Entry = ({ content }) => {
           </div>
           <div className="entry-expander align-self-md-center d-md-flex justify-content-md-center">
             <Button size="sm" color="link">
-              <img
-                src={isOpen ? upArrowIcon : downArrowIcon}
-                alt="Arrow icon"
-                width="15"
-                height="15"
+              <FontAwesomeIcon
+                icon="chevron-down"
+                className="text-light"
+                rotation={isOpen ? 180 : 0}
               />
             </Button>
           </div>
@@ -82,12 +83,7 @@ const Entry = ({ content }) => {
                 onClick={toggleEditModal}
               >
                 <Button size="sm" color="link" className="mr-1 ml-1">
-                  <img
-                    src={pencilIcon}
-                    alt="Pencil icon"
-                    width="15"
-                    height="15"
-                  />
+                  <FontAwesomeIcon icon="pen" className="text-dark" />
                 </Button>
               </div>
               <EditEntryModal

@@ -31,7 +31,7 @@ export const fetchEntries = (from, to) => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -52,7 +52,7 @@ export const addEntry = (entryDetails) => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -75,7 +75,7 @@ export const editEntry = (entryId, entryDetails) => async (
       type: EDIT_ENTRY,
     });
   } catch (e) {
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };
 
@@ -97,6 +97,6 @@ export const deleteEntry = (entryId) => async (dispatch, getState) => {
     });
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
   }
 };

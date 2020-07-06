@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import moment from 'moment';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Button,
   ButtonGroup,
@@ -17,7 +18,7 @@ import {
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { editEntry } from '../../actions/entryActions';
-import { clearErrors } from '../../actions/errorActions';
+import { clearErrors, setError } from '../../actions/errorActions';
 
 const EditEntryModal = (props) => {
   const [startDate, setStartDate] = useState(
@@ -40,6 +41,7 @@ const EditEntryModal = (props) => {
 
   const toggle = () => {
     props.setModal(!props.modal);
+    dispatch(clearErrors());
   };
 
   const resetEntry = () => {
@@ -71,16 +73,6 @@ const EditEntryModal = (props) => {
     }
     setSelectedActivity([...selectedActivity]);
   };
-
-  const importAll = (r) => {
-    let images = {};
-    r.keys().map((item) => (images[item.replace('./', '')] = r(item)));
-    return images;
-  };
-
-  const moodIcons = importAll(
-    require.context('../../images/moods', false, /\.(png|jpe?g|svg)$/),
-  );
 
   const renderHeader = () => {
     return (
@@ -130,11 +122,12 @@ const EditEntryModal = (props) => {
                 color="link"
                 onClick={() => setSelectedMood(mood._id)}
               >
-                <img
-                  src={moodIcons[`${mood.name}-dark.svg`]}
-                  width="70"
-                  height="70"
-                  alt="mood icon"
+                <FontAwesomeIcon
+                  icon={mood.icon}
+                  className={
+                    selectedMood === mood._id ? 'text-light' : 'text-primary'
+                  }
+                  size="3x"
                 />
                 <p className="text-dark mood-selector-label">
                   {mood.name.toUpperCase()}
@@ -199,17 +192,21 @@ const EditEntryModal = (props) => {
   };
 
   const saveEntry = () => {
-    const entryDetails = {
-      entryDate: `${moment(startDate).format('YYYY-MM-DD')} ${moment(
-        startTime,
-      ).format('HH:mm')}`,
-      title,
-      body,
-      mood: selectedMood,
-      activities: selectedActivity,
-    };
+    if (selectedMood.startsWith('unknown')) {
+      dispatch(setError('Please select a mood'));
+    } else {
+      const entryDetails = {
+        entryDate: `${moment(startDate).format('YYYY-MM-DD')} ${moment(
+          startTime,
+        ).format('HH:mm')}`,
+        title,
+        body,
+        mood: selectedMood,
+        activities: selectedActivity,
+      };
 
-    props.editEntry(props.entry._id, entryDetails);
+      props.editEntry(props.entry._id, entryDetails);
+    }
   };
 
   return (

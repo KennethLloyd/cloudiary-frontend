@@ -27,7 +27,7 @@ export const logIn = (formValues) => async (dispatch) => {
     history.push('/');
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
     history.push('/login');
   }
 };
@@ -50,7 +50,7 @@ export const signUp = (formValues) => async (dispatch) => {
     history.push('/');
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
     history.push('/signup');
   }
 };
@@ -74,7 +74,7 @@ export const logOut = () => async (dispatch, getState) => {
     history.push('/login');
   } catch (e) {
     dispatch({ type: FINISH_LOADING });
-    dispatch(setError(e));
+    dispatch(setError(e.response.data.error));
     history.push('/');
   }
 };
