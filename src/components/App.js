@@ -8,6 +8,10 @@ import {
   faTrash,
   faTimes,
   faCheck,
+  faChevronDown,
+  faPlus,
+  faEye,
+  faEyeSlash,
 } from '@fortawesome/free-solid-svg-icons';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import UnauthenticatedRoute from './UnauthenticatedRoute';
@@ -17,7 +21,16 @@ import HomePage from './home/HomePage';
 import history from '../history';
 
 const App = () => {
-  library.add(faPen, faTrash, faTimes, faCheck);
+  library.add(
+    faPen,
+    faTrash,
+    faTimes,
+    faCheck,
+    faChevronDown,
+    faPlus,
+    faEye,
+    faEyeSlash,
+  );
   const isLoading = useSelector((state) => state.loader.isLoading);
 
   return (

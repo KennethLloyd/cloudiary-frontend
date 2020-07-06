@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { deleteEntry } from '../../actions/entryActions';
-import trashIcon from '../../images/trash-icon.svg';
 
 const DeleteEntryModal = (props) => {
   const [modal, setModal] = useState(false);
@@ -19,7 +19,7 @@ const DeleteEntryModal = (props) => {
   return (
     <div>
       <Button size="sm" color="link" className="mr-1 ml-1" onClick={toggle}>
-        <img src={trashIcon} alt="Trash icon" width="15" height="15" />
+        <FontAwesomeIcon icon="trash" className="text-dark" />
       </Button>
       <Modal isOpen={modal} toggle={toggle} className={props.className}>
         <ModalHeader toggle={toggle}>

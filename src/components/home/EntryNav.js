@@ -1,8 +1,7 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import moment from 'moment';
-import leftArrow from '../../images/left-arrow.svg';
-import rightArrow from '../../images/right-arrow.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const EntryNav = (props) => {
   const formatDate = (date) => {
@@ -23,7 +22,12 @@ const EntryNav = (props) => {
             )
           }
         >
-          <img src={leftArrow} alt="left arrow icon" width="20" height="20" />
+          <FontAwesomeIcon
+            icon="chevron-down"
+            className="text-dark"
+            rotation={90}
+            size="lg"
+          />
         </Button>
         <h4 className="mr-5 ml-5 mt-2">{formatDate(props.date)}</h4>
         <Button
@@ -37,7 +41,12 @@ const EntryNav = (props) => {
             )
           }
         >
-          <img src={rightArrow} alt="right arrow icon" width="20" height="20" />
+          <FontAwesomeIcon
+            icon="chevron-down"
+            className="text-dark"
+            rotation={270}
+            size="lg"
+          />
         </Button>
       </div>
     </div>

@@ -12,17 +12,15 @@ import {
   Row,
   Alert,
 } from 'reactstrap';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { signUp } from '../../actions/userActions';
 import { clearErrors } from '../../actions/errorActions';
 import projectLogo from '../../images/project-logo.svg';
 import projectLabel from '../../images/project-label.svg';
-import passwordShown from '../../images/password-shown.svg';
-import passwordHidden from '../../images/password-hidden.svg';
 
 const UserSignUp = (props) => {
   const [passwordType, setPasswordType] = useState('password');
-  const [eyeIcon, setEyeIcon] = useState(passwordHidden);
+  const [eyeIcon, setEyeIcon] = useState('eye-slash');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -32,10 +30,10 @@ const UserSignUp = (props) => {
   const togglePasswordVisibility = () => {
     if (passwordType === 'password') {
       setPasswordType('text');
-      setEyeIcon(passwordShown);
+      setEyeIcon('eye');
     } else {
       setPasswordType('password');
-      setEyeIcon(passwordHidden);
+      setEyeIcon('eye-slash');
     }
   };
 
@@ -119,13 +117,10 @@ const UserSignUp = (props) => {
                 </div>
 
                 <div className="position-relative d-flex flex-column justify-content-center ml-auto sign-up-field">
-                  <img
+                  <FontAwesomeIcon
+                    icon={eyeIcon}
                     onClick={() => togglePasswordVisibility()}
-                    src={eyeIcon}
-                    className="position-absolute eye-icon align-self-end"
-                    alt="Password visibility icon"
-                    width="25"
-                    height="20"
+                    className="text-dark position-absolute eye-icon align-self-end"
                   />
                   <Input
                     type={passwordType}
