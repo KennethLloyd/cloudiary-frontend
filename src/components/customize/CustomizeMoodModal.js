@@ -14,7 +14,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InUseMood from './InUseMood';
 import { addMood } from '../../actions/moodActions';
-import { clearErrors } from '../../actions/errorActions';
+import { clearErrors, setError } from '../../actions/errorActions';
 
 const CustomizeMoodModal = (props) => {
   const allIcons = [
@@ -83,12 +83,16 @@ const CustomizeMoodModal = (props) => {
   };
 
   const saveMood = () => {
-    const moodDetails = {
-      name: newMoodName,
-      icon: selectedIcon,
-    };
+    if (newMoodName === '') {
+      dispatch(setError('Please enter mood name'));
+    } else {
+      const moodDetails = {
+        name: newMoodName,
+        icon: selectedIcon,
+      };
 
-    props.addMood(moodDetails);
+      props.addMood(moodDetails);
+    }
   };
 
   const deleteItemFromUI = (moodId) => {
