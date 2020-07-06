@@ -7,13 +7,50 @@ import {
   ModalBody,
   Alert,
   Badge,
+  Container,
 } from 'reactstrap';
-import ModifyInUseMoods from './ModifyInUseMoods';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import InUseMood from './InUseMood';
+import AvailableMood from './AvailableMood';
 import { clearErrors } from '../../actions/errorActions';
 
 const CustomizeMoodModal = (props) => {
   const [moods, updateMoods] = useState(props.moods);
   const dispatch = useDispatch();
+
+  const availableIcons = [
+    'tired',
+    'surprise',
+    'smile-wink',
+    'sad-cry',
+    'meh-rolling-eyes',
+    'meh-blank',
+    'laugh-wink',
+    'laugh-squint',
+    'laugh-beam',
+    'laugh',
+    'kiss-wink-heart',
+    'kiss-beam',
+    'kiss',
+    'grin-wink',
+    'grin-tongue-wink',
+    'grin-tongue-squint',
+    'grin-tongue',
+    'grin-tears',
+    'grin-stars',
+    'grin-squint-tears',
+    'grin-squint',
+    'grin-hearts',
+    'grin-beam-sweat',
+    'grin-beam',
+    'grin-alt',
+    'grin',
+    'grimace',
+    'frown-open',
+    'flushed',
+    'dizzy',
+    'angry',
+  ];
 
   useEffect(() => {
     updateMoods(props.moods);
@@ -46,13 +83,13 @@ const CustomizeMoodModal = (props) => {
   const renderBody = () => {
     return (
       <div>
-        <Badge color="secondary" className="ml-4">
+        <Badge color="secondary" className="ml-3">
           In Use
         </Badge>
         <ul className="d-flex flex-column justify-content-center">
           {moods.map((mood) => {
             return (
-              <ModifyInUseMoods
+              <InUseMood
                 key={mood._id}
                 mood={mood}
                 deleteItemFromUI={deleteItemFromUI}
@@ -60,6 +97,28 @@ const CustomizeMoodModal = (props) => {
             );
           })}
         </ul>
+        <Badge color="success" className="ml-3">
+          Available
+        </Badge>
+        <Container className="d-flex overflow-auto">
+          {availableIcons.map((icon) => {
+            return (
+              <Button color="link">
+                <FontAwesomeIcon
+                  key={icon}
+                  icon={icon}
+                  className="text-dark"
+                  size="2x"
+                />
+              </Button>
+              //   <AvailableMood
+              //     key={icon}
+              //     icon={icon}
+              //     deleteItemFromUI={deleteItemFromUI}
+              //   />
+            );
+          })}
+        </Container>
       </div>
     );
   };
