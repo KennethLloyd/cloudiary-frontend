@@ -14,6 +14,11 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         moods: action.payload,
       };
+    case ADD_MOOD:
+      return {
+        ...state,
+        moods: [...state.moods, action.payload.mood],
+      };
     case EDIT_MOOD:
       return {
         ...state,

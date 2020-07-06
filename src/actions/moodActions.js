@@ -27,6 +27,28 @@ export const fetchMoods = () => async (dispatch, getState) => {
   }
 };
 
+export const addMood = (moodDetails) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: START_LOADING });
+
+    const response = await api.post('/moods', moodDetails, {
+      headers: { Authorization: `Bearer ${getState().currentUser.token}` },
+    });
+
+    dispatch({ type: FINISH_LOADING });
+
+    dispatch(clearErrors());
+
+    dispatch({
+      type: ADD_MOOD,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({ type: FINISH_LOADING });
+    dispatch(setError(e));
+  }
+};
+
 export const editMood = (moodId, moodDetails) => async (dispatch, getState) => {
   try {
     dispatch({ type: START_LOADING });

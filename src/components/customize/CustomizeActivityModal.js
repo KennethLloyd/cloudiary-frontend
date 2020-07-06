@@ -84,7 +84,11 @@ const CustomizeActivityModal = (props) => {
             {props.error}
           </Alert>
           <Container className="d-flex justify-content-start ml-4">
-            <Button color="secondary" className="mt-2" onClick={addItem}>
+            <Button
+              color="secondary"
+              className="mt-2 add-activity-btn"
+              onClick={addItem}
+            >
               <FontAwesomeIcon icon="plus" className="text-light" size="sm" />
             </Button>
           </Container>

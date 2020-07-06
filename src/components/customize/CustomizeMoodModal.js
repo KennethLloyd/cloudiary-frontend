@@ -13,14 +13,19 @@ import {
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InUseMood from './InUseMood';
+import { addMood } from '../../actions/moodActions';
 import { clearErrors } from '../../actions/errorActions';
 
 const CustomizeMoodModal = (props) => {
   const [moods, updateMoods] = useState(props.moods);
   const [selectedIcon, setSelectedIcon] = useState(null);
-  const dispatch = useDispatch();
-
-  const availableIcons = [
+  const [newMoodName, setNewMoodName] = useState('');
+  const [availableIcons, setAvailableIcons] = useState([
+    'smile-beam',
+    'smile',
+    'meh',
+    'frown',
+    'sad-tear',
     'tired',
     'surprise',
     'smile-wink',
@@ -52,14 +57,35 @@ const CustomizeMoodModal = (props) => {
     'flushed',
     'dizzy',
     'angry',
-  ];
+  ]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    setNewMoodName('');
+    setSelectedIcon('');
+
+    const usedIcons = props.moods.map((mood) => mood.icon);
+
+    const filteredAvailableIcons = availableIcons.filter(
+      (availableIcon) => !usedIcons.includes(availableIcon),
+    );
+
+    setAvailableIcons(filteredAvailableIcons);
+
     updateMoods(props.moods);
   }, [props.moods]);
 
   const toggle = () => {
     props.setMoodModal(!props.moodModal);
+  };
+
+  const saveMood = () => {
+    const moodDetails = {
+      name: newMoodName,
+      icon: selectedIcon,
+    };
+
+    props.addMood(moodDetails);
   };
 
   const addItem = () => {
@@ -122,13 +148,19 @@ const CustomizeMoodModal = (props) => {
         </Container>
         {selectedIcon ? (
           <Container className="d-flex align-items-center mt-2 justify-content-center">
-            <Input placeholder="Mood name" className="w-50" size="sm"></Input>
+            <Input
+              placeholder="Mood name"
+              className="w-50"
+              bsSize="sm"
+              value={newMoodName}
+              onChange={(e) => setNewMoodName(e.target.value)}
+            ></Input>
             <div>
               <Button
                 size="sm"
                 color="link"
                 className="mr-1 ml-1"
-                // onClick={saveActivity}
+                onClick={saveMood}
               >
                 <FontAwesomeIcon icon="check" className="text-dark" />
               </Button>
@@ -186,4 +218,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(CustomizeMoodModal);
+export default connect(mapStateToProps, { addMood })(CustomizeMoodModal);
