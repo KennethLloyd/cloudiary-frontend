@@ -8,14 +8,15 @@ import {
   Alert,
   Badge,
   Container,
+  Input,
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import InUseMood from './InUseMood';
-import AvailableMood from './AvailableMood';
 import { clearErrors } from '../../actions/errorActions';
 
 const CustomizeMoodModal = (props) => {
   const [moods, updateMoods] = useState(props.moods);
+  const [selectedIcon, setSelectedIcon] = useState(null);
   const dispatch = useDispatch();
 
   const availableIcons = [
@@ -103,7 +104,11 @@ const CustomizeMoodModal = (props) => {
         <Container className="d-flex overflow-auto">
           {availableIcons.map((icon) => {
             return (
-              <Button color="link">
+              <Button
+                color="link"
+                className={icon === selectedIcon ? 'bg-success' : ''}
+                onClick={() => setSelectedIcon(icon)}
+              >
                 <FontAwesomeIcon
                   key={icon}
                   icon={icon}
@@ -111,14 +116,34 @@ const CustomizeMoodModal = (props) => {
                   size="2x"
                 />
               </Button>
-              //   <AvailableMood
-              //     key={icon}
-              //     icon={icon}
-              //     deleteItemFromUI={deleteItemFromUI}
-              //   />
             );
           })}
         </Container>
+        {selectedIcon ? (
+          <Container className="d-flex align-items-center mt-2 justify-content-center">
+            <Input placeholder="Mood name" className="w-50" size="sm"></Input>
+            <div>
+              <Button
+                size="sm"
+                color="link"
+                className="mr-1 ml-1"
+                // onClick={saveActivity}
+              >
+                <FontAwesomeIcon icon="check" className="text-dark" />
+              </Button>
+              <Button
+                size="sm"
+                color="link"
+                className="mr-1 ml-1"
+                onClick={() => setSelectedIcon(null)}
+              >
+                <FontAwesomeIcon icon="times" className="text-dark" />
+              </Button>
+            </div>
+          </Container>
+        ) : (
+          ''
+        )}
       </div>
     );
   };
