@@ -4,7 +4,6 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Button,
-  ButtonGroup,
   Modal,
   ModalHeader,
   ModalBody,
@@ -33,6 +32,7 @@ const EditEntryModal = (props) => {
   );
   const [title, setTitle] = useState(props.entry.title);
   const [body, setBody] = useState(props.entry.body);
+
   const dispatch = useDispatch();
 
   const onAlertDismiss = () => {
@@ -109,7 +109,7 @@ const EditEntryModal = (props) => {
 
   const renderMoodSelection = () => {
     return (
-      <div className="mt-2 d-flex justify-content-center modal-entry-mood-container">
+      <div className="mt-2 d-flex flex-wrap justify-content-center modal-entry-mood-container">
         {props.moods.map((mood, index) => {
           if (selectedMood === '' && !index) setSelectedMood(mood._id);
 
@@ -144,7 +144,7 @@ const EditEntryModal = (props) => {
     return (
       <div>
         <p className="mb-1">Activities:</p>
-        <ButtonGroup size="sm">
+        <div className="activity-btns">
           {props.activities.map((activity) => {
             return (
               <Button
@@ -159,7 +159,7 @@ const EditEntryModal = (props) => {
               </Button>
             );
           })}
-        </ButtonGroup>
+        </div>
       </div>
     );
   };
