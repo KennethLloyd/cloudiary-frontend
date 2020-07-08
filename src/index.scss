@@ -19,6 +19,10 @@ main {
   font-family: 'Lato', sans-serif;
 }
 
+.display-linebreak {
+  white-space: pre-line;
+}
+
 .landing-page {
   background: url('./images/landing-background.jpg');
   background-repeat: no-repeat;

@@ -95,7 +95,7 @@ const Entry = ({ content }) => {
             </Col>
           </Row>
 
-          <div className="entry-body">{content.body}</div>
+          <div className="entry-body display-linebreak">{content.body}</div>
         </CardBody>
       </Collapse>
     </Card>

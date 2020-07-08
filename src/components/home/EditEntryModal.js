@@ -33,6 +33,7 @@ const EditEntryModal = (props) => {
   );
   const [title, setTitle] = useState(props.entry.title);
   const [body, setBody] = useState(props.entry.body);
+
   const dispatch = useDispatch();
 
   const onAlertDismiss = () => {
