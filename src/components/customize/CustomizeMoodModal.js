@@ -180,7 +180,7 @@ const CustomizeMoodModal = (props) => {
 
   return (
     <div>
-      <Modal
+      {props.moodModal ? <Modal
         isOpen={props.moodModal}
         toggle={toggle}
         className={props.className}
@@ -202,7 +202,7 @@ const CustomizeMoodModal = (props) => {
             Finish
           </Button>
         </ModalFooter>
-      </Modal>
+      </Modal> : ''}
     </div>
   );
 };

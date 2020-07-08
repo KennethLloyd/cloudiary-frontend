@@ -68,7 +68,7 @@ const CustomizeActivityModal = (props) => {
 
   return (
     <div>
-      <Modal
+      {props.activityModal ? <Modal
         isOpen={props.activityModal}
         toggle={toggle}
         className={props.className}
@@ -99,7 +99,7 @@ const CustomizeActivityModal = (props) => {
             Finish
           </Button>
         </ModalFooter>
-      </Modal>
+      </Modal> : ''}
     </div>
   );
 };
