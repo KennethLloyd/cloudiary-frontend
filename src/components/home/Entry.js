@@ -63,7 +63,7 @@ const Entry = ({ content }) => {
           <Row className="entry-body-header d-flex">
             <Col className="entry-activities-section d-md-flex flex-md-row d-sm-column flex-sm-column align-items-center justify-content-start mb-4">
               <p className="mb-0 entry-activities-label">Activities:</p>
-              <div className="entry-activities d-flex mb-0 ml-2">
+              <div className="entry-activities d-flex flex-wrap mb-0 ml-2">
                 {content.activities.map((activity) => {
                   return (
                     <Badge
@@ -95,7 +95,7 @@ const Entry = ({ content }) => {
             </Col>
           </Row>
 
-          <div className="entry-body">{content.body}</div>
+          <div className="entry-body display-linebreak">{content.body}</div>
         </CardBody>
       </Collapse>
     </Card>
