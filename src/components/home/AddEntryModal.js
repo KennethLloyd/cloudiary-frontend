@@ -105,7 +105,7 @@ const AddEntryModal = (props) => {
 
   const renderMoodSelection = () => {
     return (
-      <div className="mt-2 d-flex justify-content-center modal-entry-mood-container">
+      <div className="mt-2 d-flex flex-wrap justify-content-center modal-entry-mood-container">
         {props.moods.map((mood, index) => {
           if (selectedMood === '' && !index) setSelectedMood(mood._id);
 
