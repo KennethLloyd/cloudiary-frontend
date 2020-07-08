@@ -4,7 +4,6 @@ import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Button,
-  ButtonGroup,
   Modal,
   ModalHeader,
   ModalBody,
@@ -141,10 +140,11 @@ const AddEntryModal = (props) => {
     return (
       <div>
         <p className="mb-1">Activities:</p>
-        <ButtonGroup size="sm">
+        <div className="activity-btns">
           {props.activities.map((activity) => {
             return (
               <Button
+                size="sm"
                 className="mr-1 text-dark"
                 key={activity._id}
                 outline
@@ -156,7 +156,7 @@ const AddEntryModal = (props) => {
               </Button>
             );
           })}
-        </ButtonGroup>
+        </div>
       </div>
     );
   };

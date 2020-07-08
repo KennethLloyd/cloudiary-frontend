@@ -104,6 +104,16 @@ main {
   font-size: 0.9em;
 }
 
+.activity-btns {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 300px;
+}
+
+.activity-btns > * {
+  margin: 2px 0;
+}
+
 .modal-entry-container {
   position: fixed;
   bottom: 2%;
