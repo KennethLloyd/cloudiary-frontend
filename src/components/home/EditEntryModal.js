@@ -93,7 +93,7 @@ const EditEntryModal = (props) => {
         </div>
         <div className="modal-entry-time-picker-container">
           <DatePicker
-            selected={startDate}
+            selected={startTime}
             onChange={(newTime) => setStartTime(newTime)}
             showTimeSelect
             showTimeSelectOnly
