@@ -66,7 +66,7 @@ const UserSignUp = (props) => {
               style={{ width: '70%' }}
             />
             <img
-              className="img-fluid mx-auto d-block"
+              className="img-fluid mx-auto d-block mt-4"
               src={projectLabel}
               alt="project label"
               style={{ width: '60%' }}
