@@ -112,7 +112,7 @@ const UserLogIn = (props) => {
                 </div>
               </FormGroup>
               <FormText className="text-right">
-                <Link to="/" className="landing-questions">
+                <Link to="" className="landing-questions">
                   Forgot password?
                 </Link>
               </FormText>
