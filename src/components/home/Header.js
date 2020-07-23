@@ -38,7 +38,13 @@ const Header = (props) => {
       <Navbar color="primary" light expand="md">
         <NavbarBrand className="mr-5">
           <img src={projectLogo} alt="Project logo" width="60" height="30" />
-          <img src={projectLabel} alt="Project label" width="90" height="30" />
+          <img
+            src={projectLabel}
+            alt="Project label"
+            width="90"
+            height="30"
+            className="ml-3"
+          />
         </NavbarBrand>
         <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
         <Collapse isOpen={isOpen} navbar>

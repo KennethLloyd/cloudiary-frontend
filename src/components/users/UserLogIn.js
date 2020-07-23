@@ -69,7 +69,7 @@ const UserLogIn = (props) => {
               style={{ width: '70%' }}
             />
             <img
-              className="img-fluid mx-auto d-block"
+              className="img-fluid mx-auto d-block mt-4"
               src={projectLabel}
               alt="project label"
               style={{ width: '60%' }}
@@ -112,7 +112,7 @@ const UserLogIn = (props) => {
                 </div>
               </FormGroup>
               <FormText className="text-right">
-                <Link to="/forgot-password" className="landing-questions">
+                <Link to="" className="landing-questions">
                   Forgot password?
                 </Link>
               </FormText>
